@@ -1,0 +1,32 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination__item {
+  border: 1px solid lightgray;
+  padding: 8px;
+  margin: 5px;
+  border-radius: 3px;
+}
+
+.pagination__nav:hover,
+.pagination__item:hover {
+  background-color: whitesmoke;
+  cursor: pointer;
+}
+
+.pagination__item_active {
+  border: 1px solid lightgray;
+  padding: 8px;
+  margin: 5px;
+  background-color: whitesmoke;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.pagination__nav {
+  border: 1px solid lightgray;
+  padding: 5px;
+  margin: 5px;
+}

@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import PaginationTable from './components/PaginationTable';
 
-function App() {
+const App = () => {
+  const data = [
+    {
+      id: 1,
+      name: 'Administartion module',
+      shortName: 'Admin',
+    },
+  ];
+
+  const header = [{ label: 'ID' }, { label: 'Long Name' }, { label: 'Short Name' }];
+  const body = [{ key: 'id' }, { key: 'name' }, { key: 'shortName' }];
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ width: '800px' }}>
+      <PaginationTable className='' data={data} header={header} body={body} perPage={3} sortable />
     </div>
   );
-}
+};
 
 export default App;

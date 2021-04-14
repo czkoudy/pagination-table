@@ -1,70 +1,131 @@
-# Getting Started with Create React App
+# @czkoudy/pagination-table
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> Pagination for tables
 
-## Available Scripts
+[![NPM](https://img.shields.io/npm/v/@czkoudy/pagination-table.svg)](https://www.npmjs.com/package/@czkoudy/pagination-table) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-In the project directory, you can run:
+## Install
 
-### `npm start`
+```bash
+npm install --save @czkoudy/pagination-table
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Usage
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```jsx
+import PaginationTable from '@czkoudy/pagination-table';
 
-### `npm test`
+const Table = () => {
+  const data = [{ id: 5 }, { id: 6 }];
+  const header = [{ label: 'ID' }];
+  const body = [{ key: 'id' }];
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  return <PaginationTable className='table table-sm table-hover' data={data} header={header} body={body} perPage={10} />;
+};
+```
 
-### `npm run build`
+##
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+All constants are arrays with objects.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# API
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## <PaginationTable data={} header={} body={} perPage={} info sortable />
 
-### `npm run eject`
+### props:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- data: required - Array of objects
+- header: required - Array of objects
+- body: required - Array of objects
+- perPage: required - Number of items per page
+- info: optional - show info of total items and per page
+- sortable: optional - allows table to be sorted by columns
+- onRowClick: optional - function to handle on click with argument from header
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Header
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## label: String
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+label of column
 
-## Learn More
+## width: String
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+width of column
+example:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+const header = [{
+label: "First Name", width: "100px"
+}]
+```
 
-### Code Splitting
+## onRowClick: String
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+argument passed to onRowClick function
+example:
 
-### Analyzing the Bundle Size
+```
+const header = [{
+label: "ID", width: "100px", onRowClick: "id"
+}]
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+# Body
 
-### Making a Progressive Web App
+## date: "newformatdate"
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+this is using format() from date-fns module. See more at [date-fns](https://date-fns.org/v2.19.0/docs/format)
 
-### Advanced Configuration
+example:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```
+const body = [{
+  key: "dateOfBirth", date: "d MMM yyyy"
+}]
+```
 
-### Deployment
+## function: newFunction
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+this is referencing function which will have key as its argument
 
-### `npm run build` fails to minify
+example:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+const doubleValue = key => {
+  const newValue = key * 2
+  return newValue
+
+}
+const body = [{
+  key: "value", function: doubleValue
+}]
+```
+
+## component: Component
+
+this is will wrap the key in the Component
+
+example:
+
+```
+import Toggle from "./Toggle/Toggle"
+const body = [{
+  key: "inUse", component: Toggle, props : { checked: 'inUse', onChange: onToggleChange }
+}]
+```
+
+## useDot: "true"
+
+allows to dive into objects with dot notation
+
+example:
+
+```
+const body = [{
+  key: "user.firstName", useDot: true
+}]
+```
+
+## License
+
+MIT © [czkoudy](https://github.com/czkoudy)
