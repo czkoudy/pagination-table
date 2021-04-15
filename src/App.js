@@ -8,6 +8,56 @@ const App = () => {
       name: 'Administartion module',
       shortName: 'Admin',
     },
+    {
+      id: 1,
+      name: 'Administartion module',
+      shortName: 'Admin',
+    },
+    {
+      id: 1,
+      name: 'Administartion module',
+      shortName: 'Admin',
+    },
+    {
+      id: 1,
+      name: 'Administartion module',
+      shortName: 'Admin',
+    },
+    {
+      id: 1,
+      name: 'Administartion module',
+      shortName: 'Admin',
+    },
+    {
+      id: 1,
+      name: 'Administartion module',
+      shortName: 'Admin',
+    },
+    {
+      id: 1,
+      name: 'Administartion module',
+      shortName: 'Admin',
+    },
+    {
+      id: 1,
+      name: 'Administartion module',
+      shortName: 'Admin',
+    },
+    {
+      id: 1,
+      name: 'Administartion module',
+      shortName: 'Admin',
+    },
+    {
+      id: 1,
+      name: 'Administartion module',
+      shortName: 'Admin',
+    },
+    {
+      id: 1,
+      name: 'Administartion module',
+      shortName: 'Admin',
+    },
   ];
 
   const header = [{ label: 'ID' }, { label: 'Long Name' }, { label: 'Short Name' }];

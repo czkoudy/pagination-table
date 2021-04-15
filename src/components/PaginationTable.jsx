@@ -84,8 +84,8 @@ function PaginationTable({ data, header, body, perPage, onRowClick, sortable, in
               .map((field, index) => (
                 <th key={index} width={field.width} onClick={(e) => handleOrderColumn(index)} style={{ cursor: 'pointer' }}>
                   {field.label}
-                  {sortable && body[index].key === order.column && order.direction === 'desc' && 'UP'}
-                  {sortable && body[index].key === order.column && order.direction === 'asc' && 'DOWN'}
+                  {sortable && body[index].key === order.column && order.direction === 'desc' && <i className='arrow up'></i>}
+                  {sortable && body[index].key === order.column && order.direction === 'asc' && <i className='arrow down'></i>}
                 </th>
               ))}
           </tr>

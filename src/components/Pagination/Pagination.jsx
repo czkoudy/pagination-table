@@ -50,7 +50,7 @@ function Pagination({ count, page, onChange, siblings = 2, boundary = 0 }) {
     <div className='pagination'>
       {page !== 1 && (
         <div className='pagination__nav' onClick={handleOnClickPrev}>
-          {'<'}
+          <i className='arrow left'></i>
         </div>
       )}
       {getPageNumbers().map((item) => (
@@ -60,7 +60,7 @@ function Pagination({ count, page, onChange, siblings = 2, boundary = 0 }) {
       ))}
       {page !== count && (
         <div className='pagination__nav' onClick={handleOnClickNext}>
-          {'>'}
+          <i className='arrow right'></i>
         </div>
       )}
     </div>
