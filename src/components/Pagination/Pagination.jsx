@@ -1,7 +1,12 @@
 import React from 'react';
 import './pagination.css';
 
-function Pagination({ count, page, onChange, siblings = 2, boundary = 0 }) {
+function Pagination({ count, page, onChange, options }) {
+  const defaultProps = {
+    siblings: 2,
+    boundary: 0,
+    ...options,
+  };
   const range = (from, to, step = 1) => {
     let i = from;
     const range = [];
@@ -16,7 +21,6 @@ function Pagination({ count, page, onChange, siblings = 2, boundary = 0 }) {
 
   const handleOnClick = (pageNumber) => {
     onChange(pageNumber);
-    // console.log(pageNumber)
   };
 
   const handleOnClickPrev = () => {
@@ -39,8 +43,8 @@ function Pagination({ count, page, onChange, siblings = 2, boundary = 0 }) {
 
       return [1, ...pages];
     }
-    const startPage = Math.max(2, page - siblings);
-    const endPage = Math.min(count - 1, page + siblings);
+    const startPage = Math.max(2, page - defaultProps.siblings);
+    const endPage = Math.min(count - 1, page + defaultProps.siblings);
     const pages = range(startPage, endPage);
 
     return [1, ...pages, count];
@@ -66,7 +70,5 @@ function Pagination({ count, page, onChange, siblings = 2, boundary = 0 }) {
     </div>
   );
 }
-
-// Pagination.defaultProps = {}
 
 export default Pagination;

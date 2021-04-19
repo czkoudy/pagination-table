@@ -60,11 +60,12 @@ const App = () => {
     },
   ];
 
-  const header = [{ label: 'ID' }, { label: 'Long Name' }, { label: 'Short Name' }];
-  const body = [{ key: 'id' }, { key: 'name' }, { key: 'shortName' }];
+  const header = [{ label: 'ID' }, { label: 'Long Name' }, { label: 'Short Name', title: 'Last Name' }];
+  const body = [{ key: 'id' }, { key: 'name', title: 'Fierst Name' }, { key: 'shortName' }];
+
   return (
     <div style={{ width: '800px' }}>
-      <PaginationTable className='' data={data} header={header} body={body} perPage={3} sortable />
+      <PaginationTable className='' data={data} header={header} body={body} perPage={1} sortable />
     </div>
   );
 };

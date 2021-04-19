@@ -5,11 +5,11 @@ import React, { createElement, useEffect, useState } from 'react';
 
 import _ from 'lodash';
 
-function PaginationTable({ data, header, body, perPage, onRowClick, sortable, info, className }) {
+function PaginationTable({ data, header, body, perPage, onRowClick, sortable, info, className, pagination = null }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [order, setOrder] = useState({
     column: sortable ? body[sortable.column] || body[0].key : body[0].key,
-    direction: 'desc',
+    direction: sortable.direction || 'asc',
   });
   const [sortedData, setSortedData] = useState([]);
 
@@ -57,12 +57,20 @@ function PaginationTable({ data, header, body, perPage, onRowClick, sortable, in
     }
 
     if (field.hasOwnProperty('date')) {
-      return <td key={index}>{format(new Date(useDotValue), field.date)}</td>;
+      return (
+        <td key={index} title={field.title || ''}>
+          {format(new Date(useDotValue), field.date)}
+        </td>
+      );
     } else if (field.hasOwnProperty('function')) {
-      return <td key={index}>{field.function(useDotValue)}</td>;
+      return (
+        <td key={index} title={field.title || ''}>
+          {field.function(useDotValue)}
+        </td>
+      );
     } else if (field.hasOwnProperty('component')) {
       return (
-        <td key={index}>
+        <td key={index} title={field.title || ''}>
           {createElement(field.component, {
             ...field.props,
             checked: entry[field.props.checked],
@@ -71,7 +79,11 @@ function PaginationTable({ data, header, body, perPage, onRowClick, sortable, in
         </td>
       );
     } else {
-      return <td key={index}>{useDotValue}</td>;
+      return (
+        <td key={index} title={field.title || ''}>
+          {useDotValue}
+        </td>
+      );
     }
   };
   return (
@@ -82,7 +94,7 @@ function PaginationTable({ data, header, body, perPage, onRowClick, sortable, in
             {header
               .filter((x) => x.hide !== true)
               .map((field, index) => (
-                <th key={index} width={field.width} onClick={(e) => handleOrderColumn(index)} style={{ cursor: 'pointer' }}>
+                <th key={index} width={field.width} onClick={(e) => handleOrderColumn(index)} style={{ cursor: 'pointer' }} title={field.title || ''}>
                   {field.label}
                   {sortable && body[index].key === order.column && order.direction === 'desc' && <i className='arrow up'></i>}
                   {sortable && body[index].key === order.column && order.direction === 'asc' && <i className='arrow down'></i>}
@@ -109,7 +121,7 @@ function PaginationTable({ data, header, body, perPage, onRowClick, sortable, in
           page={currentPage}
           onChange={handleChangePage}
         /> */}
-        <Pagination count={Math.ceil(sortedData.length / perPage)} page={currentPage} onChange={handleChangePage} />
+        <Pagination count={Math.ceil(sortedData.length / perPage)} page={currentPage} onChange={handleChangePage} options={pagination} />
         {info && `Showing ${firstIndex + 1} to ${lastIndex > sortedData.length ? sortedData.length : lastIndex} of ${sortedData.length} records`}
       </div>
     </React.Fragment>
