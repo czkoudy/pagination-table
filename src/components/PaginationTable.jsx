@@ -9,7 +9,7 @@ function PaginationTable({ data, header, body, perPage, onRowClick, sortable, in
   const [currentPage, setCurrentPage] = useState(1);
   const [order, setOrder] = useState({
     column: sortable ? body[sortable.column] || body[0].key : body[0].key,
-    direction: sortable.direction || 'asc',
+    direction: sortable ? sortable.direction : 'asc',
   });
   const [sortedData, setSortedData] = useState([]);
 
