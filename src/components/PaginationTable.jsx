@@ -94,7 +94,9 @@ function PaginationTable({ data, header, body, perPage, onRowClick, sortable, in
     for (let index = 0; index < count; index++) {
       rows.push(
         <tr key={index}>
-          <td>&nbsp;</td>
+          {body.map((row) => (
+            <td>&nbsp;</td>
+          ))}
         </tr>
       );
     }
