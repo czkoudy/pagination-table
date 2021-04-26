@@ -5,7 +5,7 @@ import React, { createElement, useEffect, useState } from 'react';
 
 import _ from 'lodash';
 
-function PaginationTable({ data, header, body, perPage, onRowClick, sortable, info, className, pagination = null }) {
+function PaginationTable({ data, header, body, perPage, onRowClick, sortable, info, className, pagination = null, emptyRows }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [order, setOrder] = useState({
     column: sortable ? body[sortable.column] || body[0].key : body[0].key,
@@ -15,6 +15,7 @@ function PaginationTable({ data, header, body, perPage, onRowClick, sortable, in
 
   const firstIndex = (currentPage - 1) * perPage;
   const lastIndex = (currentPage - 1) * perPage + perPage;
+  const numberOfEmptyRows = perPage - (sortedData.length % perPage);
 
   useEffect(() => {
     let isCancelled = false;
@@ -86,6 +87,20 @@ function PaginationTable({ data, header, body, perPage, onRowClick, sortable, in
       );
     }
   };
+
+  const getEmptyRows = (count) => {
+    let rows = [];
+
+    for (let index = 0; index < count; index++) {
+      rows.push(
+        <tr key={index}>
+          <td>&nbsp;</td>
+        </tr>
+      );
+    }
+    return rows;
+  };
+
   return (
     <React.Fragment>
       <table className={className}>
@@ -110,17 +125,11 @@ function PaginationTable({ data, header, body, perPage, onRowClick, sortable, in
               ))}
             </tr>
           ))}
+          {emptyRows && currentPage === Math.ceil(sortedData.length / perPage) && getEmptyRows(numberOfEmptyRows)}
         </tbody>
       </table>
       <br />
       <div className='d-flex justify-content-between'>
-        {/* <Pagination
-          count={Math.ceil(sortedData.length / perPage)}
-          variant='outlined'
-          shape='rounded'
-          page={currentPage}
-          onChange={handleChangePage}
-        /> */}
         <Pagination count={Math.ceil(sortedData.length / perPage)} page={currentPage} onChange={handleChangePage} options={pagination} />
         {info && `Showing ${firstIndex + 1} to ${lastIndex > sortedData.length ? sortedData.length : lastIndex} of ${sortedData.length} records`}
       </div>

@@ -41,6 +41,7 @@ All constants are arrays with objects.
 - info: optional - show info of total items and per page
 - sortable: optional - allows table to be sorted by columns
 - onRowClick: optional - function to handle on click with argument from header
+- emptyRows: optional - adds empty rows to last page so the table doesnrt change height
 
 # Header
 

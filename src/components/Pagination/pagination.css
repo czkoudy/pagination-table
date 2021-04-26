@@ -8,8 +8,6 @@
   padding: 6px;
   margin: 5px;
   border-radius: 3px;
-  width: 15px;
-  height: 15px;
   text-align: center;
 }
 
@@ -17,7 +15,6 @@
   border: 1px solid transparent;
   padding: 6px;
   margin: 5px;
-  width: 15px;
   height: 15px;
   text-align: center;
 }
@@ -35,7 +32,6 @@
   background-color: whitesmoke;
   cursor: pointer;
   border-radius: 3px;
-  width: 15px;
   text-align: center;
 }
 
@@ -50,7 +46,6 @@
   border-radius: 3px;
   padding: 3px 3px 5px 5px;
   margin: 5px;
-  height: 19px;
   cursor: pointer;
 }
 .pagination__nav_right {
@@ -59,7 +54,6 @@
   margin: 5px;
   border-radius: 3px;
   cursor: pointer;
-  height: 19px;
 }
 
 .arrow {

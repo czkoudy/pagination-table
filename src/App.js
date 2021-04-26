@@ -9,52 +9,52 @@ const App = () => {
       shortName: 'Admin',
     },
     {
-      id: 1,
+      id: 2,
       name: 'Administartion module',
       shortName: 'Admin',
     },
     {
-      id: 1,
+      id: 3,
       name: 'Administartion module',
       shortName: 'Admin',
     },
     {
-      id: 1,
+      id: 4,
       name: 'Administartion module',
       shortName: 'Admin',
     },
     {
-      id: 1,
+      id: 5,
       name: 'Administartion module',
       shortName: 'Admin',
     },
     {
-      id: 1,
+      id: 6,
       name: 'Administartion module',
       shortName: 'Admin',
     },
     {
-      id: 1,
+      id: 7,
       name: 'Administartion module',
       shortName: 'Admin',
     },
     {
-      id: 1,
+      id: 8,
       name: 'Administartion module',
       shortName: 'Admin',
     },
     {
-      id: 1,
+      id: 9,
       name: 'Administartion module',
       shortName: 'Admin',
     },
     {
-      id: 1,
+      id: 10,
       name: 'Administartion module',
       shortName: 'Admin',
     },
     {
-      id: 1,
+      id: 11,
       name: 'Administartion module',
       shortName: 'Admin',
     },
@@ -65,7 +65,7 @@ const App = () => {
 
   return (
     <div style={{ width: '800px' }}>
-      <PaginationTable className='' data={data} header={header} body={body} perPage={1} sortable />
+      <PaginationTable className='' data={data} header={header} body={body} perPage={10} sortable emptyRows />
     </div>
   );
 };
