@@ -8,9 +8,10 @@ import _ from 'lodash';
 function PaginationTable({ data, header, body, perPage, onRowClick, sortable, info, className, pagination = null, emptyRows }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [order, setOrder] = useState({
-    column: sortable ? body[sortable.column] || body[0].key : body[0].key,
-    direction: sortable ? sortable.direction : 'asc',
+    column: sortable ? body[sortable.column]?.key || body[0].key : body[0].key,
+    direction: sortable ? sortable.direction || 'asc' : 'asc',
   });
+  console.log(order);
   const [sortedData, setSortedData] = useState([]);
 
   const firstIndex = (currentPage - 1) * perPage;
@@ -94,8 +95,8 @@ function PaginationTable({ data, header, body, perPage, onRowClick, sortable, in
     for (let index = 0; index < count; index++) {
       rows.push(
         <tr key={index}>
-          {body.map((row) => (
-            <td>&nbsp;</td>
+          {body.map((row, i) => (
+            <td key={i}>&nbsp;</td>
           ))}
         </tr>
       );

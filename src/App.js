@@ -65,7 +65,7 @@ const App = () => {
 
   return (
     <div style={{ width: '800px' }}>
-      <PaginationTable className='' data={data} header={header} body={body} perPage={10} sortable emptyRows />
+      <PaginationTable className='' data={data} header={header} body={body} perPage={10} sortable={{ column: 2, direction: 'desc' }} emptyRows />
     </div>
   );
 };
