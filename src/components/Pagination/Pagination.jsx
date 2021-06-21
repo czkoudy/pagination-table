@@ -1,5 +1,5 @@
 import React from 'react';
-import './pagination.css';
+import css from './pagination.module.css';
 
 function Pagination({ count, page, onChange, options }) {
   const defaultProps = {
@@ -72,28 +72,28 @@ function Pagination({ count, page, onChange, options }) {
   };
 
   return (
-    <div className='pagination'>
-      <div className={`pagination__nav_left`} onClick={handleOnClickPrev}>
-        <i className='arrow left'></i>
+    <div className={css.pagination}>
+      <div className={css.pagination__nav_left} onClick={handleOnClickPrev}>
+        <i className={`${css.arrow} ${css.left}`}></i>
       </div>
 
       {getPageNumbers().map((item, i) => {
         if (item === 'LEFT' || item === 'RIGHT')
           return (
-            <div className='pagination__item_spill' key={item}>
+            <div className={css.pagination__item_spill} key={item}>
               ...
             </div>
           );
 
         return (
-          <div key={item} className={item === page ? 'pagination__item_active' : 'pagination__item'} onClick={() => handleOnClick(item)}>
+          <div key={item} className={item === page ? css.pagination__item_active : css.pagination__item} onClick={() => handleOnClick(item)}>
             {item}
           </div>
         );
       })}
 
-      <div className='pagination__nav_right' onClick={handleOnClickNext}>
-        <i className='arrow right'></i>
+      <div className={css.pagination__nav_right} onClick={handleOnClickNext}>
+        <i className={`${css.arrow} ${css.right}`}></i>
       </div>
     </div>
   );

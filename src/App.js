@@ -5,7 +5,7 @@ const App = () => {
   const data = [
     {
       id: 1,
-      name: 'Administartion module',
+      name: 'A super long line with text that should create line breaks that should create line breaks that should create line breaks that should create line breaks',
       shortName: 'Admin',
     },
     {
@@ -16,7 +16,7 @@ const App = () => {
     {
       id: 3,
       name: 'Administartion module',
-      shortName: 'Admin',
+      formatDate: { lastUpdate: '2021-04-01T09:13:01.637Z' },
     },
     {
       id: 4,
@@ -61,11 +61,11 @@ const App = () => {
   ];
 
   const header = [{ label: 'ID' }, { label: 'Long Name' }, { label: 'Short Name', title: 'Last Name' }];
-  const body = [{ key: 'id' }, { key: 'name', title: 'Fierst Name' }, { key: 'shortName' }];
+  const body = [{ key: 'id' }, { key: 'name', title: 'First Name' }, { key: 'formatDate.lastUpdate', date: 'd MMM yyyy', useDot: true }];
 
   return (
-    <div style={{ width: '800px' }}>
-      <PaginationTable className='' data={data} header={header} body={body} perPage={10} sortable={{ column: 2, direction: 'desc' }} emptyRows />
+    <div style={{ width: '500px' }}>
+      <PaginationTable className='table' data={data} header={header} body={body} perPage={5} info sortable emptyRows />
     </div>
   );
 };

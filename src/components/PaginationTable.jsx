@@ -1,17 +1,18 @@
 /* eslint-disable no-prototype-builtins */
+import './paginationtable.css';
 import Pagination from './Pagination/Pagination';
 import { format } from 'date-fns';
 import React, { createElement, useEffect, useState } from 'react';
 
 import _ from 'lodash';
 
-function PaginationTable({ data, header, body, perPage, onRowClick, sortable, info, className, pagination = null, emptyRows }) {
+function PaginationTable({ data, header, body, perPage, onRowClick, sortable, info, className, pagination = null, emptyRows, search }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [order, setOrder] = useState({
     column: sortable ? body[sortable.column]?.key || body[0].key : body[0].key,
     direction: sortable ? sortable.direction || 'asc' : 'asc',
   });
-  console.log(order);
+  const [searchString, setSearchString] = useState('');
   const [sortedData, setSortedData] = useState([]);
 
   const firstIndex = (currentPage - 1) * perPage;
@@ -26,10 +27,13 @@ function PaginationTable({ data, header, body, perPage, onRowClick, sortable, in
     return () => {
       isCancelled = true;
     };
-  }, [data, order]);
+  }, [data, order.column, order.direction, search, searchString]);
+
+  if (!data) {
+    return null;
+  }
 
   const handleChangePage = (newPage) => {
-    // console.log('Test', newPage)
     setCurrentPage(newPage);
   };
 
@@ -60,19 +64,19 @@ function PaginationTable({ data, header, body, perPage, onRowClick, sortable, in
 
     if (field.hasOwnProperty('date')) {
       return (
-        <td key={index} title={field.title || ''}>
-          {format(new Date(useDotValue), field.date)}
+        <td key={index} title={field.title || ''} className='column'>
+          {useDotValue !== undefined ? format(new Date(useDotValue), field.date) : null}
         </td>
       );
     } else if (field.hasOwnProperty('function')) {
       return (
-        <td key={index} title={field.title || ''}>
+        <td key={index} title={field.title || ''} className='column'>
           {field.function(useDotValue)}
         </td>
       );
     } else if (field.hasOwnProperty('component')) {
       return (
-        <td key={index} title={field.title || ''}>
+        <td key={index} title={field.title || ''} className='column'>
           {createElement(field.component, {
             ...field.props,
             checked: entry[field.props.checked],
@@ -82,7 +86,7 @@ function PaginationTable({ data, header, body, perPage, onRowClick, sortable, in
       );
     } else {
       return (
-        <td key={index} title={field.title || ''}>
+        <td key={index} title={field.title || ''} className='column'>
           {useDotValue}
         </td>
       );
@@ -94,18 +98,25 @@ function PaginationTable({ data, header, body, perPage, onRowClick, sortable, in
 
     for (let index = 0; index < count; index++) {
       rows.push(
-        <tr key={index}>
-          {body.map((row, i) => (
-            <td key={i}>&nbsp;</td>
-          ))}
+        <tr key={index} className='anti-hover'>
+          <td colspan={body.length}>&nbsp;</td>
         </tr>
       );
     }
     return rows;
   };
 
+  const SearchBox = () => {
+    return (
+      <div>
+        Search: <input className='searchbox' type='text' name='' value={searchString} onChange={(e) => setSearchString(e.target.value)} autoFocus />
+      </div>
+    );
+  };
+
   return (
     <React.Fragment>
+      <div className='table__top'>{search && <SearchBox />}</div>
       <table className={className}>
         <thead>
           <tr>
@@ -128,12 +139,12 @@ function PaginationTable({ data, header, body, perPage, onRowClick, sortable, in
               ))}
             </tr>
           ))}
-          {emptyRows && currentPage === Math.ceil(sortedData.length / perPage) && getEmptyRows(numberOfEmptyRows)}
+          {emptyRows && currentPage === Math.ceil(sortedData.length / perPage) && data.length > perPage && getEmptyRows(numberOfEmptyRows)}
         </tbody>
       </table>
       <br />
       <div className='d-flex justify-content-between'>
-        <Pagination count={Math.ceil(sortedData.length / perPage)} page={currentPage} onChange={handleChangePage} options={pagination} />
+        {data.length > perPage ? <Pagination count={Math.ceil(sortedData.length / perPage)} page={currentPage} onChange={handleChangePage} options={pagination} /> : <div>&nbsp;</div>}
         {info && `Showing ${firstIndex + 1} to ${lastIndex > sortedData.length ? sortedData.length : lastIndex} of ${sortedData.length} records`}
       </div>
     </React.Fragment>

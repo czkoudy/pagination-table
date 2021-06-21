@@ -1,0 +1,24 @@
+.table__top {
+  display: flex;
+  justify-content: right;
+}
+
+.searchbox {
+  border-radius: 3px;
+}
+
+.column {
+  max-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.table-hover > tbody > tr.anti-hover:hover > td,
+.table-hover > tbody > tr.anti-hover:hover > th {
+  background: white;
+}
+
+.table > tbody > tr.anti-hover > td {
+  border-top: none;
+}
