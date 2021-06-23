@@ -1,5 +1,5 @@
 /* eslint-disable no-prototype-builtins */
-import './paginationtable.css';
+import css from './paginationtable.module.css';
 import Pagination from './Pagination/Pagination';
 import { format } from 'date-fns';
 import React, { createElement, useEffect, useState } from 'react';
@@ -25,8 +25,8 @@ function PaginationTable({ data, header, body, onRowClick, options }) {
     },
     sortable: {
       active: options?.sortable || false,
-      column: options?.sortable?.column || '',
-      direction: options?.sortable?.direction || 'desc',
+      column: options?.sortable?.column || 0,
+      direction: options?.sortable?.direction || 'asc',
     },
     info: options?.info || false,
     emptyRows: options?.emptyRows || false,
@@ -95,19 +95,19 @@ function PaginationTable({ data, header, body, onRowClick, options }) {
 
     if (field.hasOwnProperty('date')) {
       return (
-        <td key={index} title={field.title || ''} className='column'>
+        <td key={index} title={field.title || ''} className={css.column}>
           {useDotValue !== undefined ? format(new Date(useDotValue), field.date) : null}
         </td>
       );
     } else if (field.hasOwnProperty('function')) {
       return (
-        <td key={index} title={field.title || ''} className='column'>
+        <td key={index} title={field.title || ''} className={css.column}>
           {field.function(useDotValue)}
         </td>
       );
     } else if (field.hasOwnProperty('component')) {
       return (
-        <td key={index} title={field.title || ''} className='column'>
+        <td key={index} title={field.title || ''} className={css.column}>
           {createElement(field.component, {
             ...field.props,
             checked: entry[field.props.checked],
@@ -117,7 +117,7 @@ function PaginationTable({ data, header, body, onRowClick, options }) {
       );
     } else {
       return (
-        <td key={index} title={field.title || ''} className='column'>
+        <td key={index} title={field.title || ''} className={css.column}>
           {useDotValue}
         </td>
       );
@@ -129,7 +129,7 @@ function PaginationTable({ data, header, body, onRowClick, options }) {
 
     for (let index = 0; index < count; index++) {
       rows.push(
-        <tr key={index} className='anti-hover'>
+        <tr key={index} className={css.anti_hover}>
           <td colSpan={body.length}>&nbsp;</td>
         </tr>
       );
@@ -140,14 +140,14 @@ function PaginationTable({ data, header, body, onRowClick, options }) {
   const SearchBox = () => {
     return (
       <div>
-        Search: <input className='searchbox' type='text' value={searchString} onChange={(e) => setSearchString(e.target.value)} autoFocus />
+        Search: <input className={css.searchbox} type='text' value={searchString} onChange={(e) => setSearchString(e.target.value)} autoFocus />
       </div>
     );
   };
 
   return (
     <React.Fragment>
-      <div className='table__top'>{defaults.search.active && <SearchBox className={defaults.search.className} />}</div>
+      <div className={css.table__top}>{defaults.search.active && <SearchBox className={defaults.search.className} />}</div>
       <table className={defaults.className}>
         <thead>
           <tr>
@@ -156,8 +156,8 @@ function PaginationTable({ data, header, body, onRowClick, options }) {
               .map((field, index) => (
                 <th key={index} width={field.width} onClick={(e) => handleOrderColumn(index)} style={{ cursor: 'pointer' }} title={field.title || ''}>
                   {field.label}
-                  {defaults.sortable.active && body[index].key === order.column && order.direction === 'desc' && <i className='arrow up'></i>}
-                  {defaults.sortable.active && body[index].key === order.column && order.direction === 'asc' && <i className='arrow down'></i>}
+                  {defaults.sortable.active && body[index].key === order.column && order.direction === 'desc' && <i className={`${css.arrow} ${css.up}`}></i>}
+                  {defaults.sortable.active && body[index].key === order.column && order.direction === 'asc' && <i className={`${css.arrow} ${css.down}`}></i>}
                 </th>
               ))}
           </tr>
