@@ -16,7 +16,7 @@ const App = () => {
     {
       id: 3,
       name: 'Administartion module',
-      formatDate: { lastUpdate: '2021-04-01T09:13:01.637Z' },
+      shortName: 'Test',
     },
     {
       id: 4,
@@ -61,11 +61,20 @@ const App = () => {
   ];
 
   const header = [{ label: 'ID' }, { label: 'Long Name' }, { label: 'Short Name', title: 'Last Name' }];
-  const body = [{ key: 'id' }, { key: 'name', title: 'First Name' }, { key: 'formatDate.lastUpdate', date: 'd MMM yyyy', useDot: true }];
+  const body = [{ key: 'id' }, { key: 'name', title: 'First Name' }, { key: 'shortName' }];
+
+  const options = {
+    info: true,
+    sortable: true,
+    emptyRows: true,
+    search: {
+      className: '',
+    },
+  };
 
   return (
     <div style={{ width: '500px' }}>
-      <PaginationTable className='table' data={data} header={header} body={body} perPage={5} info sortable emptyRows />
+      <PaginationTable className='table' data={data} header={header} body={body} options={options} />
     </div>
   );
 };

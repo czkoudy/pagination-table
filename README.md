@@ -19,10 +19,63 @@ const Table = () => {
   const data = [{ id: 5 }, { id: 6 }];
   const header = [{ label: 'ID' }];
   const body = [{ key: 'id' }];
+  const options = {
+    search: false,
+    sortable: false,
+    info: false,
+    emptyRows: false,
+    perPage: 10,
+    className: '',
+    pagination: null,
+  };
 
-  return <PaginationTable className='table table-sm table-hover' data={data} header={header} body={body} perPage={10} />;
+  return <PaginationTable className='table table-sm table-hover' data={data} header={header} body={body} options={options} />;
 };
 ```
+
+## Breaking changes in 2.0.0
+
+Now there is options object passed in rather then individual properties.
+
+### search
+
+default: false
+
+// Adding CSS class for input field
+search: {
+className: ""
+}
+
+### sortable
+
+default: false
+
+sortable: {
+column: Integer // index of default column order
+direction: String // asc or des
+}
+
+### info
+
+default: false
+
+### emptyRows
+
+default: false
+
+### perPage
+
+default: 10
+
+### pagination
+
+default: null
+
+### className
+
+default: ""
+
+CSS class for the whole table
 
 ##
 
@@ -37,11 +90,7 @@ All constants are arrays with objects.
 - data: required - Array of objects
 - header: required - Array of objects
 - body: required - Array of objects
-- perPage: required - Number of items per page
-- info: optional - show info of total items and per page
-- sortable: optional - allows table to be sorted by columns
 - onRowClick: optional - function to handle on click with argument from header
-- emptyRows: optional - adds empty rows to last page so the table doesnrt change height
 
 # Header
 

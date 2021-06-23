@@ -6,28 +6,59 @@ import React, { createElement, useEffect, useState } from 'react';
 
 import _ from 'lodash';
 
-function PaginationTable({ data, header, body, perPage, onRowClick, sortable, info, className, pagination = null, emptyRows, search }) {
+const searchFunction = (data, searchString) => {
+  const columns = data[0] && Object.keys(data[0]);
+  return data.filter((row) =>
+    columns.some((column) => {
+      if (typeof row[column] === 'string') {
+        return row[column].indexOf(searchString) > -1;
+      }
+    })
+  );
+};
+
+function PaginationTable({ data, header, body, onRowClick, options }) {
+  const defaults = {
+    search: {
+      active: options.search || false,
+      className: options.search.className || '',
+    },
+    sortable: {
+      active: options.sortable || false,
+      column: '',
+      direction: '',
+    },
+    info: options.info || false,
+    emptyRows: options.emptyRows || false,
+    perPage: options.perPage || 10,
+    className: options.className || '',
+    pagination: options.pagination || null,
+  };
   const [currentPage, setCurrentPage] = useState(1);
   const [order, setOrder] = useState({
-    column: sortable ? body[sortable.column]?.key || body[0].key : body[0].key,
-    direction: sortable ? sortable.direction || 'asc' : 'asc',
+    column: defaults.sortable.active ? body[defaults.sortable.column]?.key || body[0].key : body[0].key,
+    direction: defaults.sortable.active ? defaults.sortable.direction || 'asc' : 'asc',
   });
   const [searchString, setSearchString] = useState('');
   const [sortedData, setSortedData] = useState([]);
 
-  const firstIndex = (currentPage - 1) * perPage;
-  const lastIndex = (currentPage - 1) * perPage + perPage;
-  const numberOfEmptyRows = perPage - (sortedData.length % perPage);
+  const firstIndex = (currentPage - 1) * defaults.perPage;
+  const lastIndex = (currentPage - 1) * defaults.perPage + defaults.perPage;
+  const numberOfEmptyRows = defaults.perPage - (sortedData.length % defaults.perPage);
 
   useEffect(() => {
     let isCancelled = false;
     if (!isCancelled) {
-      setSortedData(_.orderBy(data, [order.column], [order.direction]));
+      if (defaults.search) {
+        setSortedData(_.orderBy(searchFunction(data, searchString), [order.column], [order.direction]));
+      } else {
+        setSortedData(_.orderBy(data, [order.column], [order.direction]));
+      }
     }
     return () => {
       isCancelled = true;
     };
-  }, [data, order.column, order.direction, search, searchString]);
+  }, [data, order.column, order.direction, searchString]);
 
   if (!data) {
     return null;
@@ -45,7 +76,7 @@ function PaginationTable({ data, header, body, perPage, onRowClick, sortable, in
   };
 
   const handleOrderColumn = (index) => {
-    if (sortable) {
+    if (defaults.sortable) {
       setOrder((prevState) => ({
         ...prevState,
         direction: prevState.direction === 'desc' ? 'asc' : 'desc',
@@ -99,7 +130,7 @@ function PaginationTable({ data, header, body, perPage, onRowClick, sortable, in
     for (let index = 0; index < count; index++) {
       rows.push(
         <tr key={index} className='anti-hover'>
-          <td colspan={body.length}>&nbsp;</td>
+          <td colSpan={body.length}>&nbsp;</td>
         </tr>
       );
     }
@@ -109,15 +140,15 @@ function PaginationTable({ data, header, body, perPage, onRowClick, sortable, in
   const SearchBox = () => {
     return (
       <div>
-        Search: <input className='searchbox' type='text' name='' value={searchString} onChange={(e) => setSearchString(e.target.value)} autoFocus />
+        Search: <input className='searchbox' type='text' value={searchString} onChange={(e) => setSearchString(e.target.value)} autoFocus />
       </div>
     );
   };
 
   return (
     <React.Fragment>
-      <div className='table__top'>{search && <SearchBox />}</div>
-      <table className={className}>
+      <div className='table__top'>{defaults.search.active && <SearchBox className={defaults.search.className} />}</div>
+      <table className={defaults.className}>
         <thead>
           <tr>
             {header
@@ -125,8 +156,8 @@ function PaginationTable({ data, header, body, perPage, onRowClick, sortable, in
               .map((field, index) => (
                 <th key={index} width={field.width} onClick={(e) => handleOrderColumn(index)} style={{ cursor: 'pointer' }} title={field.title || ''}>
                   {field.label}
-                  {sortable && body[index].key === order.column && order.direction === 'desc' && <i className='arrow up'></i>}
-                  {sortable && body[index].key === order.column && order.direction === 'asc' && <i className='arrow down'></i>}
+                  {defaults.sortable.active && body[index].key === order.column && order.direction === 'desc' && <i className='arrow up'></i>}
+                  {defaults.sortable.active && body[index].key === order.column && order.direction === 'asc' && <i className='arrow down'></i>}
                 </th>
               ))}
           </tr>
@@ -139,13 +170,13 @@ function PaginationTable({ data, header, body, perPage, onRowClick, sortable, in
               ))}
             </tr>
           ))}
-          {emptyRows && currentPage === Math.ceil(sortedData.length / perPage) && data.length > perPage && getEmptyRows(numberOfEmptyRows)}
+          {defaults.emptyRows && currentPage === Math.ceil(sortedData.length / defaults.perPage) && sortedData.length > defaults.perPage && getEmptyRows(numberOfEmptyRows)}
         </tbody>
       </table>
       <br />
       <div className='d-flex justify-content-between'>
-        {data.length > perPage ? <Pagination count={Math.ceil(sortedData.length / perPage)} page={currentPage} onChange={handleChangePage} options={pagination} /> : <div>&nbsp;</div>}
-        {info && `Showing ${firstIndex + 1} to ${lastIndex > sortedData.length ? sortedData.length : lastIndex} of ${sortedData.length} records`}
+        {sortedData.length > defaults.perPage ? <Pagination count={Math.ceil(sortedData.length / defaults.perPage)} page={currentPage} onChange={handleChangePage} options={defaults.pagination} /> : <div>&nbsp;</div>}
+        {defaults.info && `Showing ${firstIndex + 1} to ${lastIndex > sortedData.length ? sortedData.length : lastIndex} of ${sortedData.length} records`}
       </div>
     </React.Fragment>
   );
