@@ -20,19 +20,19 @@ const searchFunction = (data, searchString) => {
 function PaginationTable({ data, header, body, onRowClick, options }) {
   const defaults = {
     search: {
-      active: options.search || false,
-      className: options.search.className || '',
+      active: options?.search || false,
+      className: options?.search?.className || '',
     },
     sortable: {
-      active: options.sortable || false,
-      column: '',
-      direction: '',
+      active: options?.sortable || false,
+      column: options?.sortable?.column || '',
+      direction: options?.sortable?.direction || 'desc',
     },
-    info: options.info || false,
-    emptyRows: options.emptyRows || false,
-    perPage: options.perPage || 10,
-    className: options.className || '',
-    pagination: options.pagination || null,
+    info: options?.info || false,
+    emptyRows: options?.emptyRows || false,
+    perPage: options?.perPage || 10,
+    className: options?.className || '',
+    pagination: options?.pagination || null,
   };
   const [currentPage, setCurrentPage] = useState(1);
   const [order, setOrder] = useState({
