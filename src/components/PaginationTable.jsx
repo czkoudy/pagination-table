@@ -33,6 +33,7 @@ function PaginationTable({ data, header, body, onRowClick, options }) {
     perPage: options?.perPage || 10,
     className: options?.className || '',
     pagination: options?.pagination || null,
+    onRowClick: options?.onRowClick || null,
   };
   const [currentPage, setCurrentPage] = useState(1);
   const [order, setOrder] = useState({
@@ -72,12 +73,13 @@ function PaginationTable({ data, header, body, onRowClick, options }) {
     if (typeof onRowClick === 'function') {
       const key = header.find((x) => x.onRowClick !== '').onRowClick;
       onRowClick(entry[key]);
-      if (e.target.parentElement.style.backgroundColor) {
-        e.target.parentElement.style.backgroundColor = '';
-      } else {
-        e.target.parentElement.style.backgroundColor = options.onRowClick.backgroundColor;
+      if (options.onRowClick) {
+        if (e.target.parentElement.style.backgroundColor) {
+          e.target.parentElement.style.backgroundColor = '';
+        } else {
+          e.target.parentElement.style.backgroundColor = options.onRowClick.backgroundColor;
+        }
       }
-      console.log(e.target.parentElement.style);
     }
   };
 
