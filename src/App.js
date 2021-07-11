@@ -1,6 +1,6 @@
 import React from 'react';
 import PaginationTable from './components/PaginationTable';
-
+import './bootstrap.css';
 const App = () => {
   const data = [
     {
@@ -60,21 +60,23 @@ const App = () => {
     },
   ];
 
+  const handleOnRowClick = () => {};
+
   const header = [{ label: 'ID' }, { label: 'Long Name' }, { label: 'Short Name', title: 'Last Name' }];
   const body = [{ key: 'id' }, { key: 'name', title: 'First Name' }, { key: 'shortName' }];
 
   const options = {
+    className: 'table table-sm table-hover',
     info: true,
-    sortable: true,
+    sortable: {},
+    search: true,
     emptyRows: true,
-    search: {
-      className: '',
-    },
+    onRowClick: { backgroundColor: 'rgba(0,0,255,0.3)' },
   };
 
   return (
     <div style={{ width: '500px' }}>
-      <PaginationTable className='table' data={data} header={header} body={body} options={options} />
+      <PaginationTable data={data} header={header} body={body} onRowClick={handleOnRowClick} options={options} />
     </div>
   );
 };

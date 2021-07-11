@@ -11,7 +11,7 @@ const searchFunction = (data, searchString) => {
   return data.filter((row) =>
     columns.some((column) => {
       if (typeof row[column] === 'string') {
-        return row[column].indexOf(searchString) > -1;
+        return row[column].toLowerCase().indexOf(searchString.toLowerCase()) > -1;
       }
     })
   );
@@ -68,20 +68,27 @@ function PaginationTable({ data, header, body, onRowClick, options }) {
     setCurrentPage(newPage);
   };
 
-  const onRowClickHandler = (entry) => {
-    if (onRowClick) {
+  const onRowClickHandler = (e, entry) => {
+    if (typeof onRowClick === 'function') {
       const key = header.find((x) => x.onRowClick !== '').onRowClick;
       onRowClick(entry[key]);
+      if (e.target.parentElement.style.backgroundColor) {
+        e.target.parentElement.style.backgroundColor = '';
+      } else {
+        e.target.parentElement.style.backgroundColor = options.onRowClick.backgroundColor;
+      }
+      console.log(e.target.parentElement.style);
     }
   };
 
   const handleOrderColumn = (index) => {
-    if (defaults.sortable) {
+    if (defaults?.sortable.active) {
       setOrder((prevState) => ({
         ...prevState,
         direction: prevState.direction === 'desc' ? 'asc' : 'desc',
         column: body[index].key,
       }));
+      setCurrentPage(1);
     }
   };
 
@@ -164,7 +171,7 @@ function PaginationTable({ data, header, body, onRowClick, options }) {
         </thead>
         <tbody>
           {sortedData.slice(firstIndex, lastIndex).map((entry) => (
-            <tr key={entry._id || entry.id || entry.index || entry.GUID} onClick={() => onRowClickHandler(entry)} style={{ cursor: 'pointer' }}>
+            <tr key={entry._id || entry.id || entry.index || entry.GUID} onClick={(e) => onRowClickHandler(e, entry)} style={{ cursor: 'pointer' }}>
               {body.map((field, index) => (
                 <CustomTD key={index} index={index} field={field} entry={entry} />
               ))}
