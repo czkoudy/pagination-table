@@ -44,6 +44,7 @@ export function usePaginationTable({ data, header, body, options }) {
       key: options?.selection?.key || null,
       info: options?.selection?.info || false,
       className: options?.selection?.className || '',
+      onlyOne: options?.selection?.onlyOne || false,
     },
   };
   const [currentPage, setCurrentPage] = useState(1);
@@ -175,7 +176,10 @@ export function usePaginationTable({ data, header, body, options }) {
         const index = newArray.indexOf(entry[key]);
         if (index > -1) newArray.splice(index, 1);
       } else {
-        newArray.push(entry[key]);
+        if (defaults.selection.OnlyOne && newArray.length <= 1) {
+        } else {
+          newArray.push(entry[key]);
+        }
       }
       setSelectionRows(newArray);
     } catch (error) {}
@@ -189,11 +193,11 @@ export function usePaginationTable({ data, header, body, options }) {
           <thead>
             {defaults.selection.info && selectionRows.length > 0 && (
               <tr>
-                <th colspan={header.length}>{selectionRows.length} selected</th>
+                <th colSpan={header.length}>{selectionRows.length} selected</th>
               </tr>
             )}
             <tr>
-              {defaults.selection.active && <th></th>}
+              {defaults.selection.active && <th width='20px'></th>}
               {header
                 .filter((x) => x.hide !== true)
                 .map((field, index) => (
