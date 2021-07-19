@@ -10,27 +10,44 @@
 npm install --save @czkoudy/pagination-table
 ```
 
+## Breaking changes from 3.0.1
+
+- PaginationTable now uses hooks
+- onRowClick moved to options object
+
+## Additional changes from 3.0.1
+
+- support for row selection
+
 ## Usage
 
 ```jsx
-import PaginationTable from '@czkoudy/pagination-table';
+import { usePaginationTable } from '@czkoudy/pagination-table';
 
-const Table = () => {
-  const data = [{ id: 5 }, { id: 6 }];
-  const header = [{ label: 'ID' }];
-  const body = [{ key: 'id' }];
-  const options = {
-    search: false,
-    sortable: false,
-    info: false,
-    emptyRows: false,
-    perPage: 10,
-    className: '',
-    pagination: null,
-  };
-
-  return <PaginationTable className='table table-sm table-hover' data={data} header={header} body={body} options={options} />;
+const data = [{ id: 5 }, { id: 6 }];
+const header = [{ label: 'ID' }];
+const body = [{ key: 'id' }];
+const options = {
+  search: false,
+  sortable: false,
+  info: false,
+  emptyRows: false,
+  perPage: 10,
+  className: '',
+  pagination: null,
+  onRowClick: {
+    function: handleOnRowClick, // required
+    key: 'id', // defaults to 'id'
+  },
+  selection: {
+    key: 'id', // required
+    backgroundColor: '', //string rgb color or rgba, defaults to rgba(255, 165, 0, 0.5)
+  },
 };
+
+const { PaginationTable } = usePaginationTable({ data, header, body, options });
+
+return <PaginationTable />;
 ```
 
 ## Breaking changes in 2.0.0

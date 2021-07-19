@@ -17,7 +17,7 @@ const searchFunction = (data, searchString) => {
   );
 };
 
-function PaginationTable({ data, header, body, onRowClick, options }) {
+export function usePaginationTable({ data, header, body, options }) {
   const defaults = {
     search: {
       active: options?.search || false,
@@ -33,7 +33,16 @@ function PaginationTable({ data, header, body, onRowClick, options }) {
     perPage: options?.perPage || 10,
     className: options?.className || '',
     pagination: options?.pagination || null,
-    onRowClick: options?.onRowClick || null,
+    onRowClick: {
+      active: options?.onRowClick || null,
+      function: options?.onRowClick?.function || null,
+      key: options?.onRowClick?.key || 'id',
+    },
+    selection: {
+      active: options?.selection || false,
+      backgroundColor: options?.selection?.backgroundColor || 'rgba(255, 165, 0, 0.5)',
+      key: options?.selection?.key || null,
+    },
   };
   const [currentPage, setCurrentPage] = useState(1);
   const [order, setOrder] = useState({
@@ -42,6 +51,7 @@ function PaginationTable({ data, header, body, onRowClick, options }) {
   });
   const [searchString, setSearchString] = useState('');
   const [sortedData, setSortedData] = useState([]);
+  const [selectionRows, setSelectionRows] = useState([]);
 
   const firstIndex = (currentPage - 1) * defaults.perPage;
   const lastIndex = (currentPage - 1) * defaults.perPage + defaults.perPage;
@@ -59,7 +69,7 @@ function PaginationTable({ data, header, body, onRowClick, options }) {
     return () => {
       isCancelled = true;
     };
-  }, [data, order.column, order.direction, searchString]);
+  }, [order.column, order.direction, searchString, currentPage, selectionRows]);
 
   if (!data) {
     return null;
@@ -70,15 +80,10 @@ function PaginationTable({ data, header, body, onRowClick, options }) {
   };
 
   const onRowClickHandler = (e, entry) => {
-    if (typeof onRowClick === 'function') {
-      const key = header.find((x) => x.onRowClick !== '').onRowClick;
-      onRowClick(entry[key]);
-      if (options.onRowClick) {
-        if (e.target.parentElement.style.backgroundColor) {
-          e.target.parentElement.style.backgroundColor = '';
-        } else {
-          e.target.parentElement.style.backgroundColor = options.onRowClick.backgroundColor;
-        }
+    if (defaults.onRowClick) {
+      if (typeof defaults.onRowClick.function === 'function') {
+        const key = defaults.onRowClick.key;
+        defaults.onRowClick.function(entry[key]);
       }
     }
   };
@@ -139,7 +144,7 @@ function PaginationTable({ data, header, body, onRowClick, options }) {
     for (let index = 0; index < count; index++) {
       rows.push(
         <tr key={index} className={css.anti_hover}>
-          <td colSpan={body.length}>&nbsp;</td>
+          <td colSpan={defaults.selection.active ? body.length + 1 : body.length}>&nbsp;</td>
         </tr>
       );
     }
@@ -154,41 +159,74 @@ function PaginationTable({ data, header, body, onRowClick, options }) {
     );
   };
 
-  return (
-    <React.Fragment>
-      <div className={css.table__top}>{defaults.search.active && <SearchBox className={defaults.search.className} />}</div>
-      <table className={defaults.className}>
-        <thead>
-          <tr>
-            {header
-              .filter((x) => x.hide !== true)
-              .map((field, index) => (
-                <th key={index} width={field.width} onClick={(e) => handleOrderColumn(index)} style={{ cursor: 'pointer' }} title={field.title || ''}>
-                  {field.label}
-                  {defaults.sortable.active && body[index].key === order.column && order.direction === 'desc' && <i className={`${css.arrow} ${css.up}`}></i>}
-                  {defaults.sortable.active && body[index].key === order.column && order.direction === 'asc' && <i className={`${css.arrow} ${css.down}`}></i>}
-                </th>
-              ))}
-          </tr>
-        </thead>
-        <tbody>
-          {sortedData.slice(firstIndex, lastIndex).map((entry) => (
-            <tr key={entry._id || entry.id || entry.index || entry.GUID} onClick={(e) => onRowClickHandler(e, entry)} style={{ cursor: 'pointer' }}>
-              {body.map((field, index) => (
-                <CustomTD key={index} index={index} field={field} entry={entry} />
-              ))}
-            </tr>
-          ))}
-          {defaults.emptyRows && currentPage === Math.ceil(sortedData.length / defaults.perPage) && sortedData.length > defaults.perPage && getEmptyRows(numberOfEmptyRows)}
-        </tbody>
-      </table>
-      <br />
-      <div className='d-flex justify-content-between'>
-        {sortedData.length > defaults.perPage ? <Pagination count={Math.ceil(sortedData.length / defaults.perPage)} page={currentPage} onChange={handleChangePage} options={defaults.pagination} /> : <div>&nbsp;</div>}
-        {defaults.info && `Showing ${firstIndex + 1} to ${lastIndex > sortedData.length ? sortedData.length : lastIndex} of ${sortedData.length} records`}
-      </div>
-    </React.Fragment>
-  );
-}
+  const onRowSelection = (e, entry) => {
+    try {
+      const key = defaults.selection.key;
 
-export default PaginationTable;
+      if (!key) {
+        throw new Error('No key set in selection Object!');
+      }
+      const newArray = [...selectionRows];
+      const exists = newArray.find((x) => x === entry[key]);
+
+      if (exists) {
+        const index = newArray.indexOf(entry[key]);
+        if (index > -1) newArray.splice(index, 1);
+      } else {
+        newArray.push(entry[key]);
+      }
+      setSelectionRows(newArray);
+    } catch (error) {}
+  };
+
+  const PaginationTable = () => {
+    return (
+      <React.Fragment>
+        <div className={css.table__top}>{defaults.search.active && <SearchBox className={defaults.search.className} />}</div>
+        <table className={defaults.className}>
+          <thead>
+            <tr>
+              {defaults.selection.active && <th></th>}
+              {header
+                .filter((x) => x.hide !== true)
+                .map((field, index) => (
+                  <th key={index} width={field.width} onClick={(e) => handleOrderColumn(index)} style={{ cursor: 'pointer' }} title={field.title || ''}>
+                    {field.label}
+                    {defaults.sortable.active && body[index].key === order.column && order.direction === 'desc' && <i className={`${css.arrow} ${css.up}`}></i>}
+                    {defaults.sortable.active && body[index].key === order.column && order.direction === 'asc' && <i className={`${css.arrow} ${css.down}`}></i>}
+                  </th>
+                ))}
+            </tr>
+          </thead>
+          <tbody>
+            {sortedData.slice(firstIndex, lastIndex).map((entry) => (
+              <tr
+                key={entry._id || entry.id || entry.index || entry.GUID}
+                id={entry[header.find((x) => x.onRowClick !== '').onRowClick] || null}
+                onClick={(e) => onRowClickHandler(e, entry)}
+                style={{ cursor: 'pointer', backgroundColor: selectionRows.includes(entry[defaults.selection.key]) ? defaults.selection.backgroundColor : '' }}
+              >
+                {defaults.selection.active && (
+                  <td>
+                    <input type='checkbox' onChange={(e) => onRowSelection(e, entry)} id={entry[defaults.selection.key]} checked={selectionRows.includes(entry[defaults.selection.key])} />
+                  </td>
+                )}
+                {body.map((field, index) => (
+                  <CustomTD key={index} index={index} field={field} entry={entry} />
+                ))}
+              </tr>
+            ))}
+            {defaults.emptyRows && currentPage === Math.ceil(sortedData.length / defaults.perPage) && sortedData.length > defaults.perPage && getEmptyRows(numberOfEmptyRows)}
+          </tbody>
+        </table>
+        <br />
+        <div className='d-flex justify-content-between'>
+          {sortedData.length > defaults.perPage ? <Pagination count={Math.ceil(sortedData.length / defaults.perPage)} page={currentPage} onChange={handleChangePage} options={defaults.pagination} /> : <div>&nbsp;</div>}
+          {defaults.info && `Showing ${firstIndex + 1} to ${lastIndex > sortedData.length ? sortedData.length : lastIndex} of ${sortedData.length} records`}
+        </div>
+      </React.Fragment>
+    );
+  };
+
+  return { PaginationTable, selectionRows };
+}

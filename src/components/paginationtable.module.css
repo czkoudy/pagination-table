@@ -14,10 +14,10 @@
   text-overflow: ellipsis;
 }
 
-.table-hover > tbody > tr.anti_hover:hover > td,
+/* .table-hover > tbody > tr.anti_hover:hover > td,
 .table-hover > tbody > tr.anti_hover:hover > th {
-  background: white;
-}
+  background: white !important;
+} */
 
 .table > tbody > tr.anti_hover > td {
   border-top: none;
@@ -40,4 +40,13 @@
 .down {
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
+}
+
+.rowSelected {
+  background-color: aquamarine !important;
+}
+
+.anti_hover > td {
+  background: white !important;
+  border-top: 0px !important;
 }
