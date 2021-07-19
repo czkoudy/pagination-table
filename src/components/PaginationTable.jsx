@@ -42,6 +42,8 @@ export function usePaginationTable({ data, header, body, options }) {
       active: options?.selection || false,
       backgroundColor: options?.selection?.backgroundColor || 'rgba(255, 165, 0, 0.5)',
       key: options?.selection?.key || null,
+      info: options?.selection?.info || false,
+      className: options?.selection?.className || '',
     },
   };
   const [currentPage, setCurrentPage] = useState(1);
@@ -185,6 +187,11 @@ export function usePaginationTable({ data, header, body, options }) {
         <div className={css.table__top}>{defaults.search.active && <SearchBox className={defaults.search.className} />}</div>
         <table className={defaults.className}>
           <thead>
+            {defaults.selection.info && selectionRows.length > 0 && (
+              <tr>
+                <th colspan={header.length}>{selectionRows.length} selected</th>
+              </tr>
+            )}
             <tr>
               {defaults.selection.active && <th></th>}
               {header

@@ -3,6 +3,7 @@
 > Pagination for tables
 
 [![NPM](https://img.shields.io/npm/v/@czkoudy/pagination-table.svg)](https://www.npmjs.com/package/@czkoudy/pagination-table) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+![Downloads](https://img.shields.io/npm/dm/@czkoudy/pagination-table?style=for-the-badge)
 
 ## Install
 

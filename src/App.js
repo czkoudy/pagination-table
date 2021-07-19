@@ -75,6 +75,7 @@ const App = () => {
     },
     selection: {
       key: 'id',
+      info: true,
     },
     emptyRows: true,
     perPage: 5,
