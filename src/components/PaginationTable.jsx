@@ -88,7 +88,7 @@ export function usePaginationTable({ data, header, body, options }) {
     return () => {
       isCancelled = true;
     };
-  }, [order.column, order.direction, searchString, currentPage, selectionRows]);
+  }, [order.column, order.direction, searchString, currentPage, selectionRows, setSortedData, data]);
 
   if (!data) {
     return null;
@@ -200,7 +200,7 @@ export function usePaginationTable({ data, header, body, options }) {
     } catch (error) {}
   };
 
-  const PaginationTable = () => {
+  const PaginationTable2 = () => {
     return (
       <>
         {loading && defaults.loading}
@@ -266,16 +266,16 @@ export function usePaginationTable({ data, header, body, options }) {
     );
   };
 
-  return { PaginationTable, selectionRows, loading };
+  return { PaginationTable2, selectionRows, loading };
 }
 
 export const PaginationTable = ({ data, header, body, options, result }) => {
-  const { PaginationTable: Table, selectionRows } = usePaginationTable({ data, header, body, options });
+  const { PaginationTable2: Table, selectionRows } = usePaginationTable({ data, header, body, options });
   useEffect(() => {
     if (result) {
       result({ selectionRows });
     }
-  }, [selectionRows]);
+  }, [data, result, selectionRows]);
 
   return <Table />;
 };
