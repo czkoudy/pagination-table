@@ -1,5 +1,5 @@
 import React from 'react';
-import { usePaginationTable } from './components/PaginationTable';
+import { PaginationTable } from './components/PaginationTable';
 import './bootstrap.css';
 const App = () => {
   const data = [
@@ -61,7 +61,7 @@ const App = () => {
   ];
 
   const handleOnRowClick = (id) => {
-    console.log(id);
+    // console.log(id);
   };
 
   const header = [{ label: 'ID', onRowClick: 'id' }, { label: 'Long Name' }, { label: 'Short Name', title: 'Last Name' }];
@@ -76,15 +76,19 @@ const App = () => {
     selection: {
       key: 'id',
       info: true,
+      onlyOne: true,
     },
     emptyRows: true,
     perPage: 5,
+    search: {},
+    sortable: {
+      excludeColumns: [2],
+    },
   };
 
-  const { PaginationTable } = usePaginationTable({ data, header, body, options });
   return (
     <div style={{ width: '500px' }}>
-      <PaginationTable />
+      <PaginationTable data={data} header={header} body={body} options={options} />
     </div>
   );
 };

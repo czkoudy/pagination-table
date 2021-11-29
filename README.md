@@ -11,6 +11,10 @@
 npm install --save @czkoudy/pagination-table
 ```
 
+## Changes from 3.2.0
+
+- now exports PaginationTable as well as usePaginationTable hook
+
 ## Breaking changes from 3.0.1
 
 - PaginationTable now uses hooks
