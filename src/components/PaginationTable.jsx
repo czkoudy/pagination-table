@@ -275,7 +275,7 @@ export const PaginationTable = ({ data, header, body, options, result }) => {
     if (result) {
       result({ selectionRows });
     }
-  }, [result, selectionRows]);
+  }, [selectionRows]);
 
   return <Table />;
 };
