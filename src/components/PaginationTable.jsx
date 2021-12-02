@@ -13,10 +13,9 @@ const searchFunction = (data, searchString, search) => {
   } else {
     if (Array.isArray(search?.columns)) {
       columns = data[0] && search?.columns.map((x) => Object.keys(data[0])[x]);
-    } else if (typeof search.columns === 'string') {
-      columns = data[0] && Object.keys(data[0]);
     }
   }
+  console.log(columns);
   return data.filter((row) =>
     columns.some((column) => {
       if (typeof row[column] === 'string') {
@@ -90,7 +89,7 @@ export function usePaginationTable({ data, header, body, options }) {
     let isCancelled = false;
     if (!isCancelled) {
       if (defaults.search) {
-        setSortedData(_.orderBy(searchFunction(data, searchString, defaults?.search), [order.column], [order.direction]));
+        setSortedData(_.orderBy(searchFunction(data, searchString, defaults.search), [order.column], [order.direction]));
       } else {
         setSortedData(_.orderBy(data.toLowerCase(), [order.column], [order.direction]));
       }

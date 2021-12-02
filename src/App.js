@@ -80,7 +80,9 @@ const App = () => {
     },
     emptyRows: true,
     perPage: 5,
-    search: true,
+    search: {
+      columns: [0]
+    },
     sortable: {
       excludeColumns: [0],
     },
