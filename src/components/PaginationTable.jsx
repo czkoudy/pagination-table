@@ -6,8 +6,17 @@ import React, { createElement, useEffect, useState } from 'react';
 
 import _ from 'lodash';
 
-const searchFunction = (data, searchString) => {
-  const columns = data[0] && Object.keys(data[0]);
+const searchFunction = (data, searchString, search) => {
+  let columns;
+  if (search?.columns === 'all') {
+    columns = data[0] && Object.keys(data[0]);
+  } else {
+    if (Array.isArray(search?.columns)) {
+      columns = data[0] && search?.columns.map((x) => Object.keys(data[0])[x]);
+    } else if (typeof search.columns === 'string') {
+      columns = data[0] && Object.keys(data[0]);
+    }
+  }
   return data.filter((row) =>
     columns.some((column) => {
       if (typeof row[column] === 'string') {
@@ -30,11 +39,12 @@ const useStateWithCallback = (initialState, callback) => {
 export function usePaginationTable({ data, header, body, options }) {
   const defaults = {
     search: {
-      active: options?.search || false,
+      active: options?.search ? true : false,
       className: options?.search?.className || '',
+      columns: options?.search?.columns || 'all',
     },
     sortable: {
-      active: options?.sortable || false,
+      active: options?.sortable ? true : false,
       column: options?.sortable?.column || 0,
       direction: options?.sortable?.direction || 'asc',
       excludeColumns: options?.sortable?.excludeColumns || [],
@@ -80,7 +90,7 @@ export function usePaginationTable({ data, header, body, options }) {
     let isCancelled = false;
     if (!isCancelled) {
       if (defaults.search) {
-        setSortedData(_.orderBy(searchFunction(data, searchString), [order.column], [order.direction]));
+        setSortedData(_.orderBy(searchFunction(data, searchString, defaults?.search), [order.column], [order.direction]));
       } else {
         setSortedData(_.orderBy(data.toLowerCase(), [order.column], [order.direction]));
       }
@@ -93,8 +103,6 @@ export function usePaginationTable({ data, header, body, options }) {
   if (!data) {
     return null;
   }
-
-  console.log(loading);
 
   const handleChangePage = (newPage) => {
     setCurrentPage(newPage);
