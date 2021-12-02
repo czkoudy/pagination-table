@@ -6,66 +6,73 @@ const App = () => {
     {
       id: 1,
       name: 'A super long line with text that should create line breaks that should create line breaks that should create line breaks that should create line breaks',
-      shortName: 'Admin',
+      shortName: 'Admin', balance: {
+        today: 50,
+        yesterday: 100
+      }
     },
     {
       id: 2,
       name: 'Administartion module',
       shortName: 'Admin',
+      balance: {
+        today: 5,
+        yesterday: 10
+      }
     },
-    {
-      id: 3,
-      name: 'Administartion module',
-      shortName: 'Test',
-    },
-    {
-      id: 4,
-      name: 'Administartion module',
-      shortName: 'Admin',
-    },
-    {
-      id: 5,
-      name: 'Administartion module',
-      shortName: 'Admin',
-    },
-    {
-      id: 6,
-      name: 'Administartion module',
-      shortName: 'Admin',
-    },
-    {
-      id: 7,
-      name: 'Administartion module',
-      shortName: 'Admin',
-    },
-    {
-      id: 8,
-      name: 'Administartion module',
-      shortName: 'Admin',
-    },
-    {
-      id: 9,
-      name: 'Administartion module',
-      shortName: 'Admin',
-    },
-    {
-      id: 10,
-      name: 'Administartion module',
-      shortName: 'Admin',
-    },
-    {
-      id: 11,
-      name: 'Administartion module',
-      shortName: 'Admin',
-    },
+    // {
+    //   id: 3,
+    //   name: 'Administartion module',
+    //   shortName: 'Test',
+    // },
+    // {
+    //   id: 4,
+    //   name: 'Administartion module',
+    //   shortName: 'Admin',
+    // },
+    // {
+    //   id: 5,
+    //   name: 'Administartion module',
+    //   shortName: 'Admin',
+    // },
+    // {
+    //   id: 6,
+    //   name: 'Administartion module',
+    //   shortName: 'Admin',
+    // },
+    // {
+    //   id: 7,
+    //   name: 'Administartion module',
+    //   shortName: 'Admin',
+    // },
+    // {
+    //   id: 8,
+    //   name: 'Administartion module',
+    //   shortName: 'Admin',
+    // },
+    // {
+    //   id: 9,
+    //   name: 'Administartion module',
+    //   shortName: 'Admin',
+    // },
+    // {
+    //   id: 10,
+    //   name: 'Administartion module',
+    //   shortName: 'Admin',
+    // },
+    // {
+    //   id: 11,
+    //   name: 'Administartion module',
+    //   shortName: 'Admin',
+    // },
   ];
 
   const handleOnRowClick = (id) => {
     // console.log(id);
   };
 
-  const header = [{ label: 'ID', onRowClick: 'id' }, { label: 'Long Name' }, { label: 'Short Name', title: 'Last Name' }];
-  const body = [{ key: 'id' }, { key: 'name', title: 'First Name' }, { key: 'shortName' }];
+  const header = [{ label: 'ID', onRowClick: 'id' }, { label: 'Long Name' }, { label: 'Short Name', title: 'Last Name' }, { label: 'Balance', title: 'Balance' }];
+  const body = [{ key: 'id' }, { key: 'name', title: 'First Name' }, { key: 'shortName' }, { key: 'balance.today', useDot: true }];
 
   const options = {
     className: 'table table-sm table-hover',
@@ -81,12 +88,10 @@ const App = () => {
     emptyRows: true,
     perPage: 5,
     search: {
-      columns: [0]
     },
     sortable: {
       excludeColumns: [0],
     },
-    debug: true
   };
 
   return (

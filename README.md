@@ -11,6 +11,12 @@
 npm install --save @czkoudy/pagination-table
 ```
 
+## Changes from 3.2.5
+
+[New] - debug option in options object, default: false
+[Fix] - added fields to search objects  
+ - colums - array of column indexes to be included in search, default string "all"
+
 ## Changes from 3.2.0
 
 - now exports PaginationTable as well as usePaginationTable hook

@@ -64,24 +64,38 @@ export function usePaginationTable({ data, header, body, options }) {
   const lastIndex = (currentPage - 1) * defaults.perPage + defaults.perPage;
   const numberOfEmptyRows = defaults.perPage - (sortedData.length % defaults.perPage);
 
+  const log = (message) => {
+    if (defaults.debug) {
+      console.log(message);
+    }
+  };
+
   const searchFunction = (data, searchString, search) => {
     let columns;
     if (search?.columns === 'all') {
-      columns = data[0] && Object.keys(data[0]);
+      columns = data[0] && body.map((x, index) => index);
     } else {
       if (Array.isArray(search?.columns)) {
-        columns = data[0] && search?.columns.map((x) => Object.keys(data[0])[x]);
+        columns = data[0] && search?.columns.map((x) => search.columns.includes(x) && x);
       }
     }
-    if (defaults.debug) {
-      console.log(columns);
-    }
+    log(columns);
     return data.filter((row) =>
       columns.some((column) => {
-        if (typeof row[column] === 'string') {
-          return row[column].toLowerCase().indexOf(searchString.toLowerCase()) > -1;
-        } else if (typeof row[column] === 'number') {
-          return (row[column] + '').indexOf(searchString) > -1;
+        let useDotValue;
+        if (body[column]['useDot']) {
+          useDotValue = _.get(row, body[column]['key']);
+        } else {
+          useDotValue = row[body[column]['key']];
+        }
+        log('dotValue:' + useDotValue);
+
+        if (typeof useDotValue === 'string') {
+          return useDotValue.toLowerCase().indexOf(searchString.toLowerCase()) > -1;
+        } else if (typeof useDotValue === 'number') {
+          return (useDotValue + '').indexOf(searchString) > -1;
+        } else if (typeof useDotValue === 'number') {
+          return (useDotValue + '').indexOf(searchString) > -1;
         }
       })
     );
