@@ -6,27 +6,6 @@ import React, { createElement, useEffect, useState } from 'react';
 
 import _ from 'lodash';
 
-const searchFunction = (data, searchString, search) => {
-  let columns;
-  if (search?.columns === 'all') {
-    columns = data[0] && Object.keys(data[0]);
-  } else {
-    if (Array.isArray(search?.columns)) {
-      columns = data[0] && search?.columns.map((x) => Object.keys(data[0])[x]);
-    }
-  }
-  console.log(columns);
-  return data.filter((row) =>
-    columns.some((column) => {
-      if (typeof row[column] === 'string') {
-        return row[column].toLowerCase().indexOf(searchString.toLowerCase()) > -1;
-      } else if (typeof row[column] === 'number') {
-        return (row[column] + '').indexOf(searchString) > -1;
-      }
-    })
-  );
-};
-
 const useStateWithCallback = (initialState, callback) => {
   const [state, setState] = useState(initialState);
 
@@ -67,6 +46,7 @@ export function usePaginationTable({ data, header, body, options }) {
       onlyOne: options?.selection?.onlyOne || false,
     },
     loading: options?.loading?.component || options?.loading?.text || 'Loading',
+    debug: options?.debug ? options?.debug : false,
   };
   const [currentPage, setCurrentPage] = useState(1);
   const [order, setOrder] = useState({
@@ -83,6 +63,29 @@ export function usePaginationTable({ data, header, body, options }) {
   const firstIndex = (currentPage - 1) * defaults.perPage;
   const lastIndex = (currentPage - 1) * defaults.perPage + defaults.perPage;
   const numberOfEmptyRows = defaults.perPage - (sortedData.length % defaults.perPage);
+
+  const searchFunction = (data, searchString, search) => {
+    let columns;
+    if (search?.columns === 'all') {
+      columns = data[0] && Object.keys(data[0]);
+    } else {
+      if (Array.isArray(search?.columns)) {
+        columns = data[0] && search?.columns.map((x) => Object.keys(data[0])[x]);
+      }
+    }
+    if (defaults.debug) {
+      console.log(columns);
+    }
+    return data.filter((row) =>
+      columns.some((column) => {
+        if (typeof row[column] === 'string') {
+          return row[column].toLowerCase().indexOf(searchString.toLowerCase()) > -1;
+        } else if (typeof row[column] === 'number') {
+          return (row[column] + '').indexOf(searchString) > -1;
+        }
+      })
+    );
+  };
 
   useEffect(() => {
     setLoading(true);

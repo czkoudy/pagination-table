@@ -86,6 +86,7 @@ const App = () => {
     sortable: {
       excludeColumns: [0],
     },
+    debug: true
   };
 
   return (
