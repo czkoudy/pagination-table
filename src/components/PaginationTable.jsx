@@ -112,7 +112,7 @@ export function usePaginationTable({ data, header, body, options }) {
       if (defaults.search.active) {
         setSortedData(_.orderBy(searchFunction(data, searchString, defaults.search), [order.column], [order.direction]));
       } else {
-        setSortedData(_.orderBy(data, [(item) => _.get(item, order.column)?.toLowerCase()], [order.direction]));
+        setSortedData(_.orderBy(data, [(item) => (typeof _.get(item, order.column) === 'string' ? _.get(item, order.column)?.toLowerCase() : _.get(item, order.column))], [order.direction]));
       }
     }
     return () => {

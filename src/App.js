@@ -1381,6 +1381,1534 @@ const App = () => {
       }
     ]
 
+  const vlans = [
+    {
+      "_id": "60a293289aba083e5db24b8e",
+      "inUse": false,
+      "clientId": null,
+      "description": "",
+      "vlan": 436,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232270336,
+        "firstDhcp": 3232270436,
+        "lastDhcp": 3232270535,
+        "gateway": 3232270337
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b98",
+      "inUse": false,
+      "clientId": null,
+      "description": null,
+      "vlan": 446,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232272896,
+        "firstDhcp": 3232272996,
+        "lastDhcp": 3232273095,
+        "gateway": 3232272897
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24ba0",
+      "inUse": false,
+      "clientId": null,
+      "description": null,
+      "vlan": 454,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232274944,
+        "firstDhcp": 3232275044,
+        "lastDhcp": 3232275143,
+        "gateway": 3232274945
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b74",
+      "inUse": true,
+      "clientId": {
+        "_id": "612f9896b42a3411ba9a30aa",
+        "tickets": {
+          "others": [],
+          "initial": 72025
+        },
+        "suites": [
+          "60b5ffcdae111e529a3139ea",
+          "60b5ffcdae111e529a3139db"
+        ],
+        "telephony": {
+          "active": false
+        },
+        "connection": {
+          "bandwidth": 20,
+          "type": "ded",
+          "monitoring": {
+            "active": false,
+            "ifIndex": null,
+            "ifDevice": null
+          }
+        },
+        "logo": false,
+        "archive": false,
+        "name": "Print IQ Limited",
+        "shortName": "printiqlimited",
+        "siteId": "609e8d94174b2a276ce76c3d",
+        "startedDate": "2021-08-31T23:00:00.000Z",
+        "__v": 0
+      },
+      "description": null,
+      "vlan": 410,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232263680,
+        "firstDhcp": 3232263780,
+        "lastDhcp": 3232263879,
+        "gateway": 3232263681
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b8b",
+      "inUse": true,
+      "clientId": {
+        "_id": "61c2f6e85a606f2ef10c093b",
+        "tickets": {
+          "others": [],
+          "initial": 74627
+        },
+        "suites": [
+          "60b5f2adae111e529a313994"
+        ],
+        "telephony": {
+          "active": false
+        },
+        "connection": {
+          "bandwidth": 10,
+          "type": "ded",
+          "monitoring": {
+            "active": false,
+            "ifIndex": null,
+            "ifDevice": null
+          },
+          "firewallGroup": "probitas_436"
+        },
+        "logo": false,
+        "archive": false,
+        "name": "Probitas",
+        "shortName": "probitas",
+        "siteId": "609e8d94174b2a276ce76c3d",
+        "startedDate": "2022-01-01T00:00:00.000Z",
+        "__v": 0
+      },
+      "description": "",
+      "vlan": 433,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232269568,
+        "firstDhcp": 3232269668,
+        "lastDhcp": 3232269767,
+        "gateway": 3232269569
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b7a",
+      "inUse": true,
+      "clientId": {
+        "_id": "614df9c79346370612023c5b",
+        "tickets": {
+          "others": [],
+          "initial": 72505
+        },
+        "suites": [
+          "60b5ffcdae111e529a3139e1",
+          "60b5ffcdae111e529a3139e2",
+          "60b5ffcdae111e529a3139e3",
+          "60b5ffcdae111e529a3139e4",
+          "60b5ffcdae111e529a3139e5",
+          "60b5ffcdae111e529a3139e8"
+        ],
+        "telephony": {
+          "active": false
+        },
+        "connection": {
+          "bandwidth": 100,
+          "type": "ded",
+          "monitoring": {
+            "active": true,
+            "ifIndex": 614,
+            "ifDevice": "60afbe89e2025433988863cb"
+          }
+        },
+        "logo": false,
+        "archive": false,
+        "name": "Cinch Cars Limited",
+        "shortName": "cinchcarslimited",
+        "siteId": "609e8d94174b2a276ce76c3d",
+        "startedDate": "2021-09-30T23:00:00.000Z",
+        "__v": 0
+      },
+      "description": null,
+      "vlan": 416,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232265216,
+        "firstDhcp": 3232265316,
+        "lastDhcp": 3232265415,
+        "gateway": 3232265217
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b87",
+      "inUse": true,
+      "clientId": null,
+      "description": "",
+      "vlan": 429,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232268544,
+        "firstDhcp": 3232268644,
+        "lastDhcp": 3232268743,
+        "gateway": 3232268545
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b89",
+      "inUse": true,
+      "clientId": null,
+      "description": "",
+      "vlan": 431,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232269056,
+        "firstDhcp": 3232269156,
+        "lastDhcp": 3232269255,
+        "gateway": 3232269057
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b78",
+      "inUse": true,
+      "clientId": {
+        "_id": "613f3c9b4f8ffb8ebada8ed9",
+        "tickets": {
+          "others": [],
+          "initial": 72232
+        },
+        "suites": [
+          "60b5ffcdae111e529a3139d7",
+          "60b5ffcdae111e529a3139e9",
+          "60b5ffcdae111e529a3139eb"
+        ],
+        "telephony": {
+          "active": false
+        },
+        "connection": {
+          "bandwidth": 10,
+          "type": "ded",
+          "monitoring": {
+            "active": true,
+            "ifIndex": 605,
+            "ifDevice": "60afbe89e2025433988863cb"
+          }
+        },
+        "logo": false,
+        "archive": false,
+        "name": "77 Diamonds Limited",
+        "shortName": "77diamondslimited",
+        "siteId": "609e8d94174b2a276ce76c3d",
+        "startedDate": "2021-11-01T00:00:00.000Z",
+        "__v": 0
+      },
+      "description": null,
+      "vlan": 414,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232264704,
+        "firstDhcp": 3232264804,
+        "lastDhcp": 3232264903,
+        "gateway": 3232264705
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b85",
+      "inUse": true,
+      "clientId": {
+        "_id": "61a0fe6f2c8ece48a35c0058",
+        "tickets": {
+          "others": []
+        },
+        "suites": [],
+        "telephony": {
+          "active": false
+        },
+        "connection": {
+          "type": "ded",
+          "bandwidth": 40,
+          "monitoring": {
+            "active": true,
+            "shadow": false,
+            "shadowId": "",
+            "shadowIndex": "",
+            "ifDevice": "60afbe89e2025433988863cb",
+            "ifIndex": 632
+          }
+        },
+        "logo": false,
+        "archive": false,
+        "name": "HH Associates",
+        "shortName": "hhassociates",
+        "siteId": "609e8d94174b2a276ce76c3d",
+        "startedDate": "2021-11-22T00:00:00.000Z",
+        "__v": 0
+      },
+      "description": "",
+      "vlan": 427,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232268032,
+        "firstDhcp": 3232268132,
+        "lastDhcp": 3232268231,
+        "gateway": 3232268033
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b9a",
+      "inUse": false,
+      "clientId": null,
+      "description": null,
+      "vlan": 448,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232273408,
+        "firstDhcp": 3232273508,
+        "lastDhcp": 3232273607,
+        "gateway": 3232273409
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b6e",
+      "inUse": true,
+      "clientId": {
+        "_id": "60e844936389918429a0ba25",
+        "tickets": {
+          "others": [],
+          "initial": 70840
+        },
+        "suites": [
+          "60b5ffcdae111e529a3139d1"
+        ],
+        "telephony": {
+          "active": true,
+          "company": {
+            "guid": "6f800a00-a109-0011-8567-005056beb9d0",
+            "name": "MAH - QED Legal"
+          }
+        },
+        "connection": {
+          "bandwidth": 20,
+          "type": "ded",
+          "monitoring": {
+            "active": true,
+            "ifIndex": 581,
+            "ifDevice": "60afbe89e2025433988863cb"
+          }
+        },
+        "logo": false,
+        "archive": false,
+        "name": "QED Legal LLP",
+        "shortName": "qedlegalllp",
+        "siteId": "609e8d94174b2a276ce76c3d",
+        "startedDate": "2021-07-31T23:00:00.000Z",
+        "__v": 0
+      },
+      "description": "",
+      "vlan": 404,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232262144,
+        "firstDhcp": 3232262244,
+        "lastDhcp": 3232262343,
+        "gateway": 3232262145
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b94",
+      "inUse": false,
+      "clientId": null,
+      "description": null,
+      "vlan": 442,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232271872,
+        "firstDhcp": 3232271972,
+        "lastDhcp": 3232272071,
+        "gateway": 3232271873
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b8d",
+      "inUse": false,
+      "clientId": null,
+      "description": null,
+      "vlan": 435,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232270080,
+        "firstDhcp": 3232270180,
+        "lastDhcp": 3232270279,
+        "gateway": 3232270081
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b90",
+      "inUse": false,
+      "clientId": null,
+      "description": null,
+      "vlan": 438,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232270848,
+        "firstDhcp": 3232270948,
+        "lastDhcp": 3232271047,
+        "gateway": 3232270849
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b96",
+      "inUse": false,
+      "clientId": null,
+      "description": null,
+      "vlan": 444,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232272384,
+        "firstDhcp": 3232272484,
+        "lastDhcp": 3232272583,
+        "gateway": 3232272385
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b9e",
+      "inUse": false,
+      "clientId": null,
+      "description": null,
+      "vlan": 452,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232274432,
+        "firstDhcp": 3232274532,
+        "lastDhcp": 3232274631,
+        "gateway": 3232274433
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b6c",
+      "inUse": true,
+      "clientId": {
+        "_id": "60decfaf22301f7fb28008c5",
+        "tickets": {
+          "initial": {
+            "id": 70633,
+            "title": "New client created - Brown Bob Productions",
+            "description": "New client has been created via Orega Portal"
+          },
+          "others": [
+            71232
+          ]
+        },
+        "suites": [
+          "60b5f2adae111e529a31399e"
+        ],
+        "telephony": {
+          "active": true,
+          "company": {
+            "guid": "42e40900-1f61-fe10-8567-005056beb9d0",
+            "name": "MAH - Brown Bob Productions"
+          }
+        },
+        "connection": {
+          "bandwidth": 10,
+          "type": "ded",
+          "monitoring": {
+            "active": true,
+            "ifIndex": 575,
+            "ifDevice": "60afbe89e2025433988863cb"
+          }
+        },
+        "logo": false,
+        "archive": false,
+        "name": "Brown Bob Productions",
+        "shortName": "brownbobproductions",
+        "siteId": "609e8d94174b2a276ce76c3d",
+        "startedDate": "2021-07-04T23:00:00.000Z",
+        "__v": 0
+      },
+      "description": null,
+      "vlan": 402,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232261632,
+        "firstDhcp": 3232261732,
+        "lastDhcp": 3232261831,
+        "gateway": 3232261633
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b75",
+      "inUse": true,
+      "clientId": {
+        "_id": "6136213598d45c43c59110b0",
+        "tickets": {
+          "others": [],
+          "initial": 72110
+        },
+        "suites": [
+          "60b5ffcdae111e529a3139d6"
+        ],
+        "telephony": {
+          "active": false
+        },
+        "connection": {
+          "bandwidth": 10,
+          "type": "ded",
+          "monitoring": {
+            "active": false,
+            "ifIndex": null,
+            "ifDevice": null
+          }
+        },
+        "logo": false,
+        "archive": false,
+        "name": "Neil Pike Limited",
+        "shortName": "neilpikelimited",
+        "siteId": "609e8d94174b2a276ce76c3d",
+        "startedDate": "2021-09-30T23:00:00.000Z",
+        "__v": 0
+      },
+      "description": null,
+      "vlan": 411,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232263936,
+        "firstDhcp": 3232264036,
+        "lastDhcp": 3232264135,
+        "gateway": 3232263937
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b7e",
+      "inUse": true,
+      "clientId": null,
+      "description": "Orega WiFi",
+      "vlan": 420,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232266240,
+        "firstDhcp": 3232266340,
+        "lastDhcp": 3232266439,
+        "gateway": 3232266241
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b82",
+      "inUse": true,
+      "clientId": null,
+      "description": "Orega LAN",
+      "vlan": 424,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232267264,
+        "firstDhcp": 3232267364,
+        "lastDhcp": 3232267463,
+        "gateway": 3232267265
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b84",
+      "inUse": true,
+      "clientId": null,
+      "description": "",
+      "vlan": 426,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232267776,
+        "firstDhcp": 3232267876,
+        "lastDhcp": 3232267975,
+        "gateway": 3232267777
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b95",
+      "inUse": false,
+      "clientId": null,
+      "description": null,
+      "vlan": 443,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232272128,
+        "firstDhcp": 3232272228,
+        "lastDhcp": 3232272327,
+        "gateway": 3232272129
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b97",
+      "inUse": false,
+      "clientId": null,
+      "description": null,
+      "vlan": 445,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232272640,
+        "firstDhcp": 3232272740,
+        "lastDhcp": 3232272839,
+        "gateway": 3232272641
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b6a",
+      "inUse": true,
+      "clientId": null,
+      "description": "",
+      "vlan": 400,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232261120,
+        "firstDhcp": 3232261220,
+        "lastDhcp": 3232261319,
+        "gateway": 3232261121
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b70",
+      "inUse": true,
+      "clientId": {
+        "_id": "61b872f6b23f73ecbb9e3718",
+        "tickets": {
+          "others": [],
+          "initial": 74464
+        },
+        "suites": [
+          "60b5f2adae111e529a31399b"
+        ],
+        "telephony": {
+          "active": false
+        },
+        "connection": {
+          "type": "ownFirewall",
+          "bandwidth": 50,
+          "firewallGroup": "",
+          "monitoring": {
+            "active": false,
+            "shadow": false,
+            "shadowId": null,
+            "shadowIndex": null
+          }
+        },
+        "logo": false,
+        "archive": false,
+        "name": "Quooker",
+        "shortName": "quooker",
+        "siteId": "609e8d94174b2a276ce76c3d",
+        "startedDate": "2021-12-17T00:00:00.000Z",
+        "__v": 0
+      },
+      "description": "",
+      "vlan": 406,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232262656,
+        "firstDhcp": 3232262756,
+        "lastDhcp": 3232262855,
+        "gateway": 3232262657
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b83",
+      "inUse": true,
+      "clientId": null,
+      "description": "",
+      "vlan": 425,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232267520,
+        "firstDhcp": 3232267620,
+        "lastDhcp": 3232267719,
+        "gateway": 3232267521
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b8f",
+      "inUse": false,
+      "clientId": null,
+      "description": null,
+      "vlan": 437,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232270592,
+        "firstDhcp": 3232270692,
+        "lastDhcp": 3232270791,
+        "gateway": 3232270593
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b99",
+      "inUse": false,
+      "clientId": null,
+      "description": null,
+      "vlan": 447,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232273152,
+        "firstDhcp": 3232273252,
+        "lastDhcp": 3232273351,
+        "gateway": 3232273153
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b9b",
+      "inUse": false,
+      "clientId": null,
+      "description": null,
+      "vlan": 449,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232273664,
+        "firstDhcp": 3232273764,
+        "lastDhcp": 3232273863,
+        "gateway": 3232273665
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b9f",
+      "inUse": false,
+      "clientId": null,
+      "description": null,
+      "vlan": 453,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232274688,
+        "firstDhcp": 3232274788,
+        "lastDhcp": 3232274887,
+        "gateway": 3232274689
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24ba3",
+      "inUse": false,
+      "clientId": null,
+      "description": null,
+      "vlan": 457,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232275712,
+        "firstDhcp": 3232275812,
+        "lastDhcp": 3232275911,
+        "gateway": 3232275713
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b72",
+      "inUse": true,
+      "clientId": {
+        "_id": "611e2e238339337a07dcb039",
+        "tickets": {
+          "others": [],
+          "initial": 71777
+        },
+        "suites": [
+          "60b5f2adae111e529a31398d"
+        ],
+        "telephony": {
+          "active": false
+        },
+        "connection": {
+          "bandwidth": 10,
+          "type": "ded",
+          "monitoring": {
+            "active": true,
+            "ifIndex": 590,
+            "ifDevice": "60afbe89e2025433988863cb"
+          }
+        },
+        "logo": false,
+        "archive": false,
+        "name": "Whitecap Consulting Limited",
+        "shortName": "whitecapconsultinglimited",
+        "siteId": "609e8d94174b2a276ce76c3d",
+        "startedDate": "2021-08-31T23:00:00.000Z",
+        "__v": 0
+      },
+      "description": null,
+      "vlan": 408,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232263168,
+        "firstDhcp": 3232263268,
+        "lastDhcp": 3232263367,
+        "gateway": 3232263169
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b79",
+      "inUse": true,
+      "clientId": {
+        "_id": "614dedbf9346370612023866",
+        "tickets": {
+          "others": [],
+          "initial": 72504
+        },
+        "suites": [
+          "60b5ffcdae111e529a3139d2"
+        ],
+        "telephony": {
+          "active": false
+        },
+        "connection": {
+          "bandwidth": 10,
+          "type": "ded",
+          "monitoring": {
+            "active": false,
+            "ifIndex": null,
+            "ifDevice": null
+          }
+        },
+        "logo": false,
+        "archive": false,
+        "name": "Petroplan Europe Limited",
+        "shortName": "petroplaneuropelimited",
+        "siteId": "609e8d94174b2a276ce76c3d",
+        "startedDate": "2021-09-26T23:00:00.000Z",
+        "__v": 0
+      },
+      "description": null,
+      "vlan": 415,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232264960,
+        "firstDhcp": 3232265060,
+        "lastDhcp": 3232265159,
+        "gateway": 3232264961
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b81",
+      "inUse": true,
+      "clientId": null,
+      "description": "",
+      "vlan": 423,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232267008,
+        "firstDhcp": 3232267108,
+        "lastDhcp": 3232267207,
+        "gateway": 3232267009
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b88",
+      "inUse": true,
+      "clientId": null,
+      "description": "",
+      "vlan": 430,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232268800,
+        "firstDhcp": 3232268900,
+        "lastDhcp": 3232268999,
+        "gateway": 3232268801
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b8c",
+      "inUse": false,
+      "clientId": null,
+      "description": null,
+      "vlan": 434,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232269824,
+        "firstDhcp": 3232269924,
+        "lastDhcp": 3232270023,
+        "gateway": 3232269825
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24ba5",
+      "inUse": false,
+      "clientId": null,
+      "description": null,
+      "vlan": 459,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232276224,
+        "firstDhcp": 3232276324,
+        "lastDhcp": 3232276423,
+        "gateway": 3232276225
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b76",
+      "inUse": true,
+      "clientId": {
+        "_id": "61c1be163b74d9276e7b576b",
+        "tickets": {
+          "others": [],
+          "initial": 74607
+        },
+        "suites": [
+          "60b5f2adae111e529a31399c",
+          "60b5ffcdae111e529a3139cf"
+        ],
+        "telephony": {
+          "active": false
+        },
+        "connection": {
+          "bandwidth": 10,
+          "type": "ded",
+          "monitoring": {
+            "active": true,
+            "ifIndex": 602,
+            "ifDevice": "60afbe89e2025433988863cb"
+          },
+          "firewallGroup": "fourrecruitmentlim_412"
+        },
+        "logo": false,
+        "archive": false,
+        "name": "Four Recruitment Limited",
+        "shortName": "fourrecruitmentlimited",
+        "siteId": "609e8d94174b2a276ce76c3d",
+        "startedDate": "2022-01-01T00:00:00.000Z",
+        "__v": 0
+      },
+      "description": "",
+      "vlan": 412,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232264192,
+        "firstDhcp": 3232264292,
+        "lastDhcp": 3232264391,
+        "gateway": 3232264193
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b7c",
+      "inUse": true,
+      "clientId": {
+        "_id": "61572642b11bee748790640e",
+        "tickets": {
+          "others": [],
+          "initial": 72696
+        },
+        "suites": [],
+        "telephony": {
+          "active": false
+        },
+        "connection": {
+          "bandwidth": 10,
+          "type": "ded",
+          "monitoring": {
+            "active": true,
+            "ifIndex": 620,
+            "ifDevice": "60afbe89e2025433988863cb"
+          }
+        },
+        "logo": false,
+        "archive": false,
+        "name": "QJG Limited",
+        "shortName": "qjglimited",
+        "siteId": "609e8d94174b2a276ce76c3d",
+        "startedDate": "2021-10-03T23:00:00.000Z",
+        "__v": 0
+      },
+      "description": null,
+      "vlan": 418,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232265728,
+        "firstDhcp": 3232265828,
+        "lastDhcp": 3232265927,
+        "gateway": 3232265729
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b7d",
+      "inUse": true,
+      "clientId": {
+        "_id": "6166fff6d611808575f7f8b5",
+        "tickets": {
+          "others": [],
+          "initial": 72984
+        },
+        "suites": [
+          "60b5ffcdae111e529a3139ee"
+        ],
+        "telephony": {
+          "active": false
+        },
+        "connection": {
+          "bandwidth": 10,
+          "type": "ded",
+          "monitoring": {
+            "active": true,
+            "ifIndex": 623,
+            "ifDevice": "60afbe89e2025433988863cb"
+          }
+        },
+        "logo": false,
+        "archive": false,
+        "name": "Dimensional Consulting Limited",
+        "shortName": "dimensionalconsultinglimited",
+        "siteId": "609e8d94174b2a276ce76c3d",
+        "startedDate": "2021-11-01T00:00:00.000Z",
+        "__v": 0
+      },
+      "description": "",
+      "vlan": 419,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232265984,
+        "firstDhcp": 3232266084,
+        "lastDhcp": 3232266183,
+        "gateway": 3232265985
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b7b",
+      "inUse": true,
+      "clientId": {
+        "_id": "61541e04b5ac340f6d19982f",
+        "tickets": {
+          "others": [],
+          "initial": 72506
+        },
+        "suites": [],
+        "telephony": {
+          "active": false
+        },
+        "connection": {
+          "bandwidth": 100,
+          "type": "ded",
+          "monitoring": {
+            "active": true,
+            "ifIndex": 617,
+            "ifDevice": "60afbe89e2025433988863cb"
+          }
+        },
+        "logo": false,
+        "archive": false,
+        "name": "Cinch Guest",
+        "shortName": "cinchguest",
+        "siteId": "609e8d94174b2a276ce76c3d",
+        "startedDate": "2021-09-30T23:00:00.000Z",
+        "__v": 0
+      },
+      "description": null,
+      "vlan": 417,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232265472,
+        "firstDhcp": 3232265572,
+        "lastDhcp": 3232265671,
+        "gateway": 3232265473
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b86",
+      "inUse": true,
+      "clientId": {
+        "_id": "61a101a22d360148f63d55fa",
+        "tickets": {
+          "others": []
+        },
+        "suites": [
+          "60b5ffcdae111e529a3139ed"
+        ],
+        "telephony": {
+          "active": false
+        },
+        "connection": {
+          "type": "ded",
+          "bandwidth": 10,
+          "monitoring": {
+            "active": true,
+            "shadow": false,
+            "shadowId": "",
+            "shadowIndex": "",
+            "ifDevice": "60afbe89e2025433988863cb",
+            "ifIndex": 635
+          }
+        },
+        "logo": false,
+        "archive": false,
+        "name": "Axiom",
+        "shortName": "axiom",
+        "siteId": "609e8d94174b2a276ce76c3d",
+        "startedDate": "2021-11-15T00:00:00.000Z",
+        "__v": 0
+      },
+      "description": "",
+      "vlan": 428,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232268288,
+        "firstDhcp": 3232268388,
+        "lastDhcp": 3232268487,
+        "gateway": 3232268289
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b91",
+      "inUse": false,
+      "clientId": null,
+      "description": null,
+      "vlan": 439,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232271104,
+        "firstDhcp": 3232271204,
+        "lastDhcp": 3232271303,
+        "gateway": 3232271105
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b6b",
+      "inUse": true,
+      "clientId": null,
+      "description": "",
+      "vlan": 401,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232261376,
+        "firstDhcp": 3232261476,
+        "lastDhcp": 3232261575,
+        "gateway": 3232261377
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b6f",
+      "inUse": true,
+      "clientId": {
+        "_id": "61028e38bf36237c842c627d",
+        "tickets": {
+          "others": [],
+          "initial": 71313
+        },
+        "suites": [
+          "60b5f2adae111e529a31399d"
+        ],
+        "telephony": {
+          "active": false
+        },
+        "connection": {
+          "bandwidth": 10,
+          "type": "ded",
+          "monitoring": {
+            "active": true,
+            "ifIndex": 584,
+            "ifDevice": "60afbe89e2025433988863cb"
+          }
+        },
+        "logo": false,
+        "archive": false,
+        "name": "Sapien Labs Limited ",
+        "shortName": "sapienlabslimited",
+        "siteId": "609e8d94174b2a276ce76c3d",
+        "startedDate": "2021-08-29T23:00:00.000Z",
+        "__v": 0
+      },
+      "description": "",
+      "vlan": 405,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232262400,
+        "firstDhcp": 3232262500,
+        "lastDhcp": 3232262599,
+        "gateway": 3232262401
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b73",
+      "inUse": true,
+      "clientId": {
+        "_id": "6128bc6b842280d4bc389c47",
+        "tickets": {
+          "others": [],
+          "initial": 71944
+        },
+        "suites": [
+          "60b5ffcdae111e529a3139d4"
+        ],
+        "telephony": {
+          "active": false
+        },
+        "connection": {
+          "bandwidth": 10,
+          "type": "ded",
+          "monitoring": {
+            "active": true,
+            "ifIndex": 593,
+            "ifDevice": "60afbe89e2025433988863cb"
+          }
+        },
+        "logo": false,
+        "archive": false,
+        "name": "Eleven Worldwide Limited",
+        "shortName": "elevenworldwidelimited",
+        "siteId": "609e8d94174b2a276ce76c3d",
+        "startedDate": "2021-08-29T23:00:00.000Z",
+        "__v": 0
+      },
+      "description": null,
+      "vlan": 409,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232263424,
+        "firstDhcp": 3232263524,
+        "lastDhcp": 3232263623,
+        "gateway": 3232263425
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b77",
+      "inUse": true,
+      "clientId": {
+        "_id": "61c1be163b74d9276e7b576b",
+        "tickets": {
+          "others": [],
+          "initial": 74607
+        },
+        "suites": [
+          "60b5f2adae111e529a31399c",
+          "60b5ffcdae111e529a3139cf"
+        ],
+        "telephony": {
+          "active": false
+        },
+        "connection": {
+          "bandwidth": 10,
+          "type": "ded",
+          "monitoring": {
+            "active": true,
+            "ifIndex": 602,
+            "ifDevice": "60afbe89e2025433988863cb"
+          },
+          "firewallGroup": "fourrecruitmentlim_412"
+        },
+        "logo": false,
+        "archive": false,
+        "name": "Four Recruitment Limited",
+        "shortName": "fourrecruitmentlimited",
+        "siteId": "609e8d94174b2a276ce76c3d",
+        "startedDate": "2022-01-01T00:00:00.000Z",
+        "__v": 0
+      },
+      "description": null,
+      "vlan": 413,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232264448,
+        "firstDhcp": 3232264548,
+        "lastDhcp": 3232264647,
+        "gateway": 3232264449
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b9c",
+      "inUse": false,
+      "clientId": null,
+      "description": null,
+      "vlan": 450,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232273920,
+        "firstDhcp": 3232274020,
+        "lastDhcp": 3232274119,
+        "gateway": 3232273921
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24ba2",
+      "inUse": false,
+      "clientId": null,
+      "description": null,
+      "vlan": 456,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232275456,
+        "firstDhcp": 3232275556,
+        "lastDhcp": 3232275655,
+        "gateway": 3232275457
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b7f",
+      "inUse": true,
+      "clientId": null,
+      "description": "",
+      "vlan": 421,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232266496,
+        "firstDhcp": 3232266596,
+        "lastDhcp": 3232266695,
+        "gateway": 3232266497
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b8a",
+      "inUse": true,
+      "clientId": null,
+      "description": "",
+      "vlan": 432,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232269312,
+        "firstDhcp": 3232269412,
+        "lastDhcp": 3232269511,
+        "gateway": 3232269313
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24ba4",
+      "inUse": false,
+      "clientId": null,
+      "description": null,
+      "vlan": 458,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232275968,
+        "firstDhcp": 3232276068,
+        "lastDhcp": 3232276167,
+        "gateway": 3232275969
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b6d",
+      "inUse": true,
+      "clientId": {
+        "_id": "60ded3c022301f7fb2800926",
+        "tickets": {
+          "initial": {
+            "id": 70635,
+            "title": "New client created - Rapid Pictures Limited",
+            "description": "New client has been created via Orega Portal"
+          }
+        },
+        "suites": [
+          "60dee83620db868e5f05d9e8",
+          "60dee83620db868e5f05d9e9",
+          "60dee83620db868e5f05d9ea",
+          "60dee83620db868e5f05d9eb",
+          "60dee83620db868e5f05d9ec"
+        ],
+        "telephony": {
+          "active": true,
+          "company": {
+            "guid": "473e0800-d0ae-ff10-8567-005056beb9d0",
+            "name": "MAH - Rapid Productions"
+          }
+        },
+        "connection": {
+          "bandwidth": "600",
+          "monitoring": {
+            "active": true,
+            "ifIndex": "578"
+          },
+          "type": "ded"
+        },
+        "logo": false,
+        "archive": false,
+        "name": "Rapid Pictures Limited",
+        "shortName": "rapidpictureslimited",
+        "siteId": "609e8d94174b2a276ce76c3d",
+        "startedDate": "2021-07-04T23:00:00.000Z",
+        "__v": 0
+      },
+      "description": null,
+      "vlan": 403,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232261888,
+        "firstDhcp": 3232261988,
+        "lastDhcp": 3232262087,
+        "gateway": 3232261889
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b80",
+      "inUse": true,
+      "clientId": null,
+      "description": "",
+      "vlan": 422,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232266752,
+        "firstDhcp": 3232266852,
+        "lastDhcp": 3232266951,
+        "gateway": 3232266753
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b9d",
+      "inUse": false,
+      "clientId": null,
+      "description": null,
+      "vlan": 451,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232274176,
+        "firstDhcp": 3232274276,
+        "lastDhcp": 3232274375,
+        "gateway": 3232274177
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b71",
+      "inUse": true,
+      "clientId": {
+        "_id": "6113e7286cd4662c2535d0fb",
+        "tickets": {
+          "others": [],
+          "initial": 71616
+        },
+        "suites": [
+          "60b5ffcdae111e529a3139d3"
+        ],
+        "telephony": {
+          "active": false
+        },
+        "connection": {
+          "bandwidth": 10,
+          "type": "ded",
+          "monitoring": {
+            "active": true,
+            "ifIndex": 587,
+            "ifDevice": "60afbe89e2025433988863cb"
+          }
+        },
+        "logo": false,
+        "archive": false,
+        "name": "Dairy Drop Ltd ",
+        "shortName": "dairydropltd",
+        "siteId": "609e8d94174b2a276ce76c3d",
+        "startedDate": "2021-08-10T23:00:00.000Z",
+        "__v": 0
+      },
+      "description": null,
+      "vlan": 407,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232262912,
+        "firstDhcp": 3232263012,
+        "lastDhcp": 3232263111,
+        "gateway": 3232262913
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b92",
+      "inUse": false,
+      "clientId": null,
+      "description": null,
+      "vlan": 440,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232271360,
+        "firstDhcp": 3232271460,
+        "lastDhcp": 3232271559,
+        "gateway": 3232271361
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24b93",
+      "inUse": false,
+      "clientId": null,
+      "description": null,
+      "vlan": 441,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232271616,
+        "firstDhcp": 3232271716,
+        "lastDhcp": 3232271815,
+        "gateway": 3232271617
+      },
+      "__v": 0
+    },
+    {
+      "_id": "60a293289aba083e5db24ba1",
+      "inUse": false,
+      "clientId": null,
+      "description": null,
+      "vlan": 455,
+      "siteId": "609e8d94174b2a276ce76c3d",
+      "internalSubnet": {
+        "subnet": 3232275200,
+        "firstDhcp": 3232275300,
+        "lastDhcp": 3232275399,
+        "gateway": 3232275201
+      },
+      "__v": 0
+    }
+  ]
+
   const handleOnRowClick = (id) => {
     console.log(id);
   };
@@ -1426,8 +2954,9 @@ const App = () => {
   // const header = [{ label: 'ID', onRowClick: 'id' }, { label: 'Long Name' }, { label: 'Short Name', title: 'Last Name' }, { label: 'Balance', title: 'Balance' }];
   // const body = [{ key: 'id' }, { key: 'name', title: 'First Name' }, { key: 'shortName' }, { key: 'balance.today', useDot: true }];
 
-  const header = [{ label: 'Name', width: '300px' }, { label: 'SSID' }, { label: 'Uptime', width: '250px' }, { label: 'Down', width: '100px', }, { label: 'Up', width: '300px', }];
-  const body = [{ key: 'hostname' }, { key: 'essid' }, { key: 'uptime', function: millisecondsToDate }, { key: 'tx_bytes', function: bytesToMB, type: "number" }, { key: 'rx_bytes', function: bytesToMB, type: "number" }];
+  const header = [{ label: 'Vlan', width: '100px' }, { label: 'Subnet', width: '150px' }, { label: 'Client', width: '' }, { label: 'Description' }];
+
+  const body = [{ key: 'inUse' }, { key: 'vlan' }, { key: 'clientId.name', useDot: true }, { key: 'description' }];
 
   const options = {
     className: 'table table-sm table-hover',
@@ -1457,7 +2986,7 @@ const App = () => {
 
   return (
     <div style={{ width: '500px' }}>
-      <PaginationTable data={wifiData} header={header} body={body} options={options} />
+      <PaginationTable data={vlans} header={header} body={body} options={options} />
     </div>
   );
 };
