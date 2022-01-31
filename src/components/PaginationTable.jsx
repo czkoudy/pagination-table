@@ -27,6 +27,8 @@ export function usePaginationTable({ data, header, body, options }) {
       direction: options?.sortable?.direction || 'asc',
       excludeColumns: options?.sortable?.excludeColumns || [],
     },
+    lengthChange: { active: options?.lengthChange ? true : false, className: options?.lengthChange?.className || '' },
+    lengthMenu: options?.lengthMenu || [5, 10, 15, 20],
     info: options?.info || false,
     emptyRows: options?.emptyRows || false,
     perPage: options?.perPage || 10,
@@ -43,11 +45,13 @@ export function usePaginationTable({ data, header, body, options }) {
       key: options?.selection?.key || null,
       info: options?.selection?.info || false,
       className: options?.selection?.className || '',
-      onlyOne: options?.selection?.onlyOne || false,
+      maxCount: options?.selection?.maxCount || false,
+      buttons: options?.selection?.buttons || [],
     },
     loading: options?.loading?.component || options?.loading?.text || 'Loading',
     debug: options?.debug ? options?.debug : false,
   };
+  const [perPage, setPerPage] = useState(defaults.perPage);
   const [currentPage, setCurrentPage] = useState(1);
   const [order, setOrder] = useState({
     column: defaults.sortable.active ? body[defaults.sortable.column]?.key || body[0].key : body[0].key,
@@ -60,9 +64,9 @@ export function usePaginationTable({ data, header, body, options }) {
   const [selectionRows, setSelectionRows] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const firstIndex = (currentPage - 1) * defaults.perPage;
-  const lastIndex = (currentPage - 1) * defaults.perPage + defaults.perPage;
-  const numberOfEmptyRows = defaults.perPage - (sortedData.length % defaults.perPage);
+  const firstIndex = (currentPage - 1) * perPage;
+  const lastIndex = (currentPage - 1) * perPage + perPage;
+  const numberOfEmptyRows = perPage - (sortedData.length % perPage);
 
   const log = (message) => {
     if (defaults.debug) {
@@ -105,16 +109,16 @@ export function usePaginationTable({ data, header, body, options }) {
     setLoading(true);
     let isCancelled = false;
     if (!isCancelled) {
-      if (defaults.search) {
+      if (defaults.search.active) {
         setSortedData(_.orderBy(searchFunction(data, searchString, defaults.search), [order.column], [order.direction]));
       } else {
-        setSortedData(_.orderBy(data.toLowerCase(), [order.column], [order.direction]));
+        setSortedData(_.orderBy(data, [(item) => _.get(item, order.column)?.toLowerCase()], [order.direction]));
       }
     }
     return () => {
       isCancelled = true;
     };
-  }, [order.column, order.direction, searchString, currentPage, selectionRows, setSortedData, data]);
+  }, [perPage, firstIndex, lastIndex, order.column, order.direction, searchString, currentPage, selectionRows, setSortedData, data]);
 
   if (!data) {
     return null;
@@ -125,10 +129,13 @@ export function usePaginationTable({ data, header, body, options }) {
   };
 
   const onRowClickHandler = (e, entry) => {
-    if (defaults.onRowClick) {
-      if (typeof defaults.onRowClick.function === 'function') {
-        const key = defaults.onRowClick.key;
-        defaults.onRowClick.function(entry[key]);
+    if (e.target.classList.contains('row-checkbox')) {
+    } else {
+      if (defaults.onRowClick) {
+        if (typeof defaults.onRowClick.function === 'function') {
+          const key = defaults.onRowClick.key;
+          defaults.onRowClick.function(entry[key]);
+        }
       }
     }
   };
@@ -183,6 +190,11 @@ export function usePaginationTable({ data, header, body, options }) {
     }
   };
 
+  const handleOnChangePerPage = (e) => {
+    setPerPage(parseInt(e.target.value));
+    setCurrentPage(1);
+  };
+
   const getEmptyRows = (count) => {
     let rows = [];
 
@@ -200,6 +212,23 @@ export function usePaginationTable({ data, header, body, options }) {
     return (
       <div>
         Search: <input className={css.searchbox} type='text' value={searchString} onChange={(e) => setSearchString(e.target.value)} autoFocus />
+      </div>
+    );
+  };
+
+  const LengthChange = () => {
+    return (
+      <div>
+        Show{' '}
+        <select onChange={handleOnChangePerPage} defaultValue={perPage}>
+          {defaults.lengthMenu.map((item) => (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>{' '}
+        entries
+        {/* <input className={css.searchbox} type='text' value={searchString} onChange={(e) => setSearchString(e.target.value)} autoFocus /> */}
       </div>
     );
   };
@@ -230,12 +259,27 @@ export function usePaginationTable({ data, header, body, options }) {
         {loading && defaults.loading}
         {!loading && (
           <React.Fragment>
+            <div className={css.table__top}>{defaults.lengthChange.active && <LengthChange className={defaults.lengthChange.className} />}</div>
             <div className={css.table__top}>{defaults.search.active && <SearchBox className={defaults.search.className} />}</div>
             <table className={defaults.className}>
               <thead>
                 {defaults.selection.info && selectionRows.length > 0 && (
                   <tr>
-                    <th colSpan={header.length}>{selectionRows.length} selected</th>
+                    <th colSpan={header.length}>
+                      {selectionRows.length} selected{' '}
+                      {defaults?.selection?.buttons?.length > 0 &&
+                        defaults?.selection?.buttons?.map((button, index) => {
+                          return createElement(
+                            'button',
+                            {
+                              key: index,
+                              className: button?.className || '',
+                              onClick: () => button?.onClickFunction(selectionRows) || null,
+                            },
+                            button?.label ? button?.label : `Button ${index}`
+                          );
+                        })}
+                    </th>
                   </tr>
                 )}
                 <tr>
@@ -252,21 +296,17 @@ export function usePaginationTable({ data, header, body, options }) {
                 </tr>
               </thead>
               <tbody>
-                {sortedData.slice(firstIndex, lastIndex).map((entry) => (
-                  <tr
-                    key={entry._id || entry.id || entry.index || entry.GUID}
-                    id={entry[header.find((x) => x.onRowClick !== '').onRowClick] || null}
-                    onClick={(e) => onRowClickHandler(e, entry)}
-                    style={{ cursor: 'pointer', backgroundColor: selectionRows.includes(entry[defaults.selection.key]) ? defaults.selection.backgroundColor : '' }}
-                  >
+                {sortedData.slice(firstIndex, lastIndex).map((entry, index) => (
+                  <tr key={index} id={entry[header.find((x) => x.onRowClick !== '').onRowClick] || null} onClick={(e) => onRowClickHandler(e, entry)} style={{ cursor: 'pointer', backgroundColor: selectionRows.includes(entry[defaults.selection.key]) ? defaults.selection.backgroundColor : '' }}>
                     {defaults.selection.active && (
-                      <td>
+                      <td className='row-checkbox'>
                         <input
                           type='checkbox'
                           onChange={(e) => onRowSelection(e, entry)}
                           id={entry[defaults.selection.key]}
                           checked={selectionRows.includes(entry[defaults.selection.key])}
-                          disabled={defaults.selection.onlyOne && selectionRows.length >= 1 && !selectionRows.includes(entry[defaults.selection.key])}
+                          disabled={defaults.selection.maxCount && selectionRows.length >= defaults.selection.maxCount && !selectionRows.includes(entry[defaults.selection.key])}
+                          className={`row-checkbox ${defaults.selection.className}`}
                         />
                       </td>
                     )}
@@ -275,13 +315,13 @@ export function usePaginationTable({ data, header, body, options }) {
                     ))}
                   </tr>
                 ))}
-                {defaults.emptyRows && currentPage === Math.ceil(sortedData.length / defaults.perPage) && sortedData.length > defaults.perPage && getEmptyRows(numberOfEmptyRows)}
+                {defaults.emptyRows && currentPage === Math.ceil(sortedData.length / perPage) && sortedData.length > perPage && getEmptyRows(numberOfEmptyRows)}
               </tbody>
             </table>
 
             <br />
             <div className='d-flex justify-content-between'>
-              {sortedData.length > defaults.perPage ? <Pagination count={Math.ceil(sortedData.length / defaults.perPage)} page={currentPage} onChange={handleChangePage} options={defaults.pagination} /> : <div>&nbsp;</div>}
+              {sortedData.length > perPage ? <Pagination count={Math.ceil(sortedData.length / perPage)} page={currentPage} onChange={handleChangePage} options={defaults.pagination} /> : <div>&nbsp;</div>}
               {defaults.info && `Showing ${firstIndex + 1} to ${lastIndex > sortedData.length ? sortedData.length : lastIndex} of ${sortedData.length} records`}
             </div>
           </React.Fragment>
