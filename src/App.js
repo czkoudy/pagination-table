@@ -1,6 +1,7 @@
 import React, { createElement } from 'react';
 import { PaginationTable } from './components/PaginationTable';
 import './bootstrap.css';
+import { format } from 'date-fns';
 const App = () => {
   const data = [
     {
@@ -2909,6 +2910,1158 @@ const App = () => {
     }
   ]
 
+  const users = [
+    {
+      "portalSettings": {
+        "rightSidebar": false
+      },
+      "userType": "admin",
+      "siteAccess": [
+        "602259e07fc8b7a5c3b924f9",
+        "60225a247fc8b7a5c3b924fa",
+        "60225a3a7fc8b7a5c3b924fc",
+        "60225a317fc8b7a5c3b924fb",
+        "608968635825a23c5703d449",
+        "609e8d94174b2a276ce76c3d",
+        "60d346a5f6a5d4f96664d5cb"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [],
+      "featureFlags": [
+        {
+          "_id": "610173a34f2bf6cb697b2ef8",
+          "name": "admin-bandwidth-overview",
+          "description": "Overview of bandwidth of all sites with access"
+        }
+      ],
+      "permissions": [],
+      "_id": "60ffdd733a99986510cd0fa2",
+      "username": "reza.mashedy",
+      "firstName": "Reza",
+      "lastName": "Mashedy",
+      "email": "rmashedy@orega.com",
+      "password": "$2a$10$nP390IihflR6K8/9wRAUVeJ78aBizeieZA5bBA4RhrKherGelO/ye",
+      "createdAt": "2021-07-27T10:18:27.722Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": false
+      },
+      "userType": "user",
+      "siteAccess": [
+        "609e8d94174b2a276ce76c3d"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [],
+      "featureFlags": [],
+      "permissions": [],
+      "_id": "60e30ed3f376b74be2aaa8fd",
+      "username": "tilly.hardwick",
+      "firstName": "Tilly",
+      "lastName": "Hardwick",
+      "email": "thardwick@orega.com",
+      "password": "$2a$10$CMfmXrFShpicGPGRaLStbuDNnT3S.8m.rEt1Gfft2wX8kV20RytHG",
+      "createdAt": "2021-07-05T13:53:23.761Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": true
+      },
+      "userType": "super",
+      "siteAccess": [
+        "602259e07fc8b7a5c3b924f9",
+        "60225a247fc8b7a5c3b924fa",
+        "60225a3a7fc8b7a5c3b924fc",
+        "609e8d94174b2a276ce76c3d",
+        "608968635825a23c5703d449",
+        "60225a317fc8b7a5c3b924fb",
+        "60d346a5f6a5d4f96664d5cb"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [],
+      "featureFlags": [],
+      "permissions": [],
+      "_id": "60e30d60f376b74be2aaa8cd",
+      "username": "michael.holland",
+      "firstName": "Michael",
+      "lastName": "Holland",
+      "email": "michael.holland@silver-lining.com",
+      "password": "$2a$10$2Qkzhnz9NSM38y9.EdxqKuHezqFcHEqUgeqz.xc4Nhtmf.vFmwDIu",
+      "createdAt": "2021-07-05T13:47:12.877Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": true
+      },
+      "userType": "shield",
+      "siteAccess": [
+        "602259e07fc8b7a5c3b924f9",
+        "60225a247fc8b7a5c3b924fa",
+        "60225a317fc8b7a5c3b924fb",
+        "60225a3a7fc8b7a5c3b924fc",
+        "608968635825a23c5703d449",
+        "609e8d94174b2a276ce76c3d",
+        "60d346a5f6a5d4f96664d5cb",
+        "61790ec8a1c190ebdfa0deb5",
+        "618a8f8b7762d674745810b5",
+        "61aa3cc269b5aa93ebd1fc4c",
+        "6124d5680b5bc1b64440b905",
+        "61dadb83c7a359f6b71e57ec",
+        "61db292305ddfb1281418c9c",
+        "61db2c1505ddfb1281418deb"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082",
+        "618a8f7b7762d674745810b4",
+        "61c45c63d7a9483da20b29c3"
+      ],
+      "lastLog": [
+        "2022-01-08T17:21:45.559Z",
+        "2022-01-08T17:27:31.471Z",
+        "2022-01-09T12:51:53.918Z",
+        "2022-01-09T18:05:16.304Z",
+        "2022-01-10T08:22:09.257Z",
+        "2022-01-10T17:23:18.449Z",
+        "2022-01-11T08:58:27.134Z",
+        "2022-01-11T16:08:01.888Z",
+        "2022-01-12T10:50:59.996Z",
+        "2022-01-13T16:02:45.651Z",
+        "2022-01-14T09:12:57.339Z",
+        "2022-01-14T14:49:19.322Z",
+        "2022-01-15T10:18:22.047Z",
+        "2022-01-17T10:24:09.178Z",
+        "2022-01-18T08:58:28.630Z",
+        "2022-01-18T14:11:17.959Z",
+        "2022-01-18T15:05:54.702Z",
+        "2022-01-20T09:51:25.708Z",
+        "2022-01-21T12:21:35.881Z",
+        "2022-01-22T11:09:37.104Z",
+        "2022-01-22T14:16:06.311Z",
+        "2022-01-24T11:10:24.564Z",
+        "2022-01-25T08:25:58.441Z",
+        "2022-01-25T14:19:24.471Z",
+        "2022-01-26T09:13:59.307Z",
+        "2022-01-26T15:34:55.270Z",
+        "2022-01-27T10:53:39.087Z",
+        "2022-01-28T10:29:04.236Z",
+        "2022-01-28T16:17:50.047Z",
+        "2022-01-29T11:50:17.771Z",
+        "2022-01-31T11:34:27.655Z",
+        "2022-01-31T17:04:44.649Z",
+        "2022-02-01T09:00:48.880Z",
+        "2022-02-01T15:16:42.980Z",
+        "2022-02-02T11:56:55.142Z",
+        "2022-02-03T11:47:36.445Z",
+        "2022-02-04T11:10:04.397Z",
+        "2022-02-04T17:03:27.643Z",
+        "2022-02-06T10:42:18.243Z"
+      ],
+      "featureFlags": [
+        {
+          "_id": "610173864f2bf6cb697b2ef7",
+          "name": "admin-telephony-data",
+          "description": "Overview of clients for telephony and data",
+          "type": "user"
+        },
+        {
+          "_id": "6124d55e0b5bc1b64440b904",
+          "name": "admin-update-client-bandwidth",
+          "description": "Ability to update clients bandwidth",
+          "__v": 0,
+          "type": "user"
+        },
+        {
+          "_id": "612cb969e9dea7f3e8ae5f24",
+          "name": "admin-floorports-delete-all",
+          "description": "Delete all floorports button",
+          "__v": 0,
+          "type": "user"
+        },
+        {
+          "_id": "6182910accdb0533bfbf713d",
+          "name": "admin-delete-client-wizard",
+          "description": "admin-delete-client-wizard",
+          "type": "user",
+          "__v": 0
+        },
+        {
+          "_id": "61dada7cc7a359f6b71e577e",
+          "name": "admin-search-macaddress",
+          "description": "admin-search-macaddress",
+          "type": "user",
+          "__v": 0
+        }
+      ],
+      "permissions": [],
+      "_id": "602172008a78457031275918",
+      "username": "jakub.koudela",
+      "firstName": "Jakub",
+      "lastName": "Koudela",
+      "email": "jakub.koudela@silver-lining.com",
+      "password": "$2a$10$Jdq3BjAtAoGLEX3Sbs5qU.IiVfBLabSqgHvod4nigoCnB77sDGNxu",
+      "createdAt": "2021-02-08T17:16:48.615Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": false
+      },
+      "userType": "user",
+      "siteAccess": [
+        "609e8d94174b2a276ce76c3d"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [],
+      "featureFlags": [],
+      "permissions": [],
+      "_id": "60e30e82f376b74be2aaa8fc",
+      "username": "gemma.gilliland",
+      "firstName": "Gemma",
+      "lastName": "Gilliland",
+      "email": "ggilliland@orega.com",
+      "password": "$2a$10$M5fmmUrvs4EKdXtJkLYJjOasAR9.rCrgW9a8VseZf./OiLKk59zcm",
+      "createdAt": "2021-07-05T13:52:02.298Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": false
+      },
+      "userType": "user",
+      "siteAccess": [],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [],
+      "featureFlags": [],
+      "permissions": [],
+      "_id": "6093edbc28bc759ed2e04bc5",
+      "username": "reception.bristol",
+      "firstName": "Reception",
+      "lastName": "Bristol",
+      "email": "reception.bristol@orega.com",
+      "password": "$2a$10$Yln7XOOynY8vvrmP0AQ0oOd8.u2PH4aPlbV23BqhPiU..U6NTG7Ce",
+      "createdAt": "2021-05-06T13:23:08.474Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": false
+      },
+      "userType": "user",
+      "siteAccess": [
+        "602259e07fc8b7a5c3b924f9",
+        "60225a247fc8b7a5c3b924fa",
+        "60225a317fc8b7a5c3b924fb",
+        "60225a3a7fc8b7a5c3b924fc",
+        "608968635825a23c5703d449",
+        "609e8d94174b2a276ce76c3d",
+        "60d346a5f6a5d4f96664d5cb"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [],
+      "featureFlags": [
+        {
+          "_id": "610173864f2bf6cb697b2ef7",
+          "name": "admin-telephony-data",
+          "description": "Overview of clients for telephony and data"
+        }
+      ],
+      "permissions": [],
+      "_id": "610175f722231a76279822ce",
+      "username": "david.robertson",
+      "firstName": "David",
+      "lastName": "Robertson",
+      "email": "david.robertson@silver-lining.com",
+      "password": "$2a$10$Td7DXtrhgEH7TGtdk0jrAuFa7o/tGNmm6KFLwiD8QhGPx1SMpfGtW",
+      "createdAt": "2021-07-28T15:21:27.289Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": true
+      },
+      "userType": "super",
+      "siteAccess": [
+        "602259e07fc8b7a5c3b924f9",
+        "60225a247fc8b7a5c3b924fa",
+        "60225a3a7fc8b7a5c3b924fc",
+        "609e8d94174b2a276ce76c3d",
+        "608968635825a23c5703d449"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [
+        "2022-01-26T11:57:15.160Z",
+        "2022-01-27T09:04:36.739Z",
+        "2022-01-27T21:29:54.730Z",
+        "2022-02-01T10:23:50.226Z",
+        "2022-02-02T09:53:50.008Z",
+        "2022-02-02T15:14:18.340Z"
+      ],
+      "featureFlags": [
+        {
+          "_id": "610173864f2bf6cb697b2ef7",
+          "name": "admin-telephony-data",
+          "description": "Overview of clients for telephony and data",
+          "type": "user"
+        },
+        {
+          "_id": "610173a34f2bf6cb697b2ef8",
+          "name": "admin-bandwidth-overview",
+          "description": "Overview of bandwidth of all sites with access",
+          "type": "user"
+        }
+      ],
+      "permissions": [],
+      "_id": "60e49a4c5347215820be7da2",
+      "username": "sean.gabellini",
+      "firstName": "Sean",
+      "lastName": "Gabellini",
+      "email": "sean.gabellini@silver-lining.com",
+      "password": "$2a$10$bG8zC6OTNJkWH11z31xrBOGk5iVp3bTRdqJHMDheuO.AFJ0SLFoZe",
+      "createdAt": "2021-07-06T18:00:44.839Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": false
+      },
+      "userType": "user",
+      "siteAccess": [
+        "60d346a5f6a5d4f96664d5cb"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [],
+      "featureFlags": [],
+      "permissions": [],
+      "_id": "60f14a138d247bd9e4c68e87",
+      "username": "tracey.mahoney",
+      "firstName": "Tracey",
+      "lastName": "Mahoney",
+      "email": "tmahoney@orega.com",
+      "password": "$2a$10$.z.LPTji9wXUN07Uyd27u.2Yx4/trico/VDRTSsmiyXJnTgTQHYcq",
+      "createdAt": "2021-07-16T08:57:55.338Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": true
+      },
+      "userType": "user",
+      "siteAccess": [
+        "608968635825a23c5703d449"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [
+        "2022-01-20T10:50:25.266Z",
+        "2022-01-20T10:51:31.483Z",
+        "2022-01-20T10:51:56.675Z",
+        "2022-01-20T11:09:20.034Z",
+        "2022-01-20T11:24:39.491Z",
+        "2022-01-21T11:30:06.022Z",
+        "2022-01-21T11:30:06.027Z",
+        "2022-01-21T12:24:50.071Z",
+        "2022-01-22T12:12:55.733Z",
+        "2022-01-25T12:22:57.892Z"
+      ],
+      "featureFlags": [
+        {
+          "_id": "6124d55e0b5bc1b64440b904",
+          "name": "admin-update-client-bandwidth",
+          "description": "Ability to update clients bandwidth",
+          "__v": 0
+        }
+      ],
+      "permissions": [],
+      "_id": "6124d5c30b5bc1b64440b906",
+      "username": "demo.user",
+      "firstName": "Demo",
+      "lastName": "User",
+      "email": "development@silver-lining.com",
+      "password": "$2a$10$UsEp8lHKDH8ITv0AyGPNB.QoCZ.X5TgUGJPB2gkbbotxEIdCtK20y",
+      "createdAt": "2021-08-24T11:19:31.290Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": false
+      },
+      "userType": "user",
+      "siteAccess": [
+        "60225a3a7fc8b7a5c3b924fc"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [
+        "2022-01-12T10:15:37.843Z"
+      ],
+      "featureFlags": [],
+      "permissions": [],
+      "_id": "61013ccc7a8e5973ed8e3acc",
+      "username": "anca.rosca",
+      "firstName": "Anca",
+      "lastName": "Rosca",
+      "email": "arosca@orega.com",
+      "password": "$2a$10$0vCXzTeGASJDKJDGwJvwYOHW0ZcgKNqeYN0I6tCxOGAnvpSnfGCFW",
+      "createdAt": "2021-07-28T11:17:32.183Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": false
+      },
+      "userType": "user",
+      "siteAccess": [
+        "602259e07fc8b7a5c3b924f9",
+        "61790ec8a1c190ebdfa0deb5"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [],
+      "featureFlags": [],
+      "permissions": [],
+      "_id": "60225a697fc8b7a5c3b924fd",
+      "username": "damien.vanderhaegen",
+      "firstName": "Damien",
+      "lastName": "Vanderhaegen",
+      "email": "damien.vanderhaegen@silver-lining.com",
+      "password": "$2a$10$JloYiFFO//DaY9QgCYfQVuAnSWogGw.ZuGiKoT6OfAMPTHbLBkucm",
+      "createdAt": "2021-02-09T09:48:25.298Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": false
+      },
+      "userType": "user",
+      "siteAccess": [
+        "60225a3a7fc8b7a5c3b924fc"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [
+        "2022-01-18T09:18:23.389Z",
+        "2022-01-24T18:06:38.464Z",
+        "2022-01-28T11:03:13.289Z"
+      ],
+      "featureFlags": [],
+      "permissions": [],
+      "_id": "60d99dc9a73365351c2a2948",
+      "username": "joe.clubb",
+      "firstName": "Joe",
+      "lastName": "Clubb",
+      "email": "jclubb@orega.com",
+      "password": "$2a$10$RvDm5h3A6doVwJvxgaD/MO9yuoL255LhmEmKEnLUDjeoacZRcxW3O",
+      "createdAt": "2021-06-28T10:00:41.174Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": true
+      },
+      "userType": "super",
+      "siteAccess": [
+        "602259e07fc8b7a5c3b924f9",
+        "60225a247fc8b7a5c3b924fa",
+        "60225a3a7fc8b7a5c3b924fc",
+        "609e8d94174b2a276ce76c3d",
+        "608968635825a23c5703d449",
+        "60d346a5f6a5d4f96664d5cb"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [
+        "2022-01-28T15:19:42.438Z",
+        "2022-01-31T09:28:18.288Z",
+        "2022-02-01T17:26:28.938Z",
+        "2022-02-04T11:15:04.365Z"
+      ],
+      "featureFlags": [],
+      "permissions": [],
+      "_id": "60e49a235347215820be7d73",
+      "username": "tyler.smedmor",
+      "firstName": "Tyler",
+      "lastName": "Smedmor",
+      "email": "tyler.smedmor@silver-lining.com",
+      "password": "$2a$10$fxv4yg57rFuEhOy9CoDdteHHuGrXGb4Vv/JFUjTCyyL.pdCG9DRT6",
+      "createdAt": "2021-07-06T18:00:03.521Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": false
+      },
+      "userType": "user",
+      "siteAccess": [
+        "608968635825a23c5703d449"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [
+        "2022-01-14T14:41:10.056Z",
+        "2022-01-17T10:47:01.626Z",
+        "2022-01-18T11:13:07.109Z",
+        "2022-01-20T10:11:58.555Z",
+        "2022-01-21T11:22:05.896Z",
+        "2022-01-21T12:12:25.798Z",
+        "2022-01-24T10:44:52.622Z",
+        "2022-01-25T14:03:53.927Z",
+        "2022-01-26T12:45:14.590Z",
+        "2022-01-27T10:34:18.602Z",
+        "2022-01-31T10:36:28.360Z"
+      ],
+      "featureFlags": [],
+      "permissions": [],
+      "_id": "60e6d46c5c581775d0e29c4a",
+      "username": "michelle.whittock",
+      "firstName": "Michelle",
+      "lastName": "Whittock",
+      "email": "MWhittock@orega.com",
+      "password": "$2a$10$zX/wr7iwj420CEnYIIGKw.dhyRfopyEt8Mjy4w.JPDP.JdEfCpNtK",
+      "createdAt": "2021-07-08T10:33:16.990Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": false
+      },
+      "userType": "user",
+      "siteAccess": [
+        "60225a317fc8b7a5c3b924fb"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [],
+      "featureFlags": [],
+      "permissions": [],
+      "_id": "60f18b35453f9fe60be41dab",
+      "username": "michelle.handfield",
+      "firstName": "Michelle",
+      "lastName": "Handfield",
+      "email": "acsm.ld@orega.com",
+      "password": "$2a$10$K7UkP2wbEB1WFkQJJX99KuoKxviQvPX2o9rvET160Fadrnk4RT1rK",
+      "createdAt": "2021-07-16T13:35:49.916Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": false
+      },
+      "userType": "user",
+      "siteAccess": [
+        "609e8d94174b2a276ce76c3d"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [
+        "2022-01-10T11:09:15.546Z",
+        "2022-01-20T09:05:15.070Z",
+        "2022-01-25T12:02:37.080Z",
+        "2022-01-31T14:43:15.435Z",
+        "2022-02-03T10:12:43.769Z",
+        "2022-02-04T15:20:45.624Z"
+      ],
+      "featureFlags": [],
+      "permissions": [],
+      "_id": "60d321acf6a5d4f96664d456",
+      "username": "lucy.earnshaw",
+      "firstName": "Lucy",
+      "lastName": "Earnshaw",
+      "email": "lwoods@orega.com",
+      "password": "$2a$10$SfGDMMS/OMYVdR/8DvVEFOrWag9gGkpU37J6LmEnSZAPqk2DaFL0e",
+      "createdAt": "2021-06-23T11:57:32.221Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": true
+      },
+      "userType": "super",
+      "siteAccess": [
+        "602259e07fc8b7a5c3b924f9",
+        "60225a3a7fc8b7a5c3b924fc",
+        "609e8d94174b2a276ce76c3d",
+        "60225a247fc8b7a5c3b924fa",
+        "608968635825a23c5703d449",
+        "60225a317fc8b7a5c3b924fb",
+        "61790ec8a1c190ebdfa0deb5",
+        "618a8f8b7762d674745810b5",
+        "60d346a5f6a5d4f96664d5cb"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082",
+        "618a8f7b7762d674745810b4"
+      ],
+      "lastLog": [
+        "2022-01-13T15:51:13.146Z",
+        "2022-01-14T10:39:34.563Z",
+        "2022-01-14T16:26:35.276Z",
+        "2022-01-17T09:06:10.568Z",
+        "2022-01-17T16:30:01.328Z",
+        "2022-01-18T09:27:22.574Z",
+        "2022-01-24T11:10:58.667Z",
+        "2022-01-24T16:19:34.266Z",
+        "2022-01-26T08:55:14.338Z",
+        "2022-01-28T15:01:27.488Z",
+        "2022-01-31T09:49:03.269Z",
+        "2022-02-01T10:25:41.147Z",
+        "2022-02-01T10:25:41.423Z",
+        "2022-02-03T11:17:36.805Z",
+        "2022-02-04T15:57:00.474Z"
+      ],
+      "featureFlags": [],
+      "permissions": [],
+      "_id": "6023c5688a8c17d76f915f22",
+      "username": "luke.quelch",
+      "firstName": "Luke",
+      "lastName": "Quelch",
+      "email": "luke.quelch@silver-lining.com",
+      "password": "$2a$10$.6lE1D/wTGZ/a4auDut6rOdESjyiFWBzgrWVItRz/MMz.li9ikc9i",
+      "createdAt": "2021-02-10T11:37:12.240Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": true
+      },
+      "userType": "super",
+      "siteAccess": [
+        "602259e07fc8b7a5c3b924f9",
+        "60225a247fc8b7a5c3b924fa",
+        "60225a3a7fc8b7a5c3b924fc",
+        "60225a317fc8b7a5c3b924fb",
+        "608968635825a23c5703d449",
+        "609e8d94174b2a276ce76c3d",
+        "60d346a5f6a5d4f96664d5cb",
+        "61790ec8a1c190ebdfa0deb5"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [
+        "2022-02-02T14:43:47.202Z",
+        "2022-02-05T12:56:26.216Z"
+      ],
+      "featureFlags": [
+        {
+          "_id": "6182910accdb0533bfbf713d",
+          "name": "admin-delete-client-wizard",
+          "description": "admin-delete-client-wizard",
+          "type": "user",
+          "__v": 0
+        }
+      ],
+      "permissions": [
+        "61829aba66f0ff36da9cf196"
+      ],
+      "_id": "605b27959bdaefba24b842a1",
+      "username": "artur.balcerak",
+      "firstName": "Artur",
+      "lastName": "Balcerak",
+      "email": "artur.balcerak@silver-lining.com",
+      "password": "$2a$10$h78H139OcLHuqn5G25zLr.zOaLoJglJPc3uAvDbVOiJVXpdeS5gdq",
+      "createdAt": "2021-03-24T11:50:45.586Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": false
+      },
+      "userType": "user",
+      "siteAccess": [
+        "60225a247fc8b7a5c3b924fa"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [
+        "2022-01-10T17:02:22.321Z",
+        "2022-01-11T09:45:48.517Z",
+        "2022-01-11T14:56:32.037Z",
+        "2022-01-12T08:57:59.499Z",
+        "2022-01-12T09:06:21.336Z",
+        "2022-01-12T11:23:27.081Z",
+        "2022-01-13T12:11:18.664Z",
+        "2022-01-24T13:01:29.070Z",
+        "2022-01-27T12:31:45.044Z",
+        "2022-01-28T11:07:38.375Z",
+        "2022-02-01T10:53:21.006Z",
+        "2022-02-01T11:05:29.231Z",
+        "2022-02-02T09:30:09.412Z",
+        "2022-02-02T09:30:13.428Z",
+        "2022-02-02T09:30:18.961Z",
+        "2022-02-02T09:30:20.304Z",
+        "2022-02-02T09:30:26.104Z",
+        "2022-02-02T16:05:41.449Z",
+        "2022-02-03T09:26:37.062Z"
+      ],
+      "featureFlags": [],
+      "permissions": [],
+      "_id": "60e575a8672ed4613e9f1be1",
+      "username": "reception.uxbridge",
+      "firstName": "Reception",
+      "lastName": "Uxbridge",
+      "email": "reception.uxbridge@orega.com",
+      "password": "$2a$10$hKBlRHEMxdWv5Z15AHXWyOBEwNxSApLEs1/fjiJCHlaHE1AqNk.JO",
+      "createdAt": "2021-07-07T09:36:40.172Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": true
+      },
+      "userType": "super",
+      "siteAccess": [
+        "602259e07fc8b7a5c3b924f9",
+        "60225a247fc8b7a5c3b924fa",
+        "60225a317fc8b7a5c3b924fb",
+        "60225a3a7fc8b7a5c3b924fc",
+        "608968635825a23c5703d449",
+        "609e8d94174b2a276ce76c3d",
+        "60d346a5f6a5d4f96664d5cb"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [],
+      "featureFlags": [
+        {
+          "_id": "610173a34f2bf6cb697b2ef8",
+          "name": "admin-bandwidth-overview",
+          "description": "Overview of bandwidth of all sites with access"
+        }
+      ],
+      "permissions": [],
+      "_id": "60ffc2f23a1b186489a85642",
+      "username": "nathan.bonwick",
+      "firstName": "Nathan",
+      "lastName": "Bonwick",
+      "email": "nathan.bonwick@silver-lining.com",
+      "password": "$2a$10$mt.kYMF/iTQQZTA18JHGSOEABmfOz82YN9T45FCQr.KAdpJcO40eO",
+      "createdAt": "2021-07-27T08:25:22.815Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": false
+      },
+      "userType": "user",
+      "siteAccess": [
+        "602259e07fc8b7a5c3b924f9"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [
+        "2022-01-17T16:34:51.214Z",
+        "2022-02-01T10:28:46.848Z"
+      ],
+      "featureFlags": [],
+      "permissions": [],
+      "_id": "6094fff949fabba9ac56ef4d",
+      "username": "reception.slough",
+      "firstName": "Reception",
+      "lastName": "Slough",
+      "email": "reception.slough@orega.com",
+      "password": "$2a$10$7S8uhIU5OsCC2PSDstYIO.tOhXYEA8CwTNLf/ftAV9UZYp1NmuRZ.",
+      "createdAt": "2021-05-07T08:53:13.138Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": false
+      },
+      "userType": "user",
+      "siteAccess": [
+        "602259e07fc8b7a5c3b924f9",
+        "60225a247fc8b7a5c3b924fa"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [],
+      "featureFlags": [],
+      "permissions": [],
+      "_id": "610bc60be39d66f494576344",
+      "username": "taruna.patel",
+      "firstName": "Taruna",
+      "lastName": "Patel",
+      "email": "tpatel@orega.com",
+      "password": "$2a$10$9RZJyvL3lezUPTv/C2VFuO..QWmdKLYxvwXtujnydOOuN9YSUZvtO",
+      "createdAt": "2021-08-05T11:05:47.141Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": true
+      },
+      "userType": "super",
+      "siteAccess": [
+        "602259e07fc8b7a5c3b924f9",
+        "60225a247fc8b7a5c3b924fa",
+        "60225a3a7fc8b7a5c3b924fc",
+        "608968635825a23c5703d449",
+        "609e8d94174b2a276ce76c3d",
+        "60225a317fc8b7a5c3b924fb",
+        "60d346a5f6a5d4f96664d5cb"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [],
+      "featureFlags": [],
+      "permissions": [],
+      "_id": "611a7e667e7de35ed4c7197e",
+      "username": "ryan.todd",
+      "firstName": "Ryan",
+      "lastName": "Todd",
+      "email": "ryan.todd@silver-lining.com",
+      "password": "$2a$10$rEcm2bsyppLD2iendt9h7OiypKmplPrk6fGjOIiiz2RCd5XPoE27O",
+      "createdAt": "2021-08-16T15:04:06.677Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": true
+      },
+      "userType": "super",
+      "siteAccess": [
+        "602259e07fc8b7a5c3b924f9",
+        "60225a3a7fc8b7a5c3b924fc",
+        "609e8d94174b2a276ce76c3d",
+        "60225a247fc8b7a5c3b924fa",
+        "608968635825a23c5703d449",
+        "60d346a5f6a5d4f96664d5cb",
+        "60225a317fc8b7a5c3b924fb"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [
+        "2022-01-13T11:03:21.457Z",
+        "2022-01-18T10:25:36.854Z",
+        "2022-01-19T08:35:47.943Z",
+        "2022-01-20T09:04:44.574Z",
+        "2022-01-24T15:41:16.943Z",
+        "2022-01-25T15:38:27.683Z",
+        "2022-01-31T16:32:20.627Z",
+        "2022-02-01T08:33:20.705Z",
+        "2022-02-01T16:22:14.453Z",
+        "2022-02-03T08:32:19.369Z",
+        "2022-02-03T11:11:35.425Z",
+        "2022-02-03T15:12:18.291Z",
+        "2022-02-04T15:34:53.261Z"
+      ],
+      "featureFlags": [],
+      "permissions": [
+        "61829ad266f0ff36da9cf1a2"
+      ],
+      "_id": "60bf3b32f84d35cf43af7d69",
+      "username": "tom.feaver",
+      "firstName": "Tom",
+      "lastName": "Feaver",
+      "email": "tom.feaver@silver-lining.com",
+      "password": "$2a$10$8wsv0INIPXqjARZn9jFnSuXHnGOWqzgMHPLaMC7GgtKBxRpcC4VKO",
+      "createdAt": "2021-06-08T09:41:06.781Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": false
+      },
+      "userType": "user",
+      "siteAccess": [
+        "60d346a5f6a5d4f96664d5cb"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [
+        "2022-01-25T15:44:45.968Z"
+      ],
+      "featureFlags": [],
+      "permissions": [],
+      "_id": "60f14d8c8d52d6dd3f568159",
+      "username": "reception.glasgow",
+      "firstName": "Reception",
+      "lastName": "Glasgow",
+      "email": "reception.glasgow-svs@orega.com",
+      "password": "$2a$10$bdyHocqDM4NXoG2mmZra2u1AuYQG.BD3oxSW0PMRqlU0ZagY5vTgi",
+      "createdAt": "2021-07-16T09:12:44.028Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": false
+      },
+      "userType": "user",
+      "siteAccess": [
+        "602259e07fc8b7a5c3b924f9"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [],
+      "featureFlags": [],
+      "permissions": [],
+      "_id": "610bc49ae39d66f494576291",
+      "username": "marta.ribeiro",
+      "firstName": "Marta",
+      "lastName": "Ribeiro",
+      "email": "marta.ribeiro@orega.com",
+      "password": "$2a$10$9DBgl76W.efa4EvgxcdSrulqmy6vraPPZTld9dqhltjK3xJk3Hm7q",
+      "createdAt": "2021-08-05T10:59:38.536Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": false
+      },
+      "userType": "user",
+      "siteAccess": [
+        "60d346a5f6a5d4f96664d5cb"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [],
+      "featureFlags": [],
+      "permissions": [],
+      "_id": "6148ac99292a5fdc9c5c1f86",
+      "username": "lynne.morrison",
+      "firstName": "Lynne",
+      "lastName": "Morrison",
+      "email": "acsm.gl-svs@orega.com",
+      "password": "$2a$10$8pjRIvc5ya5Ce1xPWnWq6.WEVWW.1V/0J4uGRQ1d0d/ZAWt8gLL6u",
+      "createdAt": "2021-09-20T15:45:29.890Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": false
+      },
+      "userType": "user",
+      "siteAccess": [
+        "618a8f8b7762d674745810b5"
+      ],
+      "groupAccess": [
+        "618a8f7b7762d674745810b4"
+      ],
+      "lastLog": [],
+      "featureFlags": [
+        {
+          "_id": "610173a34f2bf6cb697b2ef8",
+          "name": "admin-bandwidth-overview",
+          "description": "Overview of bandwidth of all sites with access",
+          "type": "user"
+        }
+      ],
+      "permissions": [],
+      "_id": "61c32e3c5a606f2ef10c1ca0",
+      "username": "reception.dukestreet",
+      "firstName": "Reception",
+      "lastName": "DukeStreet",
+      "email": "dukestreet@theoffice.co.uk",
+      "password": "$2a$10$n0sP6hVr3HBAfJXwjLk57.Mf2sg6yM6KdtfSoAkBw4W0zp99sjEOK",
+      "createdAt": "2021-12-22T13:55:08.980Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": true
+      },
+      "userType": "super",
+      "siteAccess": [
+        "609e8d94174b2a276ce76c3d",
+        "608968635825a23c5703d449",
+        "60225a317fc8b7a5c3b924fb",
+        "60d346a5f6a5d4f96664d5cb",
+        "60225a3a7fc8b7a5c3b924fc",
+        "60225a247fc8b7a5c3b924fa",
+        "602259e07fc8b7a5c3b924f9",
+        "61790ec8a1c190ebdfa0deb5",
+        "61aa3cc269b5aa93ebd1fc4c",
+        "61dadb83c7a359f6b71e57ec",
+        "61db292305ddfb1281418c9c",
+        "61db2c1505ddfb1281418deb"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [
+        "2022-01-10T08:40:03.986Z",
+        "2022-01-18T08:29:36.791Z",
+        "2022-01-31T16:06:12.192Z"
+      ],
+      "featureFlags": [
+        {
+          "_id": "61dada7cc7a359f6b71e577e",
+          "name": "admin-search-macaddress",
+          "description": "admin-search-macaddress",
+          "type": "user",
+          "__v": 0
+        }
+      ],
+      "permissions": [],
+      "_id": "61c344cea505ac2fde51af3b",
+      "username": "chris.burt",
+      "firstName": "Chris",
+      "lastName": "Burt",
+      "email": "chris.burt@silver-lining.com",
+      "password": "$2a$10$XTNXb3fu0dJnEBYJduIJIuLTCuFX0jRULExWXxoJxddHefWQIEWZa",
+      "createdAt": "2021-12-22T15:31:26.648Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": false
+      },
+      "userType": "user",
+      "siteAccess": [
+        "602259e07fc8b7a5c3b924f9",
+        "609e8d94174b2a276ce76c3d",
+        "60d346a5f6a5d4f96664d5cb",
+        "60225a317fc8b7a5c3b924fb",
+        "60225a3a7fc8b7a5c3b924fc",
+        "60225a247fc8b7a5c3b924fa",
+        "608968635825a23c5703d449"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [
+        "2022-01-14T10:50:14.642Z",
+        "2022-01-22T15:09:57.553Z",
+        "2022-02-02T11:26:45.398Z"
+      ],
+      "featureFlags": [
+        {
+          "_id": "610173864f2bf6cb697b2ef7",
+          "name": "admin-telephony-data",
+          "description": "Overview of clients for telephony and data",
+          "type": "user"
+        }
+      ],
+      "permissions": [],
+      "_id": "61c4931420ca6e446279e70a",
+      "username": "accounts",
+      "firstName": "Accounts",
+      "lastName": "SL",
+      "email": "accounts@silver-lining.com",
+      "password": "$2a$10$NnegSROOAlNNceUUkqdncuBtLdcdcvwnutBQRnE91.Mz5ZO6Nz6y.",
+      "createdAt": "2021-12-23T15:17:40.948Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": false
+      },
+      "userType": "user",
+      "siteAccess": [
+        "618a8f8b7762d674745810b5"
+      ],
+      "groupAccess": [
+        "618a8f7b7762d674745810b4"
+      ],
+      "lastLog": [
+        "2022-01-18T15:05:34.786Z",
+        "2022-01-18T15:11:10.528Z",
+        "2022-01-20T11:51:45.484Z"
+      ],
+      "featureFlags": [],
+      "permissions": [],
+      "_id": "61d5be2ce19394ac9fb80d18",
+      "username": "maria.kuldkepp",
+      "firstName": "Maria",
+      "lastName": "Kuldkepp",
+      "email": "mk@theoffice.co.uk",
+      "password": "$2a$10$6Za4uk6wN.ysPgT5ujTE0eOImPsYz1VCTdqY8uf0Augm0sdVWrkbi",
+      "createdAt": "2022-01-05T15:50:04.041Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": false
+      },
+      "userType": "user",
+      "siteAccess": [
+        "618a8f8b7762d674745810b5"
+      ],
+      "groupAccess": [
+        "618a8f7b7762d674745810b4"
+      ],
+      "lastLog": [],
+      "featureFlags": [],
+      "permissions": [
+        "61f00ab6cff526e92d18777c"
+      ],
+      "_id": "61f01a888b68a2ea3524b2f1",
+      "username": "jade.dooley",
+      "firstName": "Jade",
+      "lastName": "Dooley",
+      "email": "jade.dooley@theoffice.co.uk",
+      "password": "$2a$10$qnS/O912pe5sAi5pRfEc4eSyzzyI8MI/5RIHD8NCbwjChuLNTrZIi",
+      "createdAt": "2022-01-25T15:43:04.613Z",
+      "__v": 0
+    },
+    {
+      "portalSettings": {
+        "rightSidebar": false
+      },
+      "userType": "user",
+      "siteAccess": [
+        "60d346a5f6a5d4f96664d5cb"
+      ],
+      "groupAccess": [
+        "61828ececcdb0533bfbf7082"
+      ],
+      "lastLog": [
+        "2022-01-25T16:17:13.918Z",
+        "2022-01-25T16:19:05.904Z",
+        "2022-01-27T09:19:09.809Z",
+        "2022-01-28T09:13:14.231Z",
+        "2022-01-28T12:03:06.494Z",
+        "2022-01-31T12:23:02.156Z"
+      ],
+      "featureFlags": [],
+      "permissions": [],
+      "_id": "61f0220c8b68a2ea3524b5ca",
+      "username": "hayley.heath",
+      "firstName": "Hayley",
+      "lastName": "Heath",
+      "email": "hheath@orega.com",
+      "password": "$2a$10$3TQchMDXgSCA14PUg8Ne7uFiFNYAuR2ZGwbjUxLMpfH46mPLsCdLG",
+      "createdAt": "2022-01-25T16:15:08.980Z",
+      "__v": 0
+    }
+  ]
+
   const handleOnRowClick = (id) => {
     console.log(id);
   };
@@ -2953,17 +4106,31 @@ const App = () => {
 
   // const header = [{ label: 'ID', onRowClick: 'id' }, { label: 'Long Name' }, { label: 'Short Name', title: 'Last Name' }, { label: 'Balance', title: 'Balance' }];
   // const body = [{ key: 'id' }, { key: 'name', title: 'First Name' }, { key: 'shortName' }, { key: 'balance.today', useDot: true }];
+  const formatUserType = (type) => {
+    return type
+  };
 
-  const header = [{ label: 'Vlan', width: '100px' }, { label: 'Subnet', width: '150px' }, { label: 'Client', width: '' }, { label: 'Description' }];
+  const formatLastLogs = (log) => {
+    if (log) {
+      const formatedDate = format(log, "dd-MMM-yyyy")
+      if (formatedDate === "01-Jan-1970") {
+        return "Never Logged In"
+      } else {
+        return formatedDate
+      }
+    }
+  };
 
-  const body = [{ key: 'inUse' }, { key: 'vlan' }, { key: 'clientId.name', useDot: true }, { key: 'description' }];
+  const header = [{ label: 'Username', onRowClick: 'username', width: '200px' }, { label: 'First Name', width: '150px' }, { label: 'Last Name', width: '150px' }, { label: 'Email' }, { label: '', width: '50px' }, { label: 'Last Log', width: '200px' }];
 
+  const body = [{ key: 'username' }, { key: 'firstName' }, { key: 'lastName' }, { key: 'email' }, { key: 'userType', function: formatUserType }, { key: 'lastLog', function: formatLastLogs }];
   const options = {
     className: 'table table-sm table-hover',
     onRowClick: {
       function: handleOnRowClick,
       key: '_id',
     },
+    perPage: 30,
     selection: {
       key: '_id',
       info: true,
@@ -2981,12 +4148,13 @@ const App = () => {
     sortable: {
       excludeColumns: [],
     },
-    lengthChange: true
+    lengthChange: true,
+    debug: true
   };
 
   return (
     <div style={{ width: '500px' }}>
-      <PaginationTable data={vlans} header={header} body={body} options={options} />
+      <PaginationTable data={users.map(x => ({ ...x, lastLog: typeof x.lastLog.at(-1) === "string" ? new Date(x.lastLog.at(-1)) : new Date(null) }))} header={header} body={body} options={options} />
     </div>
   );
 };

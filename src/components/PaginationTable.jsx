@@ -54,8 +54,9 @@ export function usePaginationTable({ data, header, body, options }) {
   const [perPage, setPerPage] = useState(defaults.perPage);
   const [currentPage, setCurrentPage] = useState(1);
   const [order, setOrder] = useState({
-    column: defaults.sortable.active ? body[defaults.sortable.column]?.key || body[0].key : body[0].key,
-    direction: defaults.sortable.active ? defaults.sortable.direction || 'asc' : 'asc',
+    // column: defaults.sortable.active ? body[defaults.sortable.column]?.key || body[0].key : body[0].key,
+    column: body[defaults.sortable.column]?.key,
+    direction: defaults.sortable.direction,
   });
   const [searchString, setSearchString] = useState('');
   const [sortedData, setSortedData] = useStateWithCallback([], (sortedData) => {
@@ -274,7 +275,10 @@ export function usePaginationTable({ data, header, body, options }) {
                             {
                               key: index,
                               className: button?.className || '',
-                              onClick: () => button?.onClickFunction(selectionRows) || null,
+                              onClick: () => {
+                                button?.onClickFunction(selectionRows);
+                                setSelectionRows();
+                              },
                             },
                             button?.label ? button?.label : `Button ${index}`
                           );
