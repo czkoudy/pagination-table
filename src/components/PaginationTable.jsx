@@ -277,7 +277,7 @@ export function usePaginationTable({ data, header, body, options }) {
                               className: button?.className || '',
                               onClick: () => {
                                 button?.onClickFunction(selectionRows);
-                                setSelectionRows();
+                                setSelectionRows([]);
                               },
                             },
                             button?.label ? button?.label : `Button ${index}`

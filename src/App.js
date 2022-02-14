@@ -127,6 +127,10 @@ const App = () => {
     }
   };
 
+  const handleDeleteSelected = (data) => {
+    console.log(data)
+  }
+
   const header = [{ label: 'id', width: '200px' }, { label: 'Name', width: '150px' },];
 
   const body = [{ key: 'id' }, { key: 'name' },];
@@ -138,6 +142,20 @@ const App = () => {
     },
     perPage: 1,
     lengthChange: true,
+    selection: {
+      backgroundColor: 'rgba(255, 165, 0, 0.5)',
+      key: '_id',
+      info: true,
+      // className: options?.selection?.className || '',
+      maxCount: 5,
+      buttons: [
+        {
+          className: 'btn btn-sm btn-danger',
+          onClickFunction: (data) => handleDeleteSelected(data),
+          label: 'Delete Selected',
+        },
+      ],
+    },
   };
 
   return (
