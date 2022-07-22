@@ -85,6 +85,7 @@ export function usePaginationTable({ data, header, body, options }) {
       }
     }
     log(columns);
+
     return data.filter((row) =>
       columns.some((column) => {
         let useDotValue;

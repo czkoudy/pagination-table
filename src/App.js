@@ -142,6 +142,7 @@ const App = () => {
     },
     perPage: 1,
     lengthChange: true,
+    search: true,
     selection: {
       backgroundColor: 'rgba(255, 165, 0, 0.5)',
       key: '_id',
