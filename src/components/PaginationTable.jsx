@@ -128,7 +128,7 @@ export function usePaginationTable({ data, header, body, options }) {
       isCancelled = true;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [perPage, order.column, order.direction, searchString]);
+  }, [perPage, order.column, order.direction, searchString, data]);
 
   // perPage, firstIndex, lastIndex, order.column, order.direction, searchString, currentPage, selectionRows, setSortedData, data
 

@@ -756,7 +756,7 @@ const App = () => {
     //   function: handleOnRowClick,
     //   key: 'id',
     // },
-    // perPage: 5,
+    perPage: 2,
     // emptyRows: true,
     // lengthChange: true,
     search: true,
