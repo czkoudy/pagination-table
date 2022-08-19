@@ -3,7 +3,6 @@ import css from './paginationtable.module.css';
 import Pagination from './Pagination/Pagination';
 import { format } from 'date-fns';
 import React, { createElement, useEffect, useState } from 'react';
-
 import _ from 'lodash';
 
 const useStateWithCallback = (initialState, callback) => {
@@ -20,19 +19,24 @@ export function usePaginationTable({ data, header, body, options }) {
       active: options?.search ? true : false,
       className: options?.search?.className || '',
       columns: options?.search?.columns || 'all',
+      style: options?.search?.style || {},
     },
-    sortable: {
-      active: options?.sortable ? true : false,
-      column: options?.sortable?.column || 0,
-      direction: options?.sortable?.direction || 'asc',
-      excludeColumns: options?.sortable?.excludeColumns || [],
+    sort: {
+      active: options?.sort ? true : false,
+      column: options?.sort?.column || 0,
+      direction: options?.sort?.direction || 'asc',
+      excludeColumns: options?.sort?.excludeColumns || [],
     },
     lengthChange: { active: options?.lengthChange ? true : false, className: options?.lengthChange?.className || '' },
-    lengthMenu: options?.lengthMenu || [5, 10, 15, 20],
-    info: options?.info || false,
+    lengthMenu: options?.lengthMenu || [1, 5, 10, 15, 20],
+    info: {
+      active: options?.info || true,
+      text: options?.info?.text || 'records',
+    },
     emptyRows: options?.emptyRows || false,
     perPage: options?.perPage || 10,
     className: options?.className || '',
+    style: options?.style || {},
     pagination: options?.pagination || null,
     onRowClick: {
       active: options?.onRowClick || null,
@@ -54,9 +58,9 @@ export function usePaginationTable({ data, header, body, options }) {
   const [perPage, setPerPage] = useState(defaults.perPage);
   const [currentPage, setCurrentPage] = useState(1);
   const [order, setOrder] = useState({
-    // column: defaults.sortable.active ? body[defaults.sortable.column]?.key || body[0].key : body[0].key,
-    column: body[defaults.sortable.column]?.key,
-    direction: defaults.sortable.direction,
+    // column: defaults.sort.active ? body[defaults.sort.column]?.key || body[0].key : body[0].key,
+    column: body[defaults.sort.column]?.key,
+    direction: defaults.sort.direction,
   });
   const [searchString, setSearchString] = useState('');
   const [sortedData, setSortedData] = useStateWithCallback([], (sortedData) => {
@@ -86,10 +90,10 @@ export function usePaginationTable({ data, header, body, options }) {
     }
     log(columns);
 
-    return data.filter((row) =>
+    const filteredData = data.filter((row) =>
       columns.some((column) => {
         let useDotValue;
-        if (body[column]['useDot']) {
+        if (body[column].key.includes('.')) {
           useDotValue = _.get(row, body[column]['key']);
         } else {
           useDotValue = row[body[column]['key']];
@@ -100,11 +104,14 @@ export function usePaginationTable({ data, header, body, options }) {
           return useDotValue.toLowerCase().indexOf(searchString.toLowerCase()) > -1;
         } else if (typeof useDotValue === 'number') {
           return (useDotValue + '').indexOf(searchString) > -1;
-        } else if (typeof useDotValue === 'number') {
-          return (useDotValue + '').indexOf(searchString) > -1;
+        } else {
+          return useDotValue + '';
         }
       })
     );
+    setCurrentPage(1);
+
+    return filteredData;
   };
 
   useEffect(() => {
@@ -120,7 +127,10 @@ export function usePaginationTable({ data, header, body, options }) {
     return () => {
       isCancelled = true;
     };
-  }, [perPage, firstIndex, lastIndex, order.column, order.direction, searchString, currentPage, selectionRows, setSortedData, data]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [perPage, order.column, order.direction, searchString]);
+
+  // perPage, firstIndex, lastIndex, order.column, order.direction, searchString, currentPage, selectionRows, setSortedData, data
 
   if (!data) {
     return null;
@@ -143,7 +153,7 @@ export function usePaginationTable({ data, header, body, options }) {
   };
 
   const handleOrderColumn = (index) => {
-    if (defaults?.sortable.active && !defaults.sortable.excludeColumns.includes(index)) {
+    if (defaults?.sort.active && !defaults.sort.excludeColumns.includes(index)) {
       setOrder((prevState) => ({
         ...prevState,
         direction: prevState.direction === 'desc' ? 'asc' : 'desc',
@@ -155,7 +165,7 @@ export function usePaginationTable({ data, header, body, options }) {
 
   const CustomTD = ({ index, field, entry }) => {
     let useDotValue;
-    if (field.hasOwnProperty('useDot')) {
+    if (field.key.includes('.')) {
       useDotValue = _.get(entry, field.key);
     } else {
       useDotValue = entry[field.key];
@@ -213,7 +223,7 @@ export function usePaginationTable({ data, header, body, options }) {
   const SearchBox = () => {
     return (
       <div>
-        Search: <input className={css.searchbox} type='text' value={searchString} onChange={(e) => setSearchString(e.target.value)} autoFocus />
+        Search: <input className={css.searchbox} type='text' value={searchString} onChange={(e) => setSearchString(e.target.value)} autoFocus style={defaults.search.style} />
       </div>
     );
   };
@@ -263,7 +273,7 @@ export function usePaginationTable({ data, header, body, options }) {
           <React.Fragment>
             <div className={css.table__top}>{defaults.lengthChange.active && <LengthChange className={defaults.lengthChange.className} />}</div>
             <div className={css.table__top}>{defaults.search.active && <SearchBox className={defaults.search.className} />}</div>
-            <table className={defaults.className}>
+            <table className={defaults.className} style={defaults.style}>
               <thead>
                 {defaults.selection.info && selectionRows.length > 0 && (
                   <tr>
@@ -294,8 +304,8 @@ export function usePaginationTable({ data, header, body, options }) {
                     .map((field, index) => (
                       <th key={index} width={field.width} onClick={(e) => handleOrderColumn(index)} style={{ cursor: 'pointer' }} title={field.title || ''}>
                         {field.label}
-                        {defaults.sortable.active && body[index].key === order.column && order.direction === 'desc' && <i className={`${css.arrow} ${css.up}`}></i>}
-                        {defaults.sortable.active && body[index].key === order.column && order.direction === 'asc' && <i className={`${css.arrow} ${css.down}`}></i>}
+                        {defaults.sort.active && body[index].key === order.column && order.direction === 'desc' && <i className={`${css.arrow} ${css.up}`}></i>}
+                        {defaults.sort.active && body[index].key === order.column && order.direction === 'asc' && <i className={`${css.arrow} ${css.down}`}></i>}
                       </th>
                     ))}
                 </tr>
@@ -327,7 +337,7 @@ export function usePaginationTable({ data, header, body, options }) {
             <br />
             <div className='d-flex justify-content-between'>
               {sortedData.length > perPage ? <Pagination count={Math.ceil(sortedData.length / perPage)} page={currentPage} onChange={handleChangePage} options={defaults.pagination} /> : <div>&nbsp;</div>}
-              {defaults.info && `Showing ${firstIndex + 1} to ${lastIndex > sortedData.length ? sortedData.length : lastIndex} of ${sortedData.length} records`}
+              {defaults.info.active && `Showing ${firstIndex + 1} to ${lastIndex > sortedData.length ? sortedData.length : lastIndex} of ${sortedData.length} ${defaults.info.text}`}
             </div>
           </React.Fragment>
         )}
