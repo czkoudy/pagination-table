@@ -42,6 +42,7 @@ export function usePaginationTable({ data, header, body, options }) {
       active: options?.onRowClick || null,
       function: options?.onRowClick?.function || null,
       key: options?.onRowClick?.key || 'id',
+      passEvent: options?.onRowClick?.passEvent || false,
     },
     selection: {
       active: options?.selection || false,
@@ -146,7 +147,11 @@ export function usePaginationTable({ data, header, body, options }) {
       if (defaults.onRowClick) {
         if (typeof defaults.onRowClick.function === 'function') {
           const key = defaults.onRowClick.key;
-          defaults.onRowClick.function(entry[key]);
+          if (defaults.onRowClick.passEvent) {
+            defaults.onRowClick.function(e, entry[key]);
+          } else {
+            defaults.onRowClick.function(entry[key]);
+          }
         }
       }
     }
