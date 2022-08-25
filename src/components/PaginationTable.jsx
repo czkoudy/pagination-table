@@ -17,9 +17,9 @@ export function usePaginationTable({ data, header, body, options }) {
   const defaults = {
     search: {
       active: options?.search ? true : false,
-      className: options?.search?.className || '',
       columns: options?.search?.columns || 'all',
       style: options?.search?.style || {},
+      className: options?.search?.className || '',
     },
     sort: {
       active: options?.sort ? true : false,
@@ -95,7 +95,7 @@ export function usePaginationTable({ data, header, body, options }) {
       columns.some((column) => {
         let useDotValue;
         if (body[column].key.includes('.')) {
-          useDotValue = _.get(row, body[column]['key']);
+          useDotValue = _.get(row, body[column].key);
         } else {
           useDotValue = row[body[column]['key']];
         }
@@ -105,6 +105,8 @@ export function usePaginationTable({ data, header, body, options }) {
           return useDotValue.toLowerCase().indexOf(searchString.toLowerCase()) > -1;
         } else if (typeof useDotValue === 'number') {
           return (useDotValue + '').indexOf(searchString) > -1;
+        } else if (Array.isArray(useDotValue)) {
+          return useDotValue.includes(searchString);
         } else {
           return useDotValue + '';
         }
