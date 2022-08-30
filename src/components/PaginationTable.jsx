@@ -43,6 +43,7 @@ export function usePaginationTable({ data, header, body, options }) {
       function: options?.onRowClick?.function || null,
       key: options?.onRowClick?.key || 'id',
       passEvent: options?.onRowClick?.passEvent || false,
+      excludeColumns: options?.onRowClick?.excludeColumns || [],
     },
     selection: {
       active: options?.selection || false,
@@ -144,7 +145,7 @@ export function usePaginationTable({ data, header, body, options }) {
   };
 
   const onRowClickHandler = (e, entry) => {
-    if (e.target.classList.contains('row-checkbox')) {
+    if (e.target.classList.contains('row-checkbox') || e.target.classList.contains('exclude-row-click')) {
     } else {
       if (defaults.onRowClick) {
         if (typeof defaults.onRowClick.function === 'function') {
@@ -182,19 +183,19 @@ export function usePaginationTable({ data, header, body, options }) {
 
     if (field.hasOwnProperty('date')) {
       return (
-        <td key={index} title={field.title || ''} className={css.column}>
+        <td key={index} title={field.title || ''} className={`${css.column} ${defaults.onRowClick.excludeColumns.includes(index) ? 'exclude-row-click' : ''}`}>
           {useDotValue !== undefined ? format(new Date(useDotValue), field.date) : null}
         </td>
       );
     } else if (field.hasOwnProperty('function')) {
       return (
-        <td key={index} title={field.title || ''} className={css.column}>
+        <td key={index} title={field.title || ''} className={`${css.column} ${defaults.onRowClick.excludeColumns.includes(index) ? 'exclude-row-click' : ''}`}>
           {field.function(useDotValue)}
         </td>
       );
     } else if (field.hasOwnProperty('component')) {
       return (
-        <td key={index} title={field.title || ''} className={css.column}>
+        <td key={index} title={field.title || ''} className={`${css.column} ${defaults.onRowClick.excludeColumns.includes(index) ? 'exclude-row-click' : ''}`}>
           {createElement(field.component, {
             ...field.props,
             checked: entry[field.props.checked],
@@ -204,7 +205,7 @@ export function usePaginationTable({ data, header, body, options }) {
       );
     } else {
       return (
-        <td key={index} title={field.title || ''} className={css.column}>
+        <td key={index} title={field.title || ''} className={`${css.column} ${defaults.onRowClick.excludeColumns.includes(index) ? 'exclude-row-click' : ''}`}>
           {useDotValue}
         </td>
       );

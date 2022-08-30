@@ -3089,7 +3089,7 @@ const App = () => {
     return 0 + 'x';
   };
 
-  const header = [{ label: 'Username', onRowClick: 'username', width: '200px' }, { label: 'First Name', width: '150px' }, { label: 'Last Name', width: '150px' }, { label: 'Email' }, { label: 'user type', width: '50px' }, { label: 'Last Log', width: '150px' }, { label: 'Total', width: '60px' }];
+  const header = [{ label: 'Username', width: '200px' }, { label: 'First Name', width: '150px' }, { label: 'Last Name', width: '150px' }, { label: 'Email' }, { label: 'user type', width: '50px' }, { label: 'Last Log', width: '150px' }, { label: 'Total', width: '60px' }];
 
   const body = [{ key: 'username' }, { key: 'firstName' }, { key: 'lastName' }, { key: 'email' }, { key: 'userType' }, { key: 'logs.dates', function: formatLastLogs }, { key: 'logs.count', function: formatTotalLogs }];
   const options = {
@@ -3098,6 +3098,7 @@ const App = () => {
     onRowClick: {
       function: handleOnRowClick,
       key: ['email', "username"],
+      excludeColumns: [0]
     },
     // perPage: 2,
     // emptyRows: true,
