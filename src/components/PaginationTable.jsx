@@ -151,6 +151,8 @@ export function usePaginationTable({ data, header, body, options }) {
           const key = defaults.onRowClick.key;
           if (defaults.onRowClick.passEvent) {
             defaults.onRowClick.function(e, entry[key]);
+          } else if (Array.isArray(key)) {
+            defaults.onRowClick.function(...key.map((x) => entry[x]));
           } else {
             defaults.onRowClick.function(entry[key]);
           }

@@ -3017,8 +3017,8 @@ const App = () => {
       "__v": 0
     }
   ]
-  const handleOnRowClick = (id) => {
-    console.log(id);
+  const handleOnRowClick = (id, test) => {
+    console.log(id, test);
   };
 
   const handleOnRowClick22 = (result) => {
@@ -3095,10 +3095,10 @@ const App = () => {
   const options = {
     // className: 'table table-sm table-hover table-striped',
 
-    // onRowClick: {
-    //   function: handleOnRowClick,
-    //   key: 'id',
-    // },
+    onRowClick: {
+      function: handleOnRowClick,
+      key: ['email', "username"],
+    },
     // perPage: 2,
     // emptyRows: true,
     // lengthChange: true,
