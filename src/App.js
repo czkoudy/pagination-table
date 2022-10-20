@@ -1,7 +1,7 @@
-import React, { createElement } from 'react';
-import { PaginationTable } from './components/PaginationTable';
-import './bootstrap.css';
 import { format } from 'date-fns';
+import React from 'react';
+import './bootstrap.css';
+import { PaginationTable } from './components/PaginationTable';
 const App = () => {
   const data2 = [
     {
@@ -3089,9 +3089,15 @@ const App = () => {
     return 0 + 'x';
   };
 
+  const formatUsername = (object) => {
+
+    return object.username
+
+  }
+
   const header = [{ label: 'Username', width: '200px' }, { label: 'First Name', width: '150px' }, { label: 'Last Name', width: '150px' }, { label: 'Email' }, { label: 'user type', width: '50px' }, { label: 'Last Log', width: '150px' }, { label: 'Total', width: '60px' }];
 
-  const body = [{ key: 'username' }, { key: 'firstName' }, { key: 'lastName' }, { key: 'email' }, { key: 'userType' }, { key: 'logs.dates', function: formatLastLogs }, { key: 'logs.count', function: formatTotalLogs }];
+  const body = [{ key: 'username', function: formatUsername, useWholeObject: true }, { key: 'firstName' }, { key: 'lastName' }, { key: 'email' }, { key: 'userType' }, { key: 'logs.dates', function: formatLastLogs }, { key: 'logs.count', function: formatTotalLogs }];
   const options = {
     // className: 'table table-sm table-hover table-striped',
 

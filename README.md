@@ -42,6 +42,10 @@ const options = {
 return <PaginationTable data={data} header={header} body={body} options={options} />;
 ```
 
+## Changes in 3.6.1
+
+[New] - body option `useWholeObject` - this will return whole object to set function rather than single field - key and function fields are required
+
 ## Changes from 3.3.0
 
 [Fix] - sorting was ignoring casing

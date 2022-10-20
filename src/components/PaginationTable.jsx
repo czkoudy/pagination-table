@@ -1,9 +1,9 @@
 /* eslint-disable no-prototype-builtins */
-import css from './paginationtable.module.css';
-import Pagination from './Pagination/Pagination';
 import { format } from 'date-fns';
-import React, { createElement, useEffect, useState } from 'react';
 import _ from 'lodash';
+import React, { createElement, useEffect, useState } from 'react';
+import Pagination from './Pagination/Pagination';
+import css from './paginationtable.module.css';
 
 const useStateWithCallback = (initialState, callback) => {
   const [state, setState] = useState(initialState);
@@ -95,9 +95,12 @@ export function usePaginationTable({ data, header, body, options }) {
     const filteredData = data.filter((row) =>
       columns.some((column) => {
         let useDotValue;
-        if (body[column].key.includes('.')) {
+
+        if (body[column].useWholeObject) {
+          useDotValue = row;
+        } else if (body[column].key.includes('.') && !body[column].useWholeObject) {
           useDotValue = _.get(row, body[column].key);
-        } else {
+        } else if (!body[column].useWholeObject) {
           useDotValue = row[body[column]['key']];
         }
         log('dotValue:' + useDotValue);
@@ -109,7 +112,7 @@ export function usePaginationTable({ data, header, body, options }) {
         } else if (Array.isArray(useDotValue)) {
           return useDotValue.includes(searchString);
         } else {
-          return useDotValue + '';
+          return useDotValue[body[column]['key']] + ''.toLowerCase().indexOf(searchString.toLowerCase()) > -1;
         }
       })
     );
@@ -175,9 +178,12 @@ export function usePaginationTable({ data, header, body, options }) {
 
   const CustomTD = ({ index, field, entry }) => {
     let useDotValue;
-    if (field.key.includes('.')) {
+
+    if (field.useWholeObject) {
+      useDotValue = entry;
+    } else if (field.key.includes('.') && !field.useWholeObject) {
       useDotValue = _.get(entry, field.key);
-    } else {
+    } else if (!field.useWholeObject) {
       useDotValue = entry[field.key];
     }
 
@@ -188,11 +194,19 @@ export function usePaginationTable({ data, header, body, options }) {
         </td>
       );
     } else if (field.hasOwnProperty('function')) {
-      return (
-        <td key={index} title={field.title || ''} className={`${css.column} ${defaults.onRowClick.excludeColumns.includes(index) ? 'exclude-row-click' : ''}`}>
-          {field.function(useDotValue)}
-        </td>
-      );
+      if (field.hasOwnProperty('useWholeObject') && field.useWholeObject === true) {
+        return (
+          <td key={index} title={field.title || ''} className={`${css.column} ${defaults.onRowClick.excludeColumns.includes(index) ? 'exclude-row-click' : ''}`}>
+            {field.function(useDotValue)}
+          </td>
+        );
+      } else {
+        return (
+          <td key={index} title={field.title || ''} className={`${css.column} ${defaults.onRowClick.excludeColumns.includes(index) ? 'exclude-row-click' : ''}`}>
+            {field.function(useDotValue)}
+          </td>
+        );
+      }
     } else if (field.hasOwnProperty('component')) {
       return (
         <td key={index} title={field.title || ''} className={`${css.column} ${defaults.onRowClick.excludeColumns.includes(index) ? 'exclude-row-click' : ''}`}>
