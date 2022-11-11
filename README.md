@@ -42,6 +42,30 @@ const options = {
 return <PaginationTable data={data} header={header} body={body} options={options} />;
 ```
 
+## Changes in 3.7.0
+
+[Fix] - selection has been redone
+[New] - Added option to select all on a page
+[New] - Search input is aligned to the right
+
+```
+const options = {
+  //rest of options
+  selection: {
+      key: '_id',
+      buttons: [
+        {
+          component: Button,
+          props: {
+            onClick: handleOnButtonClick,
+            label: 'Delete Selected',
+          },
+        },
+      ],
+    },
+}
+```
+
 ## Changes in 3.6.1
 
 [New] - body option `useWholeObject` - this will return whole object to set function rather than single field - key and function fields are required

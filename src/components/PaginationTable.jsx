@@ -13,10 +13,10 @@ const useStateWithCallback = (initialState, callback) => {
   return [state, setState];
 };
 
-export function usePaginationTable({ data, header, body, options }) {
+export const usePaginationTable = ({ data, header, body, options }) => {
   const defaults = {
     search: {
-      active: options?.search ? true : false,
+      active: options?.search ? true : true,
       columns: options?.search?.columns || 'all',
       style: options?.search?.style || {},
       className: options?.search?.className || '',
@@ -27,6 +27,7 @@ export function usePaginationTable({ data, header, body, options }) {
       direction: options?.sort?.direction || 'asc',
       excludeColumns: options?.sort?.excludeColumns || [],
     },
+    tableTitle: options.tableTitle || '',
     lengthChange: { active: options?.lengthChange ? true : false, className: options?.lengthChange?.className || '' },
     lengthMenu: options?.lengthMenu || [1, 5, 10, 15, 20],
     info: {
@@ -47,9 +48,8 @@ export function usePaginationTable({ data, header, body, options }) {
     },
     selection: {
       active: options?.selection || false,
-      backgroundColor: options?.selection?.backgroundColor || 'rgba(255, 165, 0, 0.5)',
+      backgroundColor: options?.selection?.backgroundColor || '#FFDAC1',
       key: options?.selection?.key || null,
-      info: options?.selection?.info || false,
       className: options?.selection?.className || '',
       maxCount: options?.selection?.maxCount || false,
       buttons: options?.selection?.buttons || [],
@@ -70,6 +70,7 @@ export function usePaginationTable({ data, header, body, options }) {
   });
   const [selectionRows, setSelectionRows] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedPerPage, setSelectedPerPage] = useState({});
 
   const firstIndex = (currentPage - 1) * perPage;
   const lastIndex = (currentPage - 1) * perPage + perPage;
@@ -246,7 +247,7 @@ export function usePaginationTable({ data, header, body, options }) {
 
   const SearchBox = () => {
     return (
-      <div>
+      <div style={{ padding: '10px' }}>
         Search: <input className={css.searchbox} type='text' value={searchString} onChange={(e) => setSearchString(e.target.value)} autoFocus style={defaults.search.style} />
       </div>
     );
@@ -278,15 +279,53 @@ export function usePaginationTable({ data, header, body, options }) {
       }
       const newArray = [...selectionRows];
       const exists = newArray.find((x) => x === entry[key]);
-
       if (exists) {
         const index = newArray.indexOf(entry[key]);
         if (index > -1) newArray.splice(index, 1);
+        setSelectedPerPage((prevState) => ({
+          ...prevState,
+          [currentPage]: prevState[currentPage] - 1,
+        }));
       } else {
+        // setSelectedPerPage((prevState) => ({ ...prevState, [currentPage]: prevState[currentPage]++ }));
+        setSelectedPerPage((prevState) => ({
+          ...prevState,
+          [currentPage]: Number.isNaN(prevState[currentPage]) ? 2 : prevState[currentPage] + 1,
+        }));
         newArray.push(entry[key]);
       }
       setSelectionRows(newArray);
     } catch (error) {}
+  };
+
+  const handleSelectAllOnPage = ({ reverse }) => {
+    const newArray = [...selectionRows];
+    const newArray2 = sortedData.map((x) => x._id);
+    const pageSelection = newArray2.splice(currentPage * perPage - perPage, perPage);
+
+    pageSelection.forEach((y) => {
+      const exists = newArray.find((x) => x === y);
+      if (exists) {
+        if (reverse) {
+          const index = newArray.indexOf(y);
+          if (index > -1) newArray.splice(index, 1);
+        }
+      } else {
+        newArray.push(y);
+      }
+    });
+    setSelectionRows(newArray);
+    if (reverse) {
+      setSelectedPerPage((prevState) => ({
+        ...prevState,
+        [currentPage]: 0,
+      }));
+    } else {
+      setSelectedPerPage((prevState) => ({
+        ...prevState,
+        [currentPage]: perPage,
+      }));
+    }
   };
 
   const PaginationTable2 = () => {
@@ -296,33 +335,49 @@ export function usePaginationTable({ data, header, body, options }) {
         {!loading && (
           <React.Fragment>
             <div className={css.table__top}>{defaults.lengthChange.active && <LengthChange className={defaults.lengthChange.className} />}</div>
-            <div className={css.table__top}>{defaults.search.active && <SearchBox className={defaults.search.className} />}</div>
+            <div className={css.table__top} style={{ width: '100%', display: 'flex', justifyContent: 'space-between', backgroundColor: selectionRows.length > 0 ? '#FFDAC1' : '' }}>
+              <div
+                style={{
+                  paddingTop: '15px',
+                  paddingLeft: '10px',
+                  fontWeight: 600,
+                }}
+              >
+                {selectionRows.length === 0 && `${defaults.tableTitle}`}
+                {selectionRows.length > 0 && `${selectionRows.length} ${selectionRows.length > 1 ? 'rows' : 'row'} selected`}
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                {defaults.search.active && <SearchBox className={defaults.search.className} />}
+                {defaults?.selection?.buttons?.length > 0 &&
+                  selectionRows?.length > 0 &&
+                  defaults?.selection?.buttons?.map((button, index) => {
+                    return createElement(button.component, {
+                      key: index,
+                      ...button.props,
+                      onClick: () => {
+                        button?.props?.onClick(selectionRows);
+                        setSelectionRows([]);
+                        setSelectionRows([]);
+                      },
+                      label: button?.props?.label ? button?.props?.label : `Button ${index}`,
+                    });
+                  })}
+              </div>
+            </div>
             <table className={defaults.className} style={defaults.style}>
               <thead>
-                {defaults.selection.info && selectionRows.length > 0 && (
-                  <tr>
-                    <th colSpan={header.length}>
-                      {selectionRows.length} selected{' '}
-                      {defaults?.selection?.buttons?.length > 0 &&
-                        defaults?.selection?.buttons?.map((button, index) => {
-                          return createElement(
-                            'button',
-                            {
-                              key: index,
-                              className: button?.className || '',
-                              onClick: () => {
-                                button?.onClickFunction(selectionRows);
-                                setSelectionRows([]);
-                              },
-                            },
-                            button?.label ? button?.label : `Button ${index}`
-                          );
-                        })}
-                    </th>
-                  </tr>
-                )}
                 <tr>
-                  {defaults.selection.active && <th width='20px'></th>}
+                  {defaults.selection.active && (
+                    <th width='20px'>
+                      <input
+                        type='checkbox'
+                        onChange={() => (selectedPerPage[currentPage] === perPage ? handleSelectAllOnPage({ reverse: true }) : handleSelectAllOnPage({ reverse: false }))}
+                        checked={selectedPerPage[currentPage] === perPage}
+                        // disabled={defaults.selection.maxCount && selectionRows.length >= defaults.selection.maxCount && !selectionRows.includes(entry[defaults.selection.key])}
+                        // className={`row-checkbox ${defaults.selection.className}`}
+                      />
+                    </th>
+                  )}
                   {header
                     .filter((x) => x.hide !== true)
                     .map((field, index) => (
@@ -370,7 +425,7 @@ export function usePaginationTable({ data, header, body, options }) {
   };
 
   return { PaginationTable2, selectionRows, loading };
-}
+};
 
 export const PaginationTable = ({ data, header, body, options, result }) => {
   const { PaginationTable2: Table, selectionRows } = usePaginationTable({ data, header, body, options });

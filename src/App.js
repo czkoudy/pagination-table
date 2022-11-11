@@ -3095,11 +3095,19 @@ const App = () => {
 
   }
 
+  const handleOnButtonClick = (data) => {
+    console.log("🚀 ~ file: App.js ~ line 3099 ~ handleOnButtonClick ~ data", data)
+  }
+
+  const Button = (props) => {
+    return <button {...props} className="btn btn-sm btn-success">{props.label}</button>
+  }
+
   const header = [{ label: 'Username', width: '200px' }, { label: 'First Name', width: '150px' }, { label: 'Last Name', width: '150px' }, { label: 'Email' }, { label: 'user type', width: '50px' }, { label: 'Last Log', width: '150px' }, { label: 'Total', width: '60px' }];
 
   const body = [{ key: 'username', function: formatUsername, useWholeObject: true }, { key: 'firstName' }, { key: 'lastName' }, { key: 'email' }, { key: 'userType' }, { key: 'logs.dates', function: formatLastLogs }, { key: 'logs.count', function: formatTotalLogs }];
   const options = {
-    // className: 'table table-sm table-hover table-striped',
+    className: 'table table-sm table-hover table-striped',
 
     onRowClick: {
       function: handleOnRowClick,
@@ -3109,29 +3117,29 @@ const App = () => {
     // perPage: 2,
     // emptyRows: true,
     // lengthChange: true,
-    search: true,
+    // search: true,
     sort: true,
     // info: {
     //   text: "entries"
     // }
-    // selection: {
-    //   backgroundColor: 'rgba(255, 165, 0, 0.5)',
-    //   key: '_id',
-    //   info: true,
-    //   // className: options?.selection?.className || '',
-    //   maxCount: 5,
-    //   buttons: [
-    //     {
-    //       className: 'btn btn-sm btn-danger',
-    //       onClickFunction: (data) => handleDeleteSelected(data),
-    //       label: 'Delete Selected',
-    //     },
-    //   ],
-    // },
+    selection: {
+      key: '_id',
+      info: true,
+      // className: options?.selection?.className || '',
+      buttons: [
+        {
+          component: Button,
+          props: {
+            onClick: handleOnButtonClick,
+            label: 'Delete Selected',
+          },
+        },
+      ],
+    },
   };
 
   return (
-    <div style={{ width: '500px' }}>
+    <div style={{ width: '800px' }}>
       <PaginationTable data={data} header={header} body={body} options={options} />
     </div>
   );
