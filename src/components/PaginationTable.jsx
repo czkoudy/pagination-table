@@ -355,12 +355,12 @@ export const usePaginationTable = ({ data, header, body, options }) => {
                       button.component,
                       {
                         key: index,
-                        ...button.props,
                         style: {
                           width: '40px',
                           height: '40px',
                           marginTop: '5px',
                         },
+                        ...button.props,
                         onClick: () => {
                           button?.props?.onClick(selectionRows);
                           setSelectionRows([]);

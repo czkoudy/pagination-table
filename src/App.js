@@ -1,4 +1,5 @@
 import DeleteIcon from '@mui/icons-material/Delete';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { Button } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import { format } from 'date-fns';
@@ -3132,15 +3133,17 @@ const App = () => {
       buttons: [
         {
           component: IconButton,
-          label: DeleteIcon,
+          label: VisibilityOffIcon,
           labelProps: {
             style: {
               color: "red",
             },
           },
           props: {
-            variant: "contained",
             onClick: handleOnButtonClick,
+            style: {
+              marginTop: "10px"
+            }
           },
         },
       ],
