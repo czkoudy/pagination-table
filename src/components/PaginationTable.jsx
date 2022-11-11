@@ -335,11 +335,11 @@ export const usePaginationTable = ({ data, header, body, options }) => {
         {!loading && (
           <React.Fragment>
             <div className={css.table__top}>{defaults.lengthChange.active && <LengthChange className={defaults.lengthChange.className} />}</div>
-            <div className={css.table__top} style={{ width: '100%', display: 'flex', justifyContent: 'space-between', backgroundColor: selectionRows.length > 0 ? '#FFDAC1' : '' }}>
+            <div className={css.table__top} style={{ width: '100%', display: 'flex', paddingTop: '0px', justifyContent: 'space-between', backgroundColor: selectionRows.length > 0 ? '#FFDAC1' : '' }}>
               <div
                 style={{
-                  paddingTop: '15px',
-                  paddingLeft: '10px',
+                  marginTop: '12px',
+                  marginLeft: '10px',
                   fontWeight: 600,
                 }}
               >
@@ -351,16 +351,29 @@ export const usePaginationTable = ({ data, header, body, options }) => {
                 {defaults?.selection?.buttons?.length > 0 &&
                   selectionRows?.length > 0 &&
                   defaults?.selection?.buttons?.map((button, index) => {
-                    return createElement(button.component, {
-                      key: index,
-                      ...button.props,
-                      onClick: () => {
-                        button?.props?.onClick(selectionRows);
-                        setSelectionRows([]);
-                        setSelectionRows([]);
+                    return createElement(
+                      button.component,
+                      {
+                        key: index,
+                        ...button.props,
+                        style: {
+                          width: '40px',
+                          height: '40px',
+                          marginTop: '5px',
+                        },
+                        onClick: () => {
+                          button?.props?.onClick(selectionRows);
+                          setSelectionRows([]);
+                        },
                       },
-                      label: button?.props?.label ? button?.props?.label : `Button ${index}`,
-                    });
+                      typeof button?.label === 'object'
+                        ? createElement(button.label, {
+                            ...button.labelProps,
+                          })
+                        : typeof button?.label === 'string'
+                        ? button.label
+                        : `Button ${index}`
+                    );
                   })}
               </div>
             </div>

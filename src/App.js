@@ -1,7 +1,11 @@
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Button } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
 import { format } from 'date-fns';
 import React from 'react';
 import './bootstrap.css';
 import { PaginationTable } from './components/PaginationTable';
+
 const App = () => {
   const data2 = [
     {
@@ -3099,9 +3103,9 @@ const App = () => {
     console.log("🚀 ~ file: App.js ~ line 3099 ~ handleOnButtonClick ~ data", data)
   }
 
-  const Button = (props) => {
-    return <button {...props} className="btn btn-sm btn-success">{props.label}</button>
-  }
+  // const Button = (props) => {
+  //   return <button {...props} className="btn btn-sm btn-success">{props.label}</button>
+  // }
 
   const header = [{ label: 'Username', width: '200px' }, { label: 'First Name', width: '150px' }, { label: 'Last Name', width: '150px' }, { label: 'Email' }, { label: 'user type', width: '50px' }, { label: 'Last Log', width: '150px' }, { label: 'Total', width: '60px' }];
 
@@ -3125,13 +3129,18 @@ const App = () => {
     selection: {
       key: '_id',
       info: true,
-      // className: options?.selection?.className || '',
       buttons: [
         {
-          component: Button,
+          component: IconButton,
+          label: DeleteIcon,
+          labelProps: {
+            style: {
+              color: "red",
+            },
+          },
           props: {
+            variant: "contained",
             onClick: handleOnButtonClick,
-            label: 'Delete Selected',
           },
         },
       ],
