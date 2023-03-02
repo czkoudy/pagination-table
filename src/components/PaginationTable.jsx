@@ -1,4 +1,6 @@
 /* eslint-disable no-prototype-builtins */
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { IconButton, Popover, Typography } from '@mui/material';
 import { format } from 'date-fns';
 import _ from 'lodash';
 import React, { createElement, useEffect, useState } from 'react';
@@ -16,7 +18,7 @@ const useStateWithCallback = (initialState, callback) => {
 export const usePaginationTable = ({ data, header, body, options }) => {
   const defaults = {
     search: {
-      active: options?.search ? true : true,
+      active: typeof options?.search === 'undefined' ? true : options?.search,
       columns: options?.search?.columns || 'all',
       style: options?.search?.style || {},
       className: options?.search?.className || '',
@@ -27,7 +29,7 @@ export const usePaginationTable = ({ data, header, body, options }) => {
       direction: options?.sort?.direction || 'asc',
       excludeColumns: options?.sort?.excludeColumns || [],
     },
-    tableTitle: options.tableTitle || '',
+    tableTitle: options?.tableTitle || '',
     lengthChange: { active: options?.lengthChange ? true : false, className: options?.lengthChange?.className || '' },
     lengthMenu: options?.lengthMenu || [1, 5, 10, 15, 20],
     info: {
@@ -56,6 +58,10 @@ export const usePaginationTable = ({ data, header, body, options }) => {
     },
     loading: options?.loading?.component || options?.loading?.text || 'Loading',
     debug: options?.debug ? options?.debug : false,
+    hideColumns: {
+      active: options?.hideColumns || false,
+      columns: options?.hideColumns?.columns || [],
+    },
   };
   const [perPage, setPerPage] = useState(defaults.perPage);
   const [currentPage, setCurrentPage] = useState(1);
@@ -64,6 +70,7 @@ export const usePaginationTable = ({ data, header, body, options }) => {
     column: body[defaults.sort.column]?.key,
     direction: defaults.sort.direction,
   });
+  const [anchorEl, setAnchorEl] = useState(null);
   const [searchString, setSearchString] = useState('');
   const [sortedData, setSortedData] = useStateWithCallback([], (sortedData) => {
     setLoading(false);
@@ -100,9 +107,9 @@ export const usePaginationTable = ({ data, header, body, options }) => {
         if (body[column].useWholeObject) {
           useDotValue = row;
         } else if (body[column].key.includes('.') && !body[column].useWholeObject) {
-          useDotValue = _.get(row, body[column].key);
+          useDotValue = _.get(row, body[column].key) || '';
         } else if (!body[column].useWholeObject) {
-          useDotValue = row[body[column]['key']];
+          useDotValue = row[body[column]['key']] || '';
         }
         log('dotValue:' + useDotValue);
 
@@ -177,7 +184,7 @@ export const usePaginationTable = ({ data, header, body, options }) => {
     }
   };
 
-  const CustomTD = ({ index, field, entry }) => {
+  const CustomTD = ({ index, field, entry, columnSpan }) => {
     let useDotValue;
 
     if (field.useWholeObject) {
@@ -190,27 +197,27 @@ export const usePaginationTable = ({ data, header, body, options }) => {
 
     if (field.hasOwnProperty('date')) {
       return (
-        <td key={index} title={field.title || ''} className={`${css.column} ${defaults.onRowClick.excludeColumns.includes(index) ? 'exclude-row-click' : ''}`}>
+        <td key={index} title={field.title || ''} className={`${css.column} ${defaults.onRowClick.excludeColumns.includes(index) ? 'exclude-row-click' : ''}`} colSpan={columnSpan}>
           {useDotValue !== undefined ? format(new Date(useDotValue), field.date) : null}
         </td>
       );
     } else if (field.hasOwnProperty('function')) {
       if (field.hasOwnProperty('useWholeObject') && field.useWholeObject === true) {
         return (
-          <td key={index} title={field.title || ''} className={`${css.column} ${defaults.onRowClick.excludeColumns.includes(index) ? 'exclude-row-click' : ''}`}>
+          <td key={index} title={field.title || ''} className={`${css.column} ${defaults.onRowClick.excludeColumns.includes(index) ? 'exclude-row-click' : ''}`} colSpan={columnSpan}>
             {field.function(useDotValue)}
           </td>
         );
       } else {
         return (
-          <td key={index} title={field.title || ''} className={`${css.column} ${defaults.onRowClick.excludeColumns.includes(index) ? 'exclude-row-click' : ''}`}>
+          <td key={index} title={field.title || ''} className={`${css.column} ${defaults.onRowClick.excludeColumns.includes(index) ? 'exclude-row-click' : ''}`} colSpan={columnSpan}>
             {field.function(useDotValue)}
           </td>
         );
       }
     } else if (field.hasOwnProperty('component')) {
       return (
-        <td key={index} title={field.title || ''} className={`${css.column} ${defaults.onRowClick.excludeColumns.includes(index) ? 'exclude-row-click' : ''}`}>
+        <td key={index} title={field.title || ''} className={`${css.column} ${defaults.onRowClick.excludeColumns.includes(index) ? 'exclude-row-click' : ''}`} colSpan={columnSpan}>
           {createElement(field.component, {
             ...field.props,
             checked: entry[field.props.checked],
@@ -220,7 +227,7 @@ export const usePaginationTable = ({ data, header, body, options }) => {
       );
     } else {
       return (
-        <td key={index} title={field.title || ''} className={`${css.column} ${defaults.onRowClick.excludeColumns.includes(index) ? 'exclude-row-click' : ''}`}>
+        <td key={index} title={field.title || ''} className={`${css.column} ${defaults.onRowClick.excludeColumns.includes(index) ? 'exclude-row-click' : ''}`} colSpan={columnSpan}>
           {useDotValue}
         </td>
       );
@@ -247,7 +254,7 @@ export const usePaginationTable = ({ data, header, body, options }) => {
 
   const SearchBox = () => {
     return (
-      <div style={{ padding: '10px' }}>
+      <div style={{ padding: '10px', paddingRight: '0px' }}>
         Search: <input className={css.searchbox} type='text' value={searchString} onChange={(e) => setSearchString(e.target.value)} autoFocus style={defaults.search.style} />
       </div>
     );
@@ -328,6 +335,10 @@ export const usePaginationTable = ({ data, header, body, options }) => {
     }
   };
 
+  const handleOnClick = (e) => {
+    setAnchorEl(e.currentTarget);
+  };
+
   const PaginationTable2 = () => {
     return (
       <>
@@ -400,6 +411,30 @@ export const usePaginationTable = ({ data, header, body, options }) => {
                         {defaults.sort.active && body[index].key === order.column && order.direction === 'asc' && <i className={`${css.arrow} ${css.down}`}></i>}
                       </th>
                     ))}
+                  {defaults.hideColumns.active && (
+                    <th width='10px' style={{ textAlign: 'center' }}>
+                      <IconButton size='small' onClick={(e) => handleOnClick(e)}>
+                        <MoreVertIcon />
+                      </IconButton>
+                      <Popover
+                        id={'siple-popover'}
+                        open={Boolean(anchorEl)}
+                        anchorReference='anchorPosition'
+                        anchorPosition={{ top: 200, left: 600 }}
+                        onClose={() => setAnchorEl(null)}
+                        anchorOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right',
+                        }}
+                        transformOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right',
+                        }}
+                      >
+                        <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+                      </Popover>
+                    </th>
+                  )}
                 </tr>
               </thead>
               <tbody>
@@ -417,9 +452,9 @@ export const usePaginationTable = ({ data, header, body, options }) => {
                         />
                       </td>
                     )}
-                    {body.map((field, index) => (
-                      <CustomTD key={index} index={index} field={field} entry={entry} />
-                    ))}
+                    {body.map((field, index) => {
+                      return <CustomTD key={index} index={index} field={field} entry={entry} columnSpan={index === body.length - 1 ? 2 : 1} />;
+                    })}
                   </tr>
                 ))}
                 {defaults.emptyRows && currentPage === Math.ceil(sortedData.length / perPage) && sortedData.length > perPage && getEmptyRows(numberOfEmptyRows)}
