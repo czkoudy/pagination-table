@@ -1,0 +1,21 @@
+.paginationtableheader {
+  /* display: flex;
+  justify-content: space-between; */
+
+  width: 100%;
+  display: flex;
+  padding-top: 0px;
+  padding-bottom: 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.paginationtableheader__title {
+  /* display: flex;
+  justify-content: space-between; */
+
+  /* margin-top: 12px; */
+  font-weight: 600;
+}
+
+/* backgroundColor: selectionRows.length > 0 ? '#FFDAC1' : '', */

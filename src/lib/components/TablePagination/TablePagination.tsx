@@ -1,7 +1,7 @@
 import React from 'react';
-import css from './pagination.module.css';
+import css from './tablepagination.module.css';
 
-function Pagination({ count, page, onChange, options }) {
+const TablePagination = ({ count, page, onChange, options }) => {
   const defaultProps = {
     siblings: 1,
     boundary: 1,
@@ -52,16 +52,16 @@ function Pagination({ count, page, onChange, options }) {
 
       switch (true) {
         case hasLeftSpill && !hasRightSpill:
-          let extraPages = range(startPage - spillOffset, startPage - 1);
+          const extraPages = range(startPage - spillOffset, startPage - 1);
           pages = ['LEFT', ...extraPages, ...pages];
           break;
 
         case !hasLeftSpill && hasRightSpill:
-          let extraPages3 = range(endPage + 1, endPage + spillOffset);
+          const extraPages3 = range(endPage + 1, endPage + spillOffset);
           pages = [...pages, ...extraPages3, 'RIGHT'];
           break;
         default:
-          let extraPages4 = range(page - 1, page + 1);
+          const extraPages4 = range(page - 1, page + 1);
           pages = ['LEFT', ...extraPages4, 'RIGHT'];
           break;
       }
@@ -74,10 +74,10 @@ function Pagination({ count, page, onChange, options }) {
   return (
     <div className={css.pagination}>
       <div className={css.pagination__nav_left} onClick={handleOnClickPrev}>
-        <i className={`${css.arrow} ${css.left}`}></i>
+        <i className={`${css.arrow} ${css.left}`} />
       </div>
 
-      {getPageNumbers().map((item, i) => {
+      {getPageNumbers().map((item) => {
         if (item === 'LEFT' || item === 'RIGHT')
           return (
             <div className={css.pagination__item_spill} key={item}>
@@ -86,17 +86,23 @@ function Pagination({ count, page, onChange, options }) {
           );
 
         return (
-          <div key={item} className={item === page ? css.pagination__item_active : css.pagination__item} onClick={() => handleOnClick(item)}>
+          <div
+            key={item}
+            className={
+              item === page ? css.pagination__item_active : css.pagination__item
+            }
+            onClick={() => handleOnClick(item)}
+          >
             {item}
           </div>
         );
       })}
 
       <div className={css.pagination__nav_right} onClick={handleOnClickNext}>
-        <i className={`${css.arrow} ${css.right}`}></i>
+        <i className={`${css.arrow} ${css.right}`} />
       </div>
     </div>
   );
-}
+};
 
-export default Pagination;
+export default TablePagination;
