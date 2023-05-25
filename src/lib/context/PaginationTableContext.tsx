@@ -1,11 +1,25 @@
-import { createContext, useState, useEffect } from 'react';
+/* eslint-disable react/jsx-no-constructed-context-values */
 import _ from 'lodash';
+import { createContext, useState, useEffect } from 'react';
 import { searchFunction } from '../utilz';
-export const PaginationTableContext = createContext();
 
-export const PaginationTableProvider = ({
+export type PaginationTableType = {
+  data: any;
+  options: {
+    className: string;
+    data: any[];
+  };
+};
+
+export const PaginationTableContext = createContext<PaginationTableType>({});
+
+interface PaginationTableInterface {
+  children?: React.ReactNode;
+}
+
+export const PaginationTableProvider: React.FC<PaginationTableInterface> = ({
   children,
-  value: { data: data2, body, header, options },
+  value: { data: data2, body, header, options, divRef },
 }) => {
   const [currentPage, setCurrentPage] = useState(options.currentPage);
   const [perPage, setPerPage] = useState(options?.perPage);
@@ -13,6 +27,9 @@ export const PaginationTableProvider = ({
   const [data, setData] = useState(data2);
   // const [header, setHeader] = useState(header);
   // const [body, setBody] = useState(body);
+  const [selectionRows, setSelectionRows] = useState([]);
+  const [selectedPerPage, setSelectedPerPage] = useState({});
+  const [ref, setRef] = useState(null);
 
   const firstIndex = (currentPage - 1) * perPage;
   const lastIndex = (currentPage - 1) * perPage + perPage;
@@ -26,23 +43,19 @@ export const PaginationTableProvider = ({
     let isCancelled = false;
     if (!isCancelled) {
       if (options.search.active) {
-        setData(
-          _.orderBy(
-            searchFunction({
-              body,
-              data: data2,
-              searchString,
-              search: options.search,
-              setCurrentPage,
-            }),
-            [order.column],
-            [order.direction]
-          )
-        );
+        const searchData = searchFunction({
+          body,
+          data: data2,
+          searchString,
+          search: options.search,
+          setCurrentPage,
+          stayOnPage: options.stayOnPage,
+        });
+        setData(_.orderBy(searchData, [order.column], [order.direction]));
       } else {
         setData(
           _.orderBy(
-            data,
+            data2,
             [
               (item) =>
                 typeof _.get(item, order.column) === 'string'
@@ -53,12 +66,23 @@ export const PaginationTableProvider = ({
           )
         );
       }
+      if (options.stayOnPage) {
+      } else {
+        setCurrentPage(1);
+      }
     }
     return () => {
       isCancelled = true;
     };
-  }, [order.direction, order.column, searchString]);
-
+  }, [
+    body,
+    data2,
+    options.search,
+    options.stayOnPage,
+    order.column,
+    order.direction,
+    searchString,
+  ]);
   return (
     <PaginationTableContext.Provider
       value={{
@@ -77,7 +101,13 @@ export const PaginationTableProvider = ({
         setOrder,
         searchString,
         setSearchString,
+        selectionRows,
+        setSelectionRows,
+        selectedPerPage,
+        setSelectedPerPage,
         // setOptions,
+        ref,
+        setRef,
       }}
     >
       {children}

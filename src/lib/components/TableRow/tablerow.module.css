@@ -1,0 +1,16 @@
+.anti_hover > td {
+  border-top: 1px solid white !important;
+}
+
+.row__checkbox {
+  vertical-align: middle !important;
+  text-align: center !important;
+  padding-right: 10px !important;
+  padding-left: 3px !important;
+  zoom: 1.2;
+  cursor: pointer;
+}
+
+.row__checkbox:hover {
+  cursor: pointer;
+}

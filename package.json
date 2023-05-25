@@ -1,6 +1,6 @@
 {
   "name": "@czkoudy/pagination-table",
-  "version": "3.7.6",
+  "version": "4.3.0-beta",
   "description": "Pagination for tables",
   "author": "czkoudy",
   "main": "./dist/index.umd.js",
@@ -47,6 +47,7 @@
     "@babel/cli": "^7.21.0",
     "@babel/plugin-proposal-optional-chaining": "^7.21.0",
     "@babel/preset-react": "^7.13.13",
+    "@types/lodash": "^4.14.194",
     "@types/react": "^18.0.34",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "@typescript-eslint/parser": "^5.57.1",
@@ -80,7 +81,13 @@
     "README.md"
   ],
   "dependencies": {
-    "lodash": "^4.17.21"
+    "@czkoudy/pagination-table": "^4.0.0-beta",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.16",
+    "leaflet": "^1.9.3",
+    "lodash": "^4.17.21",
+    "react-leaflet": "^4.2.1"
   },
   "exports": {
     ".": {

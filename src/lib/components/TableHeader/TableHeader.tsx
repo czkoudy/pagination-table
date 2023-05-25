@@ -1,13 +1,59 @@
 import { useContext } from 'react';
 import { PaginationTableContext } from '@/lib/context/PaginationTableContext';
+import { handleOrderColumn, handleSelectAllOnPage } from '@/lib/utilz';
 import css from './tableheader.module.css';
-import { handleOrderColumn } from '@/lib/utilz';
 
 const TableHeader = () => {
   const table = useContext(PaginationTableContext);
+  const {
+    data,
+    selectedPerPage,
+    currentPage,
+    perPage,
+    selectionRows,
+    setSelectionRows,
+    setSelectedPerPage,
+  } = table;
   return (
     <thead>
       <tr>
+        {table.options.selection.active && (
+          <th width="20px">
+            <input
+              type="checkbox"
+              onChange={() =>
+                selectedPerPage[currentPage] === perPage
+                  ? handleSelectAllOnPage({
+                      reverse: true,
+                      selectionRows,
+                      data,
+                      currentPage,
+                      perPage,
+                      setSelectionRows,
+                      setSelectedPerPage,
+                    })
+                  : handleSelectAllOnPage({
+                      reverse: false,
+                      selectionRows,
+                      data,
+                      currentPage,
+                      perPage,
+                      setSelectionRows,
+                      setSelectedPerPage,
+                    })
+              }
+              checked={
+                table.selectedPerPage[table.currentPage] === table.perPage
+              }
+              disabled={
+                table.options.selection.maxCount &&
+                table.selectionRows.length >= defaults.selection.maxCount &&
+                !table.selectionRows.includes(entry[defaults.selection.key])
+              }
+              className={`row-checkbox ${table.options.selection.className}`}
+            />
+          </th>
+        )}
         {table.header
           .filter((x) => x.hide !== true)
           .map((field, index) => (

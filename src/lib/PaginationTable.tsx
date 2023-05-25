@@ -1,35 +1,34 @@
+/* eslint-disable react/display-name */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import _ from 'lodash';
-import React, { useEffect, useContext } from 'react';
-// import Pagination from './components/Pagination/Pagination';
+import { useContext, useRef } from 'react';
 import {
   PaginationTableContext,
   PaginationTableProvider,
 } from '@/lib/context/PaginationTableContext';
-import TableCell from './components/TableCell';
-import TablePagination from '@/lib/components/TablePagination/TablePagination';
-import TableFooter from './components/PaginationTableFooter';
 import TableHeader from './components/TableHeader/TableHeader';
-import SearchBox from './components/SearchBox';
 import PaginationTableHeader from './components/PaginationTableHeader/PaginationTableHeader';
 import css from './paginationtable.module.css';
 import PaginationTableFooter from './components/PaginationTableFooter/PaginationTableFooter';
+import TableRow from './components/TableRow/TableRow';
 
-export const defaultOptions = {
-  perPage: 5,
+const defaultOptions = {
+  perPage: 10,
   currentPage: 1,
+  tableTitle: '',
   info: {
     active: true,
     startText: 'Showing',
     endText: 'records',
   },
   sort: {
-    active: true,
+    active: false,
     column: 0,
     direction: 'asc',
     excludeColumns: [],
   },
   search: {
-    active: true,
+    active: false,
     columns: 'all',
     style: {},
     className: '',
@@ -42,74 +41,33 @@ export const defaultOptions = {
     className: '',
   },
   lengthMenu: [1, 5, 10, 15, 20],
+  selection: {
+    active: false,
+    backgroundColor: '#FFDAC1',
+    key: null,
+    className: '',
+    maxCount: false,
+    buttons: [],
+  },
+  onRowClick: {
+    active: false,
+    function: null,
+    key: null,
+    passEvent: false,
+    excludeColumns: [],
+  },
+  stayOnPage: true,
 };
 
-export const usePaginationTable = ({ data, header, body, options }) => {
+export const usePaginationTable = ({ header, body }) => {
   const Table = () => {
     const table = useContext(PaginationTableContext);
+    const tableRef = useRef();
 
-    // console.log(table.data[0]);
-
-    const getEmptyRows = () => {
-      const numberOfEmptyRows =
-        table.perPage - (table.data.length % table.perPage);
-      const rows = [];
-
-      if (table.options.rowSpan) {
-        for (let index = 0; index < numberOfEmptyRows; index++) {
-          rows.push(
-            <React.Fragment key={index}>
-              <tbody>
-                <tr className={css.anti_hover}>
-                  <td
-                  // colSpan={
-                  //   table.options.selection.active
-                  //     ? body.length + 1
-                  //     : body.length
-                  // }
-                  >
-                    &nbsp;
-                  </td>
-                </tr>
-                <tr className={css.anti_hover}>
-                  <td
-                  // colSpan={
-                  //   table.options.selection.active
-                  //     ? body.length + 1
-                  //     : body.length
-                  // }
-                  >
-                    &nbsp;
-                  </td>
-                </tr>
-              </tbody>
-            </React.Fragment>
-          );
-        }
-      } else {
-        for (let index = 0; index < numberOfEmptyRows; index++) {
-          rows.push(
-            <React.Fragment key={index}>
-              <tr className={css.anti_hover}>
-                <td
-                // colSpan={
-                //   table.options.selection.active
-                //     ? body.length + 1
-                //     : body.length
-                // }
-                >
-                  &nbsp;
-                </td>
-              </tr>
-            </React.Fragment>
-          );
-        }
-      }
-      return rows;
-    };
+    if (!table?.data) return null;
 
     return (
-      <div className={css.paginationtable}>
+      <div className={`${css.paginationtable}`} ref={tableRef}>
         <PaginationTableHeader />
         <table className={table.options.className}>
           <TableHeader />
@@ -117,33 +75,15 @@ export const usePaginationTable = ({ data, header, body, options }) => {
             {table.data
               .slice(table.firstIndex, table.lastIndex)
               .map((entry, index) => (
-                <tr
+                <TableRow
                   key={index}
-                  id={
-                    entry[header.find((x) => x.onRowClick !== '').onRowClick] ||
-                    null
-                  }
-                  onClick={(e) => onRowClickHandler(e, entry)}
-                >
-                  {body.map((field, index) => {
-                    return (
-                      <TableCell
-                        key={index}
-                        defaults={table}
-                        index={index}
-                        field={field}
-                        entry={entry}
-                        columnSpan={index === body.length - 1 ? 2 : 1}
-                      />
-                    );
-                  })}
-                </tr>
+                  index={index}
+                  entry={entry}
+                  body={body}
+                  header={header}
+                />
               ))}
-
-            {table.options.emptyRows &&
-              table.currentPage ===
-                Math.ceil(table.data.length / table.perPage) &&
-              getEmptyRows()}
+            <TableRow emptyRows />
           </tbody>
         </table>
         <PaginationTableFooter />
@@ -175,15 +115,56 @@ export const PaginationTable = ({ data, header, body, options, result }) => {
     body,
     options,
   });
-  // useEffect(() => {
-  //   if (result) {
-  //     result({ selectionRows });
-  //   }
-  // }, [data, result, selectionRows]);
+
+  // const copyDefaultOptions = { ...defaultOptions };
+
+  const mergedOptions = _.merge({}, defaultOptions, {
+    ...options,
+    sort: {
+      active:
+        typeof options.sort === 'undefined'
+          ? defaultOptions.sort.active
+          : !!options.sort,
+    },
+    search: {
+      active:
+        typeof options.search === 'undefined'
+          ? defaultOptions.search.active
+          : !!options.search,
+    },
+    info: {
+      active:
+        typeof options.info === 'undefined'
+          ? defaultOptions.info.active
+          : !!options.info,
+    },
+    onRowClick: {
+      ...options.onRowClick,
+      active:
+        typeof options?.onRowClick === 'undefined'
+          ? defaultOptions?.onRowClick?.active
+          : !!options.onRowClick,
+      function:
+        typeof options?.onRowClick?.function === 'function'
+          ? options?.onRowClick?.function
+          : null,
+      key:
+        typeof options?.onRowClick?.key === 'string'
+          ? options?.onRowClick?.key
+          : null,
+    },
+    selection: {
+      ...options?.selection,
+      active:
+        typeof options?.selection === 'undefined'
+          ? defaultOptions?.selection?.active
+          : !!options.selection,
+    },
+  });
 
   return (
     <PaginationTableWrapper
-      options={{ ...defaultOptions, ...options }}
+      options={mergedOptions}
       data={data}
       header={header}
       body={body}

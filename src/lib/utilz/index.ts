@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import css from '../paginationtable.module.css';
 
 export const searchFunction = ({
   body,
@@ -7,7 +6,9 @@ export const searchFunction = ({
   searchString,
   search,
   setCurrentPage,
+  stayOnPage,
 }) => {
+  if (!data) return null;
   let columns;
   if (search?.columns === 'all') {
     columns = data[0] && body.map((x, index) => index);
@@ -51,15 +52,12 @@ export const searchFunction = ({
       );
     })
   );
-  setCurrentPage(1);
+  if (stayOnPage && searchString === '') {
+  } else {
+    setCurrentPage(1);
+  }
   return filteredData;
 };
-
-// export const log = (message) => {
-//   if (defaults.debug) {
-//     console.log(message);
-//   }
-// };
 
 export const handleOrderColumn = ({ context, index }) => {
   if (
@@ -70,6 +68,50 @@ export const handleOrderColumn = ({ context, index }) => {
       direction: prevState.direction === 'desc' ? 'asc' : 'desc',
       column: context.body[index].key,
     }));
-    context.setCurrentPage(1);
+    if (context.options.stayOnPage) {
+    } else {
+      context.setCurrentPage(1);
+    }
+  }
+};
+
+export const handleSelectAllOnPage = ({
+  reverse,
+  selectionRows,
+  data,
+  currentPage,
+  perPage,
+  setSelectionRows,
+  setSelectedPerPage,
+}) => {
+  const newArray = [...selectionRows];
+  const newArray2 = data.map((x) => x._id);
+  const pageSelection = newArray2.splice(
+    currentPage * perPage - perPage,
+    perPage
+  );
+
+  pageSelection.forEach((y) => {
+    const exists = newArray.find((x) => x === y);
+    if (exists) {
+      if (reverse) {
+        const index = newArray.indexOf(y);
+        if (index > -1) newArray.splice(index, 1);
+      }
+    } else {
+      newArray.push(y);
+    }
+  });
+  setSelectionRows(newArray);
+  if (reverse) {
+    setSelectedPerPage((prevState) => ({
+      ...prevState,
+      [currentPage]: 0,
+    }));
+  } else {
+    setSelectedPerPage((prevState) => ({
+      ...prevState,
+      [currentPage]: perPage,
+    }));
   }
 };

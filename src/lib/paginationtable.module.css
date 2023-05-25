@@ -19,12 +19,17 @@
   border-top: none !important;
 }
 
-.rowSelected {
+/* .rowSelected {
   background-color: aquamarine !important;
-}
+} */
 
-.anti_hover > td {
+/* .anti_hover > td {
   background: white !important;
+  border-top: 0px !important;
+} */
+
+.anti_hover > td:first-child {
+  background-color: blue !important;
   border-top: 0px !important;
 }
 
@@ -38,7 +43,7 @@ tr.hover,
 th.hover,
 td.hover,
 tr.hoverable:hover {
-  background-color: #e6f9ff;
+  cursor: pointer;
 }
 
 .row_checkbox {

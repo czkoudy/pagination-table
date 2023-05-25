@@ -1,6 +1,6 @@
 import { format } from 'date-fns';
-import css from './tablecell.module.css';
 import _ from 'lodash';
+import css from './tablecell.module.css';
 
 const TableCell = ({ index, defaults, field, entry, columnSpan, rowSpan }) => {
   let useDotValue;
@@ -91,10 +91,11 @@ const TableCell = ({ index, defaults, field, entry, columnSpan, rowSpan }) => {
     <td
       key={index}
       title={field.title || ''}
-      // className={`${css.column} ${defaults.onRowClick.excludeColumns.includes(index)
-      //   ? 'exclude-row-click'
-      //   : ''
-      //   }`}
+      className={`${css.column} ${
+        defaults.onRowClick.excludeColumns.includes(index)
+          ? 'exclude-row-click'
+          : ''
+      }`}
       colSpan={columnSpan}
     >
       {useDotValue}

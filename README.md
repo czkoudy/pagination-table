@@ -1,18 +1,26 @@
 # @czkoudy/pagination-table
 
-> React component for turning tables into Pagination Tables
+> React functional component for turning ordinary tables into Pagination Data Tables
 
 [![NPM](https://img.shields.io/npm/v/@czkoudy/pagination-table.svg)](https://www.npmjs.com/package/@czkoudy/pagination-table) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ![Downloads](https://img.shields.io/npm/dm/@czkoudy/pagination-table?style=for-the-badge)
 
-## Install
+## 🦸 Looking for contributors
+
+```
+I am looking for contributors who can move this project further.
+I would like to work with someone to learn more about Javascript and Typescript, React
+and how to work closely with a team.
+```
+
+## ⚙️Install
 
 ```bash
 npm install --save @czkoudy/pagination-table
 ```
 
-## Usage
+## 📓Usage
 
 ```jsx
 import PaginationTable from '@czkoudy/pagination-table';
@@ -21,26 +29,20 @@ const data = [{ id: 5 }, { id: 6 }];
 const header = [{ label: 'ID' }];
 const body = [{ key: 'id' }];
 
-const options = {
-  search: false,
-  sortable: false,
-  info: false,
-  emptyRows: false,
-  perPage: 10,
-  className: '',
-  pagination: null,
-  onRowClick: {
-    function: handleOnRowClick, // required
-    key: 'id', // defaults to 'id'
-  },
-  selection: {
-    key: 'id', // required
-    backgroundColor: '', //string rgb color or rgba, defaults to rgba(255, 165, 0, 0.5)
-  },
-};
-
-return <PaginationTable data={data} header={header} body={body} options={options} />;
+return <PaginationTable data={data} header={header} body={body} />;
 ```
+
+## 🗳️4.3.0-beta Release
+
+### 🔧Breaking Changes
+
+- rename `sortable` to `sort` in `options` object
+
+### 🔥Improvements
+
+- 🆕 - stayOnPage in options to stay on the same page after data refresh
+- 🆕 - slowly moving to TypeScript
+- 🆕 - table now can have title - `options.tableTitle`
 
 ## Changes in 3.7.0
 
@@ -171,36 +173,36 @@ All constants are arrays with objects.
 
 ### PaginationTable props
 
-| Name    | Type    | Required | Default |
-| ------- | ------- | -------- | ------- |
-| data    | Array[] | Yes      | -       |
-| header  | Array[] | Yes      | -       |
-| body    | Array[] | Yes      | -       |
-| options | Array[] | No       | -       |
+| Name    | Type    | Required | Default   |
+| ------- | ------- | -------- | --------- |
+| data    | Array[] | Yes      | -         |
+| header  | Array[] | Yes      | -         |
+| body    | Array[] | Yes      | -         |
+| options | Array[] | No       | see below |
 
 ### options props
 
-| Name                    | Type              | Required | Default      | Description                                    |
-| ----------------------- | ----------------- | -------- | ------------ | ---------------------------------------------- |
-| perPage                 | Int               | No       | 10           |
-| emptyRows               | Boolean           | No       | false        |
-| lengthChange            | Boolean           | No       | false        |
-| lengthMenu              | Array[]           | No       | [5,10,15,20] |
-| info                    | Boolean           | No       | false        |
-| search                  | Boolean or Object | No       | false        |
-| search.columns          | Array or String   | No       | "all"        | Array of indexes of columns to search within   |
-| search.className        | String            | No       | false        | ClassName for search input                     |
-| sortable                | Boolean or Object | No       | false        |
-| sortable.column         | Int               | No       | 0            | Index of default column to sort by             |
-| sortable.direction      | String            | No       | "asc"        | "asc" or "desc"                                |
-| sortable.excludeColumns | Array             | No       | []           | Array of columns indesx to exclude sorting for |
-| onRowClick              | Object            | No       | {}           |
-| onRowClick.function     | Function          | No       | {}           | function to be actioned on click on row        |
-| onRowClick.key          | String            | No       | "id"         | Key to be passed to function                   |
-| loading                 | Object            | No       | {}           |
-| loading.component       | React.Component   | No       | null         |
-| loading.text            | String            | No       | "Loading"    |
-| debug                   | Boolean           | No       | false        | Logging to console progress of PaginationTable |
+| Name                | Type              | Required | Default      | Description                                    |
+| ------------------- | ----------------- | -------- | ------------ | ---------------------------------------------- |
+| perPage             | Int               | No       | 10           |
+| emptyRows           | Boolean           | No       | false        |
+| lengthChange        | Boolean           | No       | false        |
+| lengthMenu          | Array[]           | No       | [5,10,15,20] |
+| info                | Boolean           | No       | true         |
+| search              | Boolean or Object | No       | false        |
+| search.columns      | Array or String   | No       | "all"        | Array of indexes of columns to search within   |
+| search.className    | String            | No       | false        | ClassName for search input                     |
+| sort                | Boolean or Object | No       | false        |
+| sort.column         | Int               | No       | 0            | Index of default column to sort by             |
+| sort.direction      | String            | No       | "asc"        | "asc" or "desc"                                |
+| sort.excludeColumns | Array             | No       | []           | Array of columns indesx to exclude sorting for |
+| onRowClick          | Object            | No       | {}           |
+| onRowClick.function | Function          | No       | {}           | function to be actioned on click on row        |
+| onRowClick.key      | String            | No       | "id"         | Key to be passed to function                   |
+| loading             | Object            | No       | {}           |
+| loading.component   | React.Component   | No       | null         |
+| loading.text        | String            | No       | "Loading"    |
+| debug               | Boolean           | No       | false        | Logging to console progress of PaginationTable |
 
 ### header props
 

@@ -1,21 +1,23 @@
 .paginationtableheader {
-  /* display: flex;
-  justify-content: space-between; */
-
-  width: 100%;
   display: flex;
+  width: 100%;
   padding-top: 0px;
-  padding-bottom: 10px;
+  /* padding-bottom: 10px; */
   justify-content: space-between;
   align-items: center;
+  height: 40px;
 }
 
 .paginationtableheader__title {
-  /* display: flex;
-  justify-content: space-between; */
-
-  /* margin-top: 12px; */
   font-weight: 600;
+  flex-grow: 1;
+  margin-left: 10px;
 }
 
-/* backgroundColor: selectionRows.length > 0 ? '#FFDAC1' : '', */
+.paginationtableheader__selection {
+  display: flex;
+  justify-content: center;
+  margin-right: 0px;
+  background-color: lightpink;
+  border-radius: 3px;
+}
