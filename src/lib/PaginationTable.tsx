@@ -121,6 +121,7 @@ export const PaginationTable = ({ data, header, body, options, result }) => {
   const mergedOptions = _.merge({}, defaultOptions, {
     ...options,
     sort: {
+      ...options.sort,
       active:
         typeof options.sort === 'undefined'
           ? defaultOptions.sort.active
