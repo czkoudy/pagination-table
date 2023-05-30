@@ -1,5 +1,3 @@
-/* eslint-disable react/display-name */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import _ from 'lodash';
 import { useContext, useRef } from 'react';
 import {
