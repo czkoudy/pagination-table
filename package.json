@@ -23,7 +23,8 @@
     "dev": "vite",
     "preview": "vite preview",
     "semantic-release": "semantic-release --branches main",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "acp": "git add . && npm run commit && git push"
   },
   "eslintConfig": {
     "extends": [
