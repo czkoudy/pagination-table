@@ -128,6 +128,7 @@ export const PaginationTable = ({ data, header, body, options, result }) => {
           : !!options.sort,
     },
     search: {
+      ...options.search,
       active:
         typeof options.search === 'undefined'
           ? defaultOptions.search.active
