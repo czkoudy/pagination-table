@@ -21,9 +21,9 @@
       "*": ["node_modules/*"],
       "@/*": ["src/*"]
     },
-    "types": ["vite/client"]
+    "types": ["vite/client", "@testing-library/jest-dom"]
   },
-  "include": ["src/**/*", "lib/index.ts"],
+  "include": ["src/**/*", "lib/index.ts", "vite.config.ts"],
   "exclude": ["node_modules"]
   // "references": [{ "path": "./tsconfig.node.json" }]
 }

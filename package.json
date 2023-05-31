@@ -21,8 +21,10 @@
   },
   "scripts": {
     "dev": "vite",
+    "test": "vitest",
     "preview": "vite preview",
     "semantic-release": "semantic-release --branches main",
+    "prepare": "npm run build",
     "commit": "git-cz",
     "acp": "git add . && npm run commit && git push"
   },
@@ -48,6 +50,8 @@
     "@babel/cli": "^7.21.0",
     "@babel/plugin-proposal-optional-chaining": "^7.21.0",
     "@babel/preset-react": "^7.13.13",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
     "@types/lodash": "^4.14.194",
     "@types/react": "^18.0.34",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
@@ -63,13 +67,15 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "jsdom": "^22.1.0",
     "prettier": "^2.8.4",
     "react-error-overlay": "6.0.9",
     "semantic-release": "^21.0.2",
     "typescript": "^5.0.3",
     "vite": "^4.2.1",
     "vite-plugin-css-injected-by-js": "^3.1.0",
-    "vite-plugin-dts": "^2.2.0"
+    "vite-plugin-dts": "^2.2.0",
+    "vitest": "^0.31.2"
   },
   "babel": {
     "plugins": [
