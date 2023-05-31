@@ -22,6 +22,7 @@
   "scripts": {
     "dev": "vite",
     "test": "vitest",
+    "build": "vite build",
     "preview": "vite preview",
     "semantic-release": "semantic-release --branches main",
     "prepare": "npm run build",
