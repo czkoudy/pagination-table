@@ -9,7 +9,9 @@
     "airbnb/hooks",
     "plugin:react/recommended",
     "plugin:prettier/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:testing-library/react",
+    "plugin:jest-dom/recommended"
   ],
   "overrides": [],
   "parser": "@typescript-eslint/parser",
@@ -18,7 +20,13 @@
     "sourceType": "module",
     "project": "./tsconfig.json"
   },
-  "plugins": ["react", "prettier", "@typescript-eslint"],
+  "plugins": [
+    "react",
+    "prettier",
+    "@typescript-eslint",
+    "testing-library",
+    "jest-dom"
+  ],
   "rules": {
     "no-underscore-dangle": 0,
     "import/extensions": [

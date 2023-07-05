@@ -1,5 +1,6 @@
 import { format } from 'date-fns';
 import _ from 'lodash';
+import { createElement } from 'react';
 import css from './tablecell.module.css';
 
 const TableCell = ({ index, defaults, field, entry, columnSpan, rowSpan }) => {

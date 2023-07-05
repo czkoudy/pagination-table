@@ -8,10 +8,24 @@ export type PaginationTableType = {
   options: {
     className: string;
     data: any[];
+    lengthChange: {
+      active?: boolean;
+    };
+    tableTitle: string;
+    search: {
+      active?: boolean;
+    };
+    selection: {
+      buttons: any[];
+    };
   };
+  selectionRows: any[];
+  setSelectionRows: ([]) => void;
 };
 
-export const PaginationTableContext = createContext<PaginationTableType>({});
+export const PaginationTableContext = createContext<PaginationTableType | null>(
+  null
+);
 
 interface PaginationTableInterface {
   children?: React.ReactNode;

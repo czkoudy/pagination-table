@@ -26,7 +26,7 @@ export default ({ mode }) => {
     build: {
       lib: {
         entry: path.resolve(__dirname, './src/lib/index.ts'),
-        name: 'ToggleSwitch',
+        name: 'PaginationTable',
         fileName: (format) => `index.${format}.js`,
       },
       // outDir: 'build',

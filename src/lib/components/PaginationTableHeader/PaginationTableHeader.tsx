@@ -7,6 +7,8 @@ import LengthChangeMenu from '../LengthChangeMenu';
 const PaginationTableHeader = () => {
   const table = useContext(PaginationTableContext);
 
+  if (!table) return null;
+
   return (
     <div
       className={`${css.paginationtableheader} ${
@@ -14,7 +16,6 @@ const PaginationTableHeader = () => {
       }`}
     >
       {table.options.lengthChange.active && <LengthChangeMenu />}
-
       <span className={`${css.paginationtableheader__title}`}>
         {table.selectionRows?.length <= 0 && table.options.tableTitle}
         {table.selectionRows?.length > 0 &&

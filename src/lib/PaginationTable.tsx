@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { useContext, useRef } from 'react';
+import { forwardRef, useContext, useRef } from 'react';
 import {
   PaginationTableContext,
   PaginationTableProvider,
@@ -57,7 +57,7 @@ const defaultOptions = {
   stayOnPage: true,
 };
 
-export const usePaginationTable = ({ header, body }) => {
+export const usePaginationTable = ({ header, body, ref }) => {
   const Table = () => {
     const table = useContext(PaginationTableContext);
     const tableRef = useRef();
@@ -65,7 +65,7 @@ export const usePaginationTable = ({ header, body }) => {
     if (!table?.data) return null;
 
     return (
-      <div className={`${css.paginationtable}`} ref={tableRef}>
+      <div className={`${css.paginationtable}`} ref={ref || tableRef}>
         <PaginationTableHeader />
         <table className={table.options.className}>
           <TableHeader />
@@ -106,71 +106,74 @@ export const PaginationTableWrapper = ({
   );
 };
 
-export const PaginationTable = ({ data, header, body, options, result }) => {
-  const { Table, selectionRows } = usePaginationTable({
-    data,
-    header,
-    body,
-    options,
-  });
+export const PaginationTable = forwardRef(
+  ({ data, header, body, options, result }, ref) => {
+    const { Table, selectionRows } = usePaginationTable({
+      data,
+      header,
+      body,
+      options,
+      ref,
+    });
 
-  // const copyDefaultOptions = { ...defaultOptions };
+    // const copyDefaultOptions = { ...defaultOptions };
 
-  const mergedOptions = _.merge({}, defaultOptions, {
-    ...options,
-    sort: {
-      ...options.sort,
-      active:
-        typeof options.sort === 'undefined'
-          ? defaultOptions.sort.active
-          : !!options.sort,
-    },
-    search: {
-      ...options.search,
-      active:
-        typeof options.search === 'undefined'
-          ? defaultOptions.search.active
-          : !!options.search,
-    },
-    info: {
-      ...options.info,
-      active:
-        typeof options.info === 'undefined'
-          ? defaultOptions.info.active
-          : !!options.info,
-    },
-    onRowClick: {
-      ...options.onRowClick,
-      active:
-        typeof options?.onRowClick === 'undefined'
-          ? defaultOptions?.onRowClick?.active
-          : !!options.onRowClick,
-      function:
-        typeof options?.onRowClick?.function === 'function'
-          ? options?.onRowClick?.function
-          : null,
-      key:
-        typeof options?.onRowClick?.key === 'string'
-          ? options?.onRowClick?.key
-          : null,
-    },
-    selection: {
-      ...options?.selection,
-      active:
-        typeof options?.selection === 'undefined'
-          ? defaultOptions?.selection?.active
-          : !!options.selection,
-    },
-  });
+    const mergedOptions = _.merge({}, defaultOptions, {
+      ...options,
+      sort: {
+        ...options.sort,
+        active:
+          typeof options.sort === 'undefined'
+            ? defaultOptions.sort.active
+            : !!options.sort,
+      },
+      search: {
+        ...options.search,
+        active:
+          typeof options.search === 'undefined'
+            ? defaultOptions.search.active
+            : !!options.search,
+      },
+      info: {
+        ...options.info,
+        active:
+          typeof options.info === 'undefined'
+            ? defaultOptions.info.active
+            : !!options.info,
+      },
+      onRowClick: {
+        ...options.onRowClick,
+        active:
+          typeof options?.onRowClick === 'undefined'
+            ? defaultOptions?.onRowClick?.active
+            : !!options.onRowClick,
+        function:
+          typeof options?.onRowClick?.function === 'function'
+            ? options?.onRowClick?.function
+            : null,
+        key:
+          typeof options?.onRowClick?.key === 'string'
+            ? options?.onRowClick?.key
+            : null,
+      },
+      selection: {
+        ...options?.selection,
+        active:
+          typeof options?.selection === 'undefined'
+            ? defaultOptions?.selection?.active
+            : !!options.selection,
+      },
+    });
 
-  return (
-    <PaginationTableWrapper
-      options={mergedOptions}
-      data={data}
-      header={header}
-      body={body}
-    >
-      <Table />
-    </PaginationTableWrapper>
-  );
-};
+    return (
+      <PaginationTableWrapper
+        options={mergedOptions}
+        data={data}
+        header={header}
+        body={body}
+      >
+        <Table />
+      </PaginationTableWrapper>
+    );
+  }
+);
