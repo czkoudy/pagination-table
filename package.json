@@ -24,7 +24,7 @@
     "test": "vitest",
     "build": "vite build",
     "preview": "vite preview",
-    "semantic-release": "semantic-release",
+    "semantic-release": "semantic-release --branches main",
     "prepare": "npm run build",
     "commit": "git-cz",
     "acp": "git add . && npm run commit && git push"
