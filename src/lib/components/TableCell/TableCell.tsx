@@ -1,10 +1,11 @@
+/* eslint-disable react/no-unstable-nested-components */
 import { format } from 'date-fns';
 import _ from 'lodash';
 import { createElement } from 'react';
 import css from './tablecell.module.css';
 
 const TableCell = ({ index, defaults, field, entry, columnSpan, rowSpan }) => {
-  let useDotValue;
+  let useDotValue: string | number | Date | undefined;
   const _fieldKey = rowSpan ? field?.key2 || field?.key : field?.key;
 
   if (field.useWholeObject) {
@@ -15,79 +16,33 @@ const TableCell = ({ index, defaults, field, entry, columnSpan, rowSpan }) => {
     useDotValue = entry[_fieldKey];
   }
 
-  if (field.hasOwnProperty('date')) {
-    return (
-      <td
-        key={index}
-        title={field.title || ''}
-        className={`${css.column} ${
-          defaults.onRowClick.excludeColumns.includes(index)
-            ? 'exclude-row-click'
-            : ''
-        }`}
-        colSpan={columnSpan}
-      >
-        {useDotValue !== undefined
-          ? format(new Date(useDotValue), field.date)
-          : null}
-      </td>
-    );
-  }
-  if (field.hasOwnProperty('function')) {
-    if (
-      field.hasOwnProperty('useWholeObject') &&
-      field.useWholeObject === true
-    ) {
-      return (
-        <td
-          key={index}
-          title={field.title || ''}
-          className={`${css.column} ${
-            defaults.onRowClick.excludeColumns.includes(index)
-              ? 'exclude-row-click'
-              : ''
-          }`}
-          colSpan={columnSpan}
-        >
-          {field.function(useDotValue)}
-        </td>
-      );
+  const cellElement = () => {
+    if (field.hasOwnProperty('date')) {
+      return useDotValue !== undefined
+        ? format(new Date(useDotValue), field.date)
+        : null;
     }
-    return (
-      <td
-        key={index}
-        title={field.title || ''}
-        className={`${css.column} ${
-          defaults.onRowClick.excludeColumns.includes(index)
-            ? 'exclude-row-click'
-            : ''
-        }`}
-        colSpan={columnSpan}
-      >
-        {field.function(useDotValue)}
-      </td>
-    );
-  }
-  if (field.hasOwnProperty('component')) {
-    return (
-      <td
-        key={index}
-        title={field.title || ''}
-        className={`${css.column} ${
-          defaults.onRowClick.excludeColumns.includes(index)
-            ? 'exclude-row-click'
-            : ''
-        }`}
-        colSpan={columnSpan}
-      >
-        {createElement(field.component, {
-          ...field.props,
-          checked: entry[field.props.checked],
-          entry,
-        })}
-      </td>
-    );
-  }
+
+    if (field.hasOwnProperty('function')) {
+      if (
+        field.hasOwnProperty('useWholeObject') &&
+        field.useWholeObject === true
+      ) {
+        return field.function(useDotValue);
+      }
+      return field.function(useDotValue);
+    }
+    if (field.hasOwnProperty('component')) {
+      return createElement(field.component, {
+        ...field.props,
+        checked: entry[field.props.checked],
+        entry,
+      });
+    }
+
+    return useDotValue;
+  };
+
   return (
     <td
       key={index}
@@ -96,10 +51,16 @@ const TableCell = ({ index, defaults, field, entry, columnSpan, rowSpan }) => {
         defaults.onRowClick.excludeColumns.includes(index)
           ? 'exclude-row-click'
           : ''
+      } ${
+        field.align === 'center'
+          ? css.column_align_center
+          : field.align === 'right'
+          ? css.column_align_right
+          : ''
       }`}
       colSpan={columnSpan}
     >
-      {useDotValue}
+      {cellElement()}
     </td>
   );
 };

@@ -70,10 +70,15 @@ export const PaginationTableProvider: React.FC<PaginationTableInterface> = ({
           _.orderBy(
             searchData,
             [
-              (item) =>
-                typeof _.get(item, order.column) === 'string'
-                  ? _.get(item, order.column)?.toLowerCase()
-                  : _.get(item, order.column),
+              (item) => {
+                if (typeof _.get(item, order.column) === 'string') {
+                  return _.get(item, order.column)?.toLowerCase();
+                }
+                if (Array.isArray(_.get(item, order.column))) {
+                  return _.get(item, order.column).map((x) => x.toLowerCase());
+                }
+                return _.get(item, order.column);
+              },
             ],
             [order.direction]
           )
@@ -83,10 +88,15 @@ export const PaginationTableProvider: React.FC<PaginationTableInterface> = ({
           _.orderBy(
             data2,
             [
-              (item) =>
-                typeof _.get(item, order.column) === 'string'
-                  ? _.get(item, order.column)?.toLowerCase()
-                  : _.get(item, order.column),
+              (item) => {
+                if (typeof _.get(item, order.column) === 'string') {
+                  return _.get(item, order.column)?.toLowerCase();
+                }
+                if (Array.isArray(_.get(item, order.column))) {
+                  return _.get(item, order.column).map((x) => x.toLowerCase());
+                }
+                return _.get(item, order.column);
+              },
             ],
             [order.direction]
           )
