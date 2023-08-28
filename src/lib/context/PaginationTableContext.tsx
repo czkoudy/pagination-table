@@ -19,6 +19,7 @@ export type PaginationTableType = {
       buttons: any[];
     };
   };
+  result?: any;
   selectionRows: any[];
   setSelectionRows: ([]) => void;
 };
@@ -65,7 +66,18 @@ export const PaginationTableProvider: React.FC<PaginationTableInterface> = ({
           setCurrentPage,
           stayOnPage: options.stayOnPage,
         });
-        setData(_.orderBy(searchData, [order.column], [order.direction]));
+        setData(
+          _.orderBy(
+            searchData,
+            [
+              (item) =>
+                typeof _.get(item, order.column) === 'string'
+                  ? _.get(item, order.column)?.toLowerCase()
+                  : _.get(item, order.column),
+            ],
+            [order.direction]
+          )
+        );
       } else {
         setData(
           _.orderBy(

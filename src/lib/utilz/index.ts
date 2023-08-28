@@ -13,26 +13,26 @@ export const searchFunction = ({
   if (search?.columns === 'all') {
     columns = data[0] && body.map((x, index) => index);
   } else if (Array.isArray(search?.columns)) {
-    columns =
-      data[0] && search?.columns.map((x) => search.columns.includes(x) && x);
+    columns = search?.columns;
+    // data[0] && .map((x) => search.columns.includes(x) && x);
   }
-  // log(columns);
 
   const filteredData = data.filter((row) =>
     columns.some((column) => {
-      let useDotValue;
+      let useDotValue = '';
 
-      if (body[column].useWholeObject) {
+      if (body[column]?.useWholeObject && !search.skipObjects) {
         useDotValue = row;
+      } else if (body[column]?.useWholeObject && search.skipObjects) {
+        useDotValue = '';
       } else if (
         body[column].key.includes('.') &&
         !body[column].useWholeObject
       ) {
         useDotValue = _.get(row, body[column].key) || '';
-      } else if (!body[column].useWholeObject) {
+      } else {
         useDotValue = row[body[column].key] || '';
       }
-      // log(`dotValue:${useDotValue}`);
 
       if (typeof useDotValue === 'string') {
         return (
@@ -43,7 +43,9 @@ export const searchFunction = ({
         return `${useDotValue}`.indexOf(searchString) > -1;
       }
       if (Array.isArray(useDotValue)) {
-        return useDotValue.includes(searchString);
+        const regEx = new RegExp(`${searchString}`, 'i');
+        // return useDotValue.includes(searchString);
+        return useDotValue.some((e) => regEx.test(e));
       }
       return (
         useDotValue[body[column].key] +

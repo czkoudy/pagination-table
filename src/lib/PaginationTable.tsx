@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import _ from 'lodash';
 import { forwardRef, useContext, useRef } from 'react';
 import {
@@ -30,6 +31,7 @@ const defaultOptions = {
     columns: 'all',
     style: {},
     className: '',
+    skipObjects: true,
   },
   showPagination: true,
   emptyRows: false,
@@ -107,7 +109,7 @@ export const PaginationTableWrapper = ({
 };
 
 export const PaginationTable = forwardRef(
-  ({ data, header, body, options, result }, ref) => {
+  ({ data, header, body, options = {}, result }, ref) => {
     const { Table, selectionRows } = usePaginationTable({
       data,
       header,
