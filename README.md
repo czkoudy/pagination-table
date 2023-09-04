@@ -182,27 +182,28 @@ All constants are arrays with objects.
 
 ### options props
 
-| Name                | Type              | Required | Default      | Description                                    |
-| ------------------- | ----------------- | -------- | ------------ | ---------------------------------------------- |
-| perPage             | Int               | No       | 10           |
-| emptyRows           | Boolean           | No       | false        |
-| lengthChange        | Boolean           | No       | false        |
-| lengthMenu          | Array[]           | No       | [5,10,15,20] |
-| info                | Boolean           | No       | true         |
-| search              | Boolean or Object | No       | false        |
-| search.columns      | Array or String   | No       | "all"        | Array of indexes of columns to search within   |
-| search.className    | String            | No       | false        | ClassName for search input                     |
-| sort                | Boolean or Object | No       | false        |
-| sort.column         | Int               | No       | 0            | Index of default column to sort by             |
-| sort.direction      | String            | No       | "asc"        | "asc" or "desc"                                |
-| sort.excludeColumns | Array             | No       | []           | Array of columns indesx to exclude sorting for |
-| onRowClick          | Object            | No       | {}           |
-| onRowClick.function | Function          | No       | {}           | function to be actioned on click on row        |
-| onRowClick.key      | String            | No       | "id"         | Key to be passed to function                   |
-| loading             | Object            | No       | {}           |
-| loading.component   | React.Component   | No       | null         |
-| loading.text        | String            | No       | "Loading"    |
-| debug               | Boolean           | No       | false        | Logging to console progress of PaginationTable |
+| Name                      | Type              | Required | Default      | Description                                        |
+| ------------------------- | ----------------- | -------- | ------------ | -------------------------------------------------- | --- |
+| perPage                   | Int               | No       | 10           |
+| emptyRows                 | Boolean           | No       | false        |
+| lengthChange              | Boolean           | No       | false        |
+| lengthMenu                | Array[]           | No       | [5,10,15,20] |
+| info                      | Boolean           | No       | true         |
+| search                    | Boolean or Object | No       | false        |
+| search.columns            | Array or String   | No       | "all"        | Array of indexes of columns to search within       |
+| search.className          | String            | No       | false        | ClassName for search input                         |
+| sort                      | Boolean or Object | No       | false        |
+| sort.column               | Int               | No       | 0            | Index of default column to sort by                 |
+| sort.direction            | String            | No       | "asc"        | "asc" or "desc"                                    |
+| sort.excludeColumns       | Array             | No       | []           | Array of columns indesx to exclude sorting for     |
+| onRowClick                | Object            | No       | {}           |
+| onRowClick.function       | Function          | No       | {}           | function to be actioned on click on row            |
+| onRowClick.key            | String            | No       | "id"         | Key to be passed to function                       | v   |
+| onRowClick.excludeColumns | Array             | No       | null         | Array of columns indesx to exclude from onRowClick |
+| loading                   | Object            | No       | {}           |
+| loading.component         | React.Component   | No       | null         |
+| loading.text              | String            | No       | "Loading"    |
+| debug                     | Boolean           | No       | false        | Logging to console progress of PaginationTable     |
 
 ### header props
 
