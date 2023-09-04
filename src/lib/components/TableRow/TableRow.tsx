@@ -23,11 +23,13 @@ const TableRow = ({
     table.currentPage === Math.ceil(table.data.length / table.perPage);
 
   const onRowClickHandler = (e, entry) => {
+    e.stopPropagation();
+    e.preventDefault();
     if (
       e.target.classList.contains('row-checkbox') ||
-      e.target.classList.contains('exclude-row-click')
+      e.target?.closest('td')?.classList.contains('exclude-row-click')
     ) {
-      return '';
+      return;
     }
     if (table.options.onRowClick.active) {
       if (typeof table.options.onRowClick.function === 'function') {
@@ -39,6 +41,8 @@ const TableRow = ({
         } else {
           table.options.onRowClick.function(entry[key]);
         }
+      } else {
+        throw new Error('Function Must be defined in onRowClick handler!');
       }
     }
   };
@@ -129,7 +133,7 @@ const TableRow = ({
               index={index}
               field={field}
               entry={entry}
-              columnSpan={index === body.length - 1 ? 2 : 1}
+              columnSpan={1}
             />
           );
         })}
