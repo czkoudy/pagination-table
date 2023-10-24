@@ -62,6 +62,13 @@ const defaultOptions = {
       library: 'date-fns',
       options: {},
     },
+    currency: {
+      code: 'en-UK',
+      options: {
+        style: 'currency',
+        currency: 'GBP',
+      },
+    },
   },
 };
 

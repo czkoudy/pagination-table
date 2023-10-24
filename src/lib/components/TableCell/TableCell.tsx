@@ -38,6 +38,17 @@ const TableCell = ({ index, defaults, field, entry, columnSpan, rowSpan }) => {
       );
     }
 
+    if (field.hasOwnProperty('currency')) {
+      if (useDotValue === undefined) {
+        return null;
+      }
+
+      return new Intl.NumberFormat(
+        defaults.customFormatFunctions.currency.code,
+        defaults.customFormatFunctions.currency.options
+      ).format(parseFloat(useDotValue));
+    }
+
     if (field.hasOwnProperty('function')) {
       if (
         field.hasOwnProperty('useWholeObject') &&
