@@ -18,9 +18,24 @@ const TableCell = ({ index, defaults, field, entry, columnSpan, rowSpan }) => {
 
   const cellElement = () => {
     if (field.hasOwnProperty('date')) {
-      return useDotValue !== undefined
-        ? format(new Date(useDotValue), field.date)
-        : null;
+      if (useDotValue === undefined) {
+        return null;
+      }
+
+      // return useDotValue !== undefined
+      //   ? format(new Date(useDotValue), field.date, {
+      //       locale: defaults.customFormatFunctions.data.locale,
+      //     })
+      //   : null;
+
+      if (defaults.customFormatFunctions.date.library !== 'date-fns') {
+        // todo implement other libraries support
+      }
+      return format(
+        new Date(useDotValue),
+        field.date,
+        defaults.customFormatFunctions.date.options
+      );
     }
 
     if (field.hasOwnProperty('function')) {

@@ -4,7 +4,7 @@ import { createContext, useState, useEffect } from 'react';
 import { searchFunction } from '../utilz';
 
 export type PaginationTableType = {
-  data: any;
+  data: any[];
   options: {
     className: string;
     data: any[];

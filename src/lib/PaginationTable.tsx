@@ -57,6 +57,12 @@ const defaultOptions = {
     excludeColumns: [],
   },
   stayOnPage: true,
+  customFormatFunctions: {
+    date: {
+      library: 'date-fns',
+      options: {},
+    },
+  },
 };
 
 export const usePaginationTable = ({ header, body, ref }) => {
