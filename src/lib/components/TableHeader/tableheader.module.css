@@ -16,3 +16,16 @@
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
+.column {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.column_align_center {
+  text-align: center;
+}
+
+.column_align_right {
+  text-align: right;
+}

@@ -63,6 +63,13 @@ const TableHeader = () => {
               onClick={(e) => handleOrderColumn({ context: table, index })}
               style={{ cursor: 'pointer' }}
               title={field.title || ''}
+              className={`${css.column} ${
+                field.align === 'center'
+                  ? css.column_align_center
+                  : field.align === 'right'
+                  ? css.column_align_right
+                  : ''
+              }`}
             >
               {field.label}
               {table.options.sort.active &&
