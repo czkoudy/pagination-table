@@ -184,7 +184,7 @@ const TableRow = ({
               <tr
                 key={index}
                 className={css.subrow}
-                onClick={(e) => onRowClickHandler(e, entry)}
+                onClick={(e) => onRowClickHandler(e, field2)}
               >
                 <td>&nbsp;</td>
                 {body?.map((field, index) => {
