@@ -14,9 +14,11 @@ const TableHeader = () => {
     setSelectionRows,
     setSelectedPerPage,
   } = table;
+
   return (
     <thead>
       <tr>
+        {table.options.nestedRows && <th width="20px" />}
         {table.options.selection.active && (
           <th width="20px">
             <input

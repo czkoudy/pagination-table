@@ -14,3 +14,30 @@
 .row__checkbox:hover {
   cursor: pointer;
 }
+
+.arrow {
+  border: solid black;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  /* margin-left: 5px; */
+  /* margin-right: 5px; */
+}
+
+.right {
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.down {
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.row__selected {
+  background-color: #eee0c9;
+}
+
+.subrow {
+  background-color: #f1f0e8;
+}
