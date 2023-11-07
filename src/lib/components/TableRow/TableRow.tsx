@@ -141,7 +141,7 @@ const TableRow = ({
             </td>
           )}
 
-          {table.options?.nestedRows && !entry?.children && <th width="20px" />}
+          {table.options?.nestedRows && !entry?.children && <td>&nbsp;</td>}
           {table.options.selection.active && (
             <td
               className={`${css.row__checkbox} exclude-row-click row-checkbox`}
