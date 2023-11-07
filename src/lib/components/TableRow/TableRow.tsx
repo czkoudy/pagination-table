@@ -121,7 +121,7 @@ const TableRow = ({
             >
               <IconButton
                 aria-label="delete"
-                size="large"
+                size="small"
                 onClick={() => handleOnNestedRowClick(entry)}
                 sx={
                   {
@@ -130,6 +130,7 @@ const TableRow = ({
                     // paddingRight: '4px',
                   }
                 }
+                disableRipple
               >
                 <i
                   className={`${css.arrow} ${
@@ -185,7 +186,7 @@ const TableRow = ({
                 className={css.subrow}
                 onClick={(e) => onRowClickHandler(e, entry)}
               >
-                <td />
+                <td>&nbsp;</td>
                 {body?.map((field, index) => {
                   return (
                     <TableCell
