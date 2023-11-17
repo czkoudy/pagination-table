@@ -55,6 +55,7 @@ const defaultOptions = {
     key: null,
     passEvent: false,
     excludeColumns: [],
+    useWholeObject: false,
   },
   stayOnPage: true,
   customFormatFunctions: {
@@ -167,7 +168,7 @@ export const PaginationTable = forwardRef(
             ? options?.onRowClick?.function
             : null,
         key:
-          typeof options?.onRowClick?.key === 'string'
+          typeof options?.onRowClick?.key !== 'undefined'
             ? options?.onRowClick?.key
             : null,
       },

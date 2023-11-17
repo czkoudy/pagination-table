@@ -1,6 +1,7 @@
 import { PaginationTableContext } from '@/lib/context/PaginationTableContext';
 import { useContext, useState } from 'react';
 import { IconButton } from '@mui/material';
+import _ from 'lodash';
 import TableCell from '../TableCell';
 import css from './tablerow.module.css';
 
@@ -25,6 +26,10 @@ const TableRow = ({
     table.currentPage === Math.ceil(table.data.length / table.perPage);
 
   const onRowClickHandler = (e, entry) => {
+    let useDotValue;
+
+    const { active, key, useWholeObject } = table.options.onRowClick;
+
     e.stopPropagation();
     e.preventDefault();
     if (
@@ -33,15 +38,25 @@ const TableRow = ({
     ) {
       return;
     }
-    if (table.options.onRowClick.active) {
+    if (active) {
+      if (useWholeObject) {
+        useDotValue = entry;
+      } else if (key?.includes('.') && !useWholeObject) {
+        useDotValue = _.get(entry, key);
+      } else if (Array.isArray(key)) {
+        useDotValue = key.map((x) => entry[x]).join(' ');
+      } else {
+        useDotValue = entry[key];
+      }
+
       if (typeof table.options.onRowClick.function === 'function') {
         const { key } = table.options.onRowClick;
         if (table.options.onRowClick.passEvent) {
-          table.options.onRowClick.function(e, entry[key]);
+          table.options.onRowClick.function(e, useDotValue);
         } else if (Array.isArray(key)) {
-          table.options.onRowClick.function(...key.map((x) => entry[x]));
+          table.options.onRowClick.function(useDotValue);
         } else {
-          table.options.onRowClick.function(entry[key]);
+          table.options.onRowClick.function(useDotValue);
         }
       } else {
         throw new Error('Function Must be defined in onRowClick handler!');
