@@ -19,7 +19,7 @@ export default ({ mode }) => {
     },
     server: {
       open: false,
-      port: 3001,
+      port: 3099,
       strictPort: true,
       // https: true
     },

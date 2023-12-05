@@ -118,6 +118,7 @@ export const PaginationTableProvider: React.FC<PaginationTableInterface> = ({
     order.column,
     order.direction,
     searchString,
+    selectionRows,
   ]);
   return (
     <PaginationTableContext.Provider

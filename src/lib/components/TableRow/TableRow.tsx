@@ -1,5 +1,5 @@
 import { PaginationTableContext } from '@/lib/context/PaginationTableContext';
-import { useContext, useState } from 'react';
+import { createElement, useContext, useState } from 'react';
 import { IconButton } from '@mui/material';
 import _ from 'lodash';
 import TableCell from '../TableCell';
@@ -21,6 +21,7 @@ const TableRow = ({
   header,
 }: TableRowProps) => {
   const table = useContext(PaginationTableContext);
+  const { setSelectionRows, setSelectedPerPage } = table;
   const [nestedRows, setNestedRows] = useState(false);
   const isLastPage =
     table.currentPage === Math.ceil(table.data.length / table.perPage);
@@ -67,29 +68,29 @@ const TableRow = ({
   const onRowSelection = (e, entry) => {
     try {
       const { key } = table.options.selection;
-
       if (!key) {
         throw new Error('No key set in selection Object!');
       }
       const newArray = [...table.selectionRows];
-      const exists = newArray.find((x) => x === entry[key]);
+
+      const exists = !!newArray.find((x) => x === entry[key]);
+
       if (exists) {
-        const index = newArray.indexOf(entry[key]);
-        if (index > -1) newArray.splice(index, 1);
-        table.setSelectedPerPage((prevState) => ({
+        const arrayIndex = newArray.indexOf(entry[key]);
+
+        if (arrayIndex > -1) newArray.splice(arrayIndex, 1);
+        setSelectedPerPage((prevState) => ({
           ...prevState,
           [table.currentPage]: prevState[table.currentPage] - 1,
         }));
       } else {
-        table.setSelectedPerPage((prevState) => ({
+        setSelectedPerPage((prevState) => ({
           ...prevState,
-          [table.currentPage]: Number.isNaN(prevState[table.currentPage])
-            ? 2
-            : prevState[table.currentPage] + 1,
+          [table.currentPage]: prevState[table.currentPage] + 1,
         }));
         newArray.push(entry[key]);
       }
-      table.setSelectionRows(newArray);
+      setSelectionRows(newArray);
     } catch (error) {}
   };
 
@@ -138,13 +139,6 @@ const TableRow = ({
                 aria-label="delete"
                 size="small"
                 onClick={() => handleOnNestedRowClick(entry)}
-                sx={
-                  {
-                    // marginLeft: '4px',
-                    // padding: '14px',
-                    // paddingRight: '4px',
-                  }
-                }
                 disableRipple
               >
                 <i
@@ -161,23 +155,40 @@ const TableRow = ({
             <td
               className={`${css.row__checkbox} exclude-row-click row-checkbox`}
             >
-              <input
-                type="checkbox"
+              {table.options.selection.component ? (
+                createElement(table.options.selection.component, {
+                  key: entry[table.options.selection.key],
+                  checked: table.selectionRows.includes(
+                    entry[table.options.selection.key]
+                  ),
+                  onClick: (e) => onRowSelection(e, entry),
+                })
+              ) : (
+                <input
+                  type="checkbox"
+                  onChange={(e) => onRowSelection(e, entry)}
+                  id={entry[table.options.selection.key]}
+                  checked={table.selectionRows.includes(
+                    entry[table.options.selection.key]
+                  )}
+                  disabled={
+                    table.options.selection.maxCount &&
+                    table.selectionRows.length >=
+                      table.options.selection.maxCount &&
+                    !table.selectionRows.includes(
+                      entry[table.options.selection.key]
+                    )
+                  }
+                  className={`row-checkbox ${table.options.selection.className}`}
+                />
+              )}
+
+              {/* <Checkbox
                 onChange={(e) => onRowSelection(e, entry)}
-                id={entry[table.options.selection.key]}
                 checked={table.selectionRows.includes(
                   entry[table.options.selection.key]
                 )}
-                disabled={
-                  table.options.selection.maxCount &&
-                  table.selectionRows.length >=
-                    table.options.selection.maxCount &&
-                  !table.selectionRows.includes(
-                    entry[table.options.selection.key]
-                  )
-                }
-                className={`row-checkbox ${table.options.selection.className}`}
-              />
+              /> */}
             </td>
           )}
           {body?.map((field, index) => {

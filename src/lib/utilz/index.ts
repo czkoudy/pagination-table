@@ -85,6 +85,7 @@ export const handleSelectAllOnPage = ({
   perPage,
   setSelectionRows,
   setSelectedPerPage,
+  maxCount,
 }) => {
   const newArray = [...selectionRows];
   const newArray2 = data.map((x) => x._id);

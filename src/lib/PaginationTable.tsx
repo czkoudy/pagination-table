@@ -48,6 +48,7 @@ const defaultOptions = {
     className: '',
     maxCount: false,
     buttons: [],
+    component: null,
   },
   onRowClick: {
     active: false,

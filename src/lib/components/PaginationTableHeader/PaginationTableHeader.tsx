@@ -14,6 +14,14 @@ const PaginationTableHeader = () => {
       className={`${css.paginationtableheader} ${
         table.selectionRows?.length > 0 && css.paginationtableheader__selection
       }`}
+      style={{
+        backgroundColor:
+          table.options.selection.active &&
+          table.selectionRows?.length > 0 &&
+          table.options.selection.backgroundColor,
+        paddingLeft: '10px',
+        paddingRight: '10px',
+      }}
     >
       {table.options.lengthChange.active && <LengthChangeMenu />}
       <span className={`${css.paginationtableheader__title}`}>

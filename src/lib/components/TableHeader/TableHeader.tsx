@@ -33,6 +33,7 @@ const TableHeader = () => {
                       perPage,
                       setSelectionRows,
                       setSelectedPerPage,
+                      maxCount: table?.options.selection.maxCount,
                     })
                   : handleSelectAllOnPage({
                       reverse: false,
@@ -42,15 +43,19 @@ const TableHeader = () => {
                       perPage,
                       setSelectionRows,
                       setSelectedPerPage,
+                      maxCount: table?.options.selection.maxCount,
                     })
               }
               checked={
                 table.selectedPerPage[table.currentPage] === table.perPage
               }
               disabled={
-                table.options.selection.maxCount &&
-                table.selectionRows.length >= defaults.selection.maxCount &&
-                !table.selectionRows.includes(entry[defaults.selection.key])
+                false
+                // table.options.selection.maxCount &&
+                // table.selectionRows.length >= table.options.selection.maxCount
+                // !table.selectionRows.includes(
+                //   entry[table.options.selection.key]
+                // )
               }
               className={`row-checkbox ${table.options.selection.className}`}
             />
