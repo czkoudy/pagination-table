@@ -115,9 +115,10 @@ export const PaginationTableWrapper = ({
   data,
   header,
   body,
+  result,
 }) => {
   return (
-    <PaginationTableProvider value={{ options, data, header, body }}>
+    <PaginationTableProvider value={{ options, data, header, body, result }}>
       {children}
     </PaginationTableProvider>
   );
@@ -130,6 +131,7 @@ export const PaginationTable = forwardRef(
       header,
       body,
       options,
+      result,
       ref,
     });
 
@@ -188,6 +190,7 @@ export const PaginationTable = forwardRef(
         data={data}
         header={header}
         body={body}
+        result={result}
       >
         <Table />
       </PaginationTableWrapper>

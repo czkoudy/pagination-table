@@ -19,7 +19,7 @@ export type PaginationTableType = {
       buttons: any[];
     };
   };
-  result?: any;
+  result?: () => void;
   selectionRows: any[];
   setSelectionRows: ([]) => void;
 };
@@ -34,7 +34,7 @@ interface PaginationTableInterface {
 
 export const PaginationTableProvider: React.FC<PaginationTableInterface> = ({
   children,
-  value: { data: data2, body, header, options, divRef },
+  value: { data: data2, body, header, options, result = () => {}, divRef },
 }) => {
   const [currentPage, setCurrentPage] = useState(options.currentPage);
   const [perPage, setPerPage] = useState(options?.perPage);
@@ -83,6 +83,7 @@ export const PaginationTableProvider: React.FC<PaginationTableInterface> = ({
             [order.direction]
           )
         );
+        result({ selectionRows });
       } else {
         setData(
           _.orderBy(
@@ -101,6 +102,7 @@ export const PaginationTableProvider: React.FC<PaginationTableInterface> = ({
             [order.direction]
           )
         );
+        result({ selectionRows });
       }
       if (options.stayOnPage) {
       } else {

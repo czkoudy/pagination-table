@@ -8,9 +8,9 @@ import css from './tablerow.module.css';
 interface TableRowProps {
   emptyRows: boolean;
   index: number;
-  entry: {};
-  body: {};
-  header: {};
+  entry: object;
+  body: object;
+  header: object;
 }
 
 const TableRow = ({
@@ -161,6 +161,13 @@ const TableRow = ({
                   checked: table.selectionRows.includes(
                     entry[table.options.selection.key]
                   ),
+                  disabled:
+                    table.options.selection.maxCount &&
+                    table.selectionRows.length >=
+                      table.options.selection.maxCount &&
+                    !table.selectionRows.includes(
+                      entry[table.options.selection.key]
+                    ),
                   onClick: (e) => onRowSelection(e, entry),
                 })
               ) : (
@@ -182,13 +189,6 @@ const TableRow = ({
                   className={`row-checkbox ${table.options.selection.className}`}
                 />
               )}
-
-              {/* <Checkbox
-                onChange={(e) => onRowSelection(e, entry)}
-                checked={table.selectionRows.includes(
-                  entry[table.options.selection.key]
-                )}
-              /> */}
             </td>
           )}
           {body?.map((field, index) => {
