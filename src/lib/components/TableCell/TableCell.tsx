@@ -4,12 +4,39 @@ import _ from 'lodash';
 import { createElement } from 'react';
 import css from './tablecell.module.css';
 
-const TableCell = ({ index, defaults, field, entry, columnSpan, rowSpan }) => {
+type TableCellProps = {
+  index: number;
+  defaults: object;
+  field: object;
+  entry: object;
+  columnSpan: number;
+  rowSpan: number;
+};
+
+const TableCell = ({
+  index,
+  defaults,
+  field,
+  entry,
+  columnSpan,
+  rowSpan,
+}: TableCellProps) => {
   let useDotValue: string | number | Date | undefined;
   const _fieldKey = rowSpan ? field?.key2 || field?.key : field?.key;
 
   if (field.useWholeObject) {
     useDotValue = entry;
+  }
+  if (Array.isArray(_fieldKey)) {
+    if (_fieldKey[0]?.includes('.') && _.get(entry, _fieldKey[0])) {
+      useDotValue = _.get(entry, _fieldKey[0]);
+    } else if (_fieldKey[1]?.includes('.') && _.get(entry, _fieldKey[1])) {
+      useDotValue = _.get(entry, _fieldKey[1]);
+    } else if (typeof entry[_fieldKey[0]] !== 'undefined') {
+      useDotValue = entry[_fieldKey[0]];
+    } else if (typeof entry[_fieldKey[1]] !== 'undefined') {
+      useDotValue = entry[_fieldKey[1]];
+    }
   } else if (_fieldKey?.includes('.') && !field.useWholeObject) {
     useDotValue = _.get(entry, _fieldKey);
   } else if (!field.useWholeObject) {

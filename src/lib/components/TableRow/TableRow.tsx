@@ -42,6 +42,17 @@ const TableRow = ({
     if (active) {
       if (useWholeObject) {
         useDotValue = entry;
+      }
+      if (Array.isArray(key)) {
+        if (key[0]?.includes('.') && _.get(entry, key[0])) {
+          useDotValue = _.get(entry, key[0]);
+        } else if (key[1]?.includes('.') && _.get(entry, key[1])) {
+          useDotValue = _.get(entry, key[1]);
+        } else if (typeof entry[key[0]] !== 'undefined') {
+          useDotValue = entry[key[0]];
+        } else if (typeof entry[key[1]] !== 'undefined') {
+          useDotValue = entry[key[1]];
+        }
       } else if (key?.includes('.') && !useWholeObject) {
         useDotValue = _.get(entry, key);
       } else if (Array.isArray(key)) {
