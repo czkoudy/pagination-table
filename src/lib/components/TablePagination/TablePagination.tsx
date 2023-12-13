@@ -1,4 +1,4 @@
-import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import css from './tablepagination.module.css';
 
 const TablePagination = ({ count, page, onChange, options }) => {
@@ -74,7 +74,8 @@ const TablePagination = ({ count, page, onChange, options }) => {
   return (
     <div className={css.pagination}>
       <div className={css.pagination__nav_left} onClick={handleOnClickPrev}>
-        <i className={`${css.arrow} ${css.left}`} />
+        <FontAwesomeIcon icon="fa-solid fa-angle-left" />
+        {/* <i className={`${css.arrow} ${css.left}`} /> */}
       </div>
 
       {getPageNumbers().map((item) => {
@@ -99,7 +100,8 @@ const TablePagination = ({ count, page, onChange, options }) => {
       })}
 
       <div className={css.pagination__nav_right} onClick={handleOnClickNext}>
-        <i className={`${css.arrow} ${css.right}`} />
+        {/* <i className={`${css.arrow} ${css.right}`} /> */}
+        <FontAwesomeIcon icon="fa-solid fa-angle-right" />
       </div>
     </div>
   );

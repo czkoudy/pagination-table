@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { PaginationTableContext } from '@/lib/context/PaginationTableContext';
 import { handleOrderColumn, handleSelectAllOnPage } from '@/lib/utilz';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import css from './tableheader.module.css';
 
 const TableHeader = () => {
@@ -63,35 +64,54 @@ const TableHeader = () => {
         )}
         {table.header
           .filter((x) => x.hide !== true)
-          .map((field, index) => (
-            <th
-              key={index}
-              width={field.width}
-              onClick={(e) => handleOrderColumn({ context: table, index })}
-              style={{ cursor: 'pointer' }}
-              title={field.title || ''}
-              className={`${css.column} ${
-                field.align === 'center'
-                  ? css.column_align_center
-                  : field.align === 'right'
-                  ? css.column_align_right
-                  : ''
-              }`}
-            >
-              {field.label}
-              {table.options.sort.active &&
-                table.body[index].key === table.order.column &&
-                table.order.direction === 'desc' && (
-                  <i className={`${css.arrow} ${css.up}`} />
-                )}
+          .map((field, index) => {
+            const keyIsArray = Array.isArray(table.body[index].key);
 
-              {table.options.sort.active &&
-                table.body[index].key === table.order.column &&
-                table.order.direction === 'asc' && (
-                  <i className={`${css.arrow} ${css.down}`} />
-                )}
-            </th>
-          ))}
+            return (
+              <th
+                key={index}
+                width={field.width}
+                onClick={(e) =>
+                  handleOrderColumn({
+                    context: table,
+                    index,
+                  })
+                }
+                style={{ cursor: 'pointer' }}
+                title={field.title || ''}
+                className={`${css.column} ${
+                  field.align === 'center'
+                    ? css.column_align_center
+                    : field.align === 'right'
+                      ? css.column_align_right
+                      : ''
+                }`}
+              >
+                {field.label}
+                {table.options.sort.active &&
+                  table.body[index].key === table.order.column &&
+                  table.order.direction === 'desc' && (
+                    <FontAwesomeIcon
+                      icon="fa-solid fa-arrow-down-wide-short"
+                      style={{ paddingLeft: '5px', color: 'gray' }}
+                      size="xs"
+                    />
+                    // <i className={`${css.arrow} ${css.up}`} />
+                  )}
+
+                {table.options.sort.active &&
+                  table.body[index].key === table.order.column &&
+                  table.order.direction === 'asc' && (
+                    // <i className={`${css.arrow} ${css.down}`} />
+                    <FontAwesomeIcon
+                      icon="fa-solid fa-arrow-up-wide-short"
+                      style={{ paddingLeft: '5px', color: 'gray' }}
+                      size="xs"
+                    />
+                  )}
+              </th>
+            );
+          })}
       </tr>
     </thead>
   );

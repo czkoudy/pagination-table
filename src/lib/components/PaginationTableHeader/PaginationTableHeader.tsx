@@ -54,8 +54,8 @@ const PaginationTableHeader = () => {
                     ...button.labelProps,
                   })
                 : typeof button?.label === 'string'
-                ? button.label
-                : `Button ${index}`
+                  ? button.label
+                  : `Button ${index}`
             );
           })}
       </div>

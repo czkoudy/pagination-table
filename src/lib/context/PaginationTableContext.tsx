@@ -38,10 +38,7 @@ export const PaginationTableProvider: React.FC<PaginationTableInterface> = ({
 }) => {
   const [currentPage, setCurrentPage] = useState(options.currentPage);
   const [perPage, setPerPage] = useState(options?.perPage);
-  // const [sortedData, setSortedData] = useState([]);
   const [data, setData] = useState(data2);
-  // const [header, setHeader] = useState(header);
-  // const [body, setBody] = useState(body);
   const [selectionRows, setSelectionRows] = useState([]);
   const [selectedPerPage, setSelectedPerPage] = useState({});
   const [ref, setRef] = useState(null);
@@ -71,6 +68,15 @@ export const PaginationTableProvider: React.FC<PaginationTableInterface> = ({
             searchData,
             [
               (item) => {
+                // if (Array.isArray(order.column)) {
+                //   if (_.get(item, order.column[0])) {
+                //     return _.get(item, order.column)?.toLowerCase();
+                //   }
+                //   if (_.get(item, order.column[1])) {
+                //     return _.get(item, order.column)?.toLowerCase();
+                //   }
+                // }
+
                 if (typeof _.get(item, order.column) === 'string') {
                   return _.get(item, order.column)?.toLowerCase();
                 }
@@ -122,6 +128,9 @@ export const PaginationTableProvider: React.FC<PaginationTableInterface> = ({
     searchString,
     selectionRows,
   ]);
+
+  const bodyKeysHasValueArrays = body.filter((y) => Array.isArray(y.value));
+
   return (
     <PaginationTableContext.Provider
       value={{
@@ -129,7 +138,43 @@ export const PaginationTableProvider: React.FC<PaginationTableInterface> = ({
         setCurrentPage,
         perPage,
         setPerPage,
-        data,
+        data: data.map((x) => {
+          const keys = bodyKeysHasValueArrays.map((z) => z.key);
+
+          const values = bodyKeysHasValueArrays.map((x) => [...x.value]);
+
+          const getValue = () => {
+            if (values[1][0]?.includes('.') && _.get(x, values[1][0])) {
+              return _.get(x, values[1][0]);
+            }
+            if (!values[1][0]?.includes('.') && x[values[1][0]]) {
+              if (_.isObject(x[values[1][0]])) {
+                return 'E001';
+              }
+
+              return x[values[1][0]];
+            }
+            if (values[1][1]?.includes('.') && _.get(x, values[1][1])) {
+              return _.get(x, values[1][1]);
+            }
+            if (!values[1][1]?.includes('.') && x[values[1][1]]) {
+              if (_.isObject(x[values[1][1]])) {
+                return 'E002';
+              }
+              return x[values[1][1]];
+            }
+
+            return '0';
+          };
+
+          return _.merge(
+            x,
+            { [keys[0]]: x[values[0][0]] },
+            {
+              [keys[1]]: getValue(),
+            }
+          );
+        }),
         setData,
         firstIndex,
         lastIndex,

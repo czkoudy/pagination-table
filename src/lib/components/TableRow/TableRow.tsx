@@ -27,9 +27,15 @@ const TableRow = ({
     table.currentPage === Math.ceil(table.data.length / table.perPage);
 
   const onRowClickHandler = (e, entry) => {
+    if (!table.options.onRowClick.active) return;
     let useDotValue;
 
-    const { active, key, useWholeObject } = table.options.onRowClick;
+    const {
+      active,
+      key,
+      value = entry[key],
+      useWholeObject,
+    } = table.options.onRowClick;
 
     e.stopPropagation();
     e.preventDefault();
