@@ -11,26 +11,40 @@ const PaginationTableHeader = () => {
   if (!table) return null;
 
   return (
-    <div
-      className={`${css.paginationtableheader} ${
-        table.selectionRows?.length > 0 && css.paginationtableheader__selection
-      }`}
-    >
-      {table.options.lengthChange.active && <LengthChangeMenu />}
+    <Box sx={{ height: '40px' }}>
+      {/* {table.options.lengthChange.active && <LengthChangeMenu />} */}
 
       {table.selectionRows?.length <= 0 && (
-        <Typography sx={{ paddingLeft: '10px' }}>
-          {table.options.tableTitle}{' '}
-        </Typography>
+        <Box
+          sx={{
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <Typography sx={{ paddingLeft: '10px' }}>
+            {table.options.tableTitle}
+          </Typography>
+          {table.options.search.active && <SearchBox />}
+        </Box>
       )}
 
       {table.selectionRows?.length > 0 && (
-        <Slide in unmountOnExit>
+        <Slide
+          in
+          unmountOnExit
+          container={table?.ref?.current}
+          direction="right"
+        >
           <Box
             sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
               width: '100%',
               height: '100%',
-              pt: '5px',
+              // pt: '5px',
               pl: '10px',
               m: 0,
               backgroundColor:
@@ -42,41 +56,39 @@ const PaginationTableHeader = () => {
             <Typography>
               <strong>{table.selectionRows?.length}</strong> item selected
             </Typography>
+            <Box>
+              {table.options.selection?.buttons?.length > 0 &&
+                table.selectionRows?.length > 0 &&
+                table.options.selection?.buttons?.map((button, index) => {
+                  return createElement(
+                    button.component,
+                    {
+                      key: index,
+                      style: {
+                        // width: '40px',
+                        height: '30px',
+                        marginRight: '10px',
+                      },
+                      ...button.props,
+                      onClick: () => {
+                        button?.props?.onClick(table.selectionRows);
+                        table.setSelectionRows([]);
+                      },
+                    },
+                    typeof button?.label === 'object'
+                      ? createElement(button.label, {
+                          ...button.labelProps,
+                        })
+                      : typeof button?.label === 'string'
+                        ? button.label
+                        : `Button ${index}`
+                  );
+                })}
+            </Box>
           </Box>
         </Slide>
       )}
-
-      {table.options.search.active && <SearchBox />}
-      <div className={css.paginationtableheader__selection}>
-        {table.options.selection?.buttons?.length > 0 &&
-          table.selectionRows?.length > 0 &&
-          table.options.selection?.buttons?.map((button, index) => {
-            return createElement(
-              button.component,
-              {
-                key: index,
-                style: {
-                  width: '40px',
-                  height: '40px',
-                  marginTop: '5px',
-                },
-                ...button.props,
-                onClick: () => {
-                  button?.props?.onClick(table.selectionRows);
-                  table.setSelectionRows([]);
-                },
-              },
-              typeof button?.label === 'object'
-                ? createElement(button.label, {
-                    ...button.labelProps,
-                  })
-                : typeof button?.label === 'string'
-                  ? button.label
-                  : `Button ${index}`
-            );
-          })}
-      </div>
-    </div>
+    </Box>
   );
 };
 

@@ -166,7 +166,10 @@ export const PaginationTableProvider: React.FC<PaginationTableInterface> = ({
             return '0';
           };
 
-          if (keys.length > 0) {
+          if (keys.length === 1) {
+            return _.merge(x, { [keys[0]]: getValue(0) });
+          }
+          if (keys.length === 2) {
             return _.merge(
               x,
               { [keys[0]]: getValue(0) },

@@ -1,11 +1,12 @@
 import { useContext } from 'react';
-import css from './searchbox.module.css';
 import { PaginationTableContext } from '@/lib/context/PaginationTableContext';
+import { Box } from '@mui/material';
+import css from './searchbox.module.css';
 
 const SearchBox = () => {
   const table = useContext(PaginationTableContext);
   return (
-    <div style={{ padding: '10px', paddingRight: '0px' }}>
+    <Box sx={{ paddingRight: '10px' }}>
       Search:{' '}
       <input
         className={css.searchbox}
@@ -15,7 +16,7 @@ const SearchBox = () => {
         autoFocus
         // style={defaults.search.style}
       />
-    </div>
+    </Box>
   );
 };
 

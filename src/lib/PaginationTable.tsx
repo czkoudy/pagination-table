@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import _ from 'lodash';
-import { forwardRef, useContext, useRef } from 'react';
+import { forwardRef, useContext, useEffect, useRef } from 'react';
 import {
   PaginationTableContext,
   PaginationTableProvider,
@@ -83,6 +83,10 @@ export const usePaginationTable = ({ header, body, ref }) => {
   const Table = () => {
     const table = useContext(PaginationTableContext);
     const tableRef = useRef();
+
+    useEffect(() => {
+      table.setRef(tableRef);
+    }, [table]);
 
     if (!table?.data) return null;
 
