@@ -89,23 +89,33 @@ const TableHeader = () => {
               >
                 {field.label}
                 {table.options.sort.active &&
-                  table.body[index].key === table.order.column &&
+                  !table?.options.sort?.excludeColumns?.includes(index) &&
                   table.order.direction === 'desc' && (
                     <FontAwesomeIcon
                       icon="fa-solid fa-arrow-down-wide-short"
-                      style={{ paddingLeft: '5px', color: 'gray' }}
                       size="xs"
+                      style={{
+                        paddingLeft: '5px',
+                        color:
+                          table.body[index].key === table.order.column
+                            ? 'black'
+                            : 'lightgray',
+                      }}
                     />
-                    // <i className={`${css.arrow} ${css.up}`} />
                   )}
 
                 {table.options.sort.active &&
-                  table.body[index].key === table.order.column &&
-                  table.order.direction === 'asc' && (
-                    // <i className={`${css.arrow} ${css.down}`} />
+                  table.order.direction === 'asc' &&
+                  !table?.options.sort?.excludeColumns?.includes(index) && (
                     <FontAwesomeIcon
                       icon="fa-solid fa-arrow-up-wide-short"
-                      style={{ paddingLeft: '5px', color: 'gray' }}
+                      style={{
+                        paddingLeft: '5px',
+                        color:
+                          table.body[index].key === table.order.column
+                            ? 'black'
+                            : 'lightgray',
+                      }}
                       size="xs"
                     />
                   )}

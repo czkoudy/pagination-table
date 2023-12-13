@@ -1,17 +1,9 @@
 .paginationtableheader {
   display: flex;
   width: 100%;
-  padding-top: 0px;
-  /* padding-bottom: 10px; */
   justify-content: space-between;
   align-items: center;
   height: 35px;
-}
-
-.paginationtableheader__title {
-  font-weight: 600;
-  flex-grow: 1;
-  margin-left: 0px;
 }
 
 .paginationtableheader__selection {
@@ -20,25 +12,4 @@
   margin-right: 0px;
   /* background-color: lightpink; */
   border-radius: 3px;
-  animation-name: example;
-  animation-duration: 1s;
-}
-@keyframes example {
-  0% {
-    background-color: white;
-    left: 0px;
-    top: 0px;
-  }
-
-  50% {
-    /* background-color: blue; */
-    left: 200px;
-    top: 200px;
-  }
-
-  100% {
-    /* background-color: red; */
-    left: 0px;
-    top: 0px;
-  }
 }

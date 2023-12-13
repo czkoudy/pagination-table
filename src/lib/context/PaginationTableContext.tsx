@@ -143,37 +143,41 @@ export const PaginationTableProvider: React.FC<PaginationTableInterface> = ({
 
           const values = bodyKeysHasValueArrays.map((x) => [...x.value]);
 
-          const getValue = () => {
-            if (values[1][0]?.includes('.') && _.get(x, values[1][0])) {
-              return _.get(x, values[1][0]);
+          const getValue = (key) => {
+            if (values[key][0]?.includes('.') && _.get(x, values[key][0])) {
+              return _.get(x, values[key][0]);
             }
-            if (!values[1][0]?.includes('.') && x[values[1][0]]) {
-              if (_.isObject(x[values[1][0]])) {
+            if (!values[key][0]?.includes('.') && x[values[key][0]]) {
+              if (_.isObject(x[values[key][0]])) {
                 return 'E001';
               }
 
-              return x[values[1][0]];
+              return x[values[key][0]];
             }
-            if (values[1][1]?.includes('.') && _.get(x, values[1][1])) {
-              return _.get(x, values[1][1]);
+            if (values[key][1]?.includes('.') && _.get(x, values[key][1])) {
+              return _.get(x, values[key][1]);
             }
-            if (!values[1][1]?.includes('.') && x[values[1][1]]) {
-              if (_.isObject(x[values[1][1]])) {
+            if (!values[key][1]?.includes('.') && x[values[key][1]]) {
+              if (_.isObject(x[values[key][1]])) {
                 return 'E002';
               }
-              return x[values[1][1]];
+              return x[values[key][1]];
             }
 
             return '0';
           };
 
-          return _.merge(
-            x,
-            { [keys[0]]: x[values[0][0]] },
-            {
-              [keys[1]]: getValue(),
-            }
-          );
+          if (keys.length > 0) {
+            return _.merge(
+              x,
+              { [keys[0]]: getValue(0) },
+              {
+                [keys[1]]: getValue(1),
+              }
+            );
+          }
+
+          return x;
         }),
         setData,
         firstIndex,

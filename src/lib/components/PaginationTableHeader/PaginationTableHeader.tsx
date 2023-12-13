@@ -1,5 +1,6 @@
 import { createElement, useContext } from 'react';
 import { PaginationTableContext } from '@/lib/context/PaginationTableContext';
+import { Box, Slide, Typography } from '@mui/material';
 import SearchBox from '../SearchBox';
 import css from './paginationtableheader.module.css';
 import LengthChangeMenu from '../LengthChangeMenu';
@@ -14,21 +15,37 @@ const PaginationTableHeader = () => {
       className={`${css.paginationtableheader} ${
         table.selectionRows?.length > 0 && css.paginationtableheader__selection
       }`}
-      style={{
-        backgroundColor:
-          table.options.selection.active &&
-          table.selectionRows?.length > 0 &&
-          table.options.selection.backgroundColor,
-        paddingLeft: '10px',
-        paddingRight: '10px',
-      }}
     >
       {table.options.lengthChange.active && <LengthChangeMenu />}
-      <span className={`${css.paginationtableheader__title}`}>
-        {table.selectionRows?.length <= 0 && table.options.tableTitle}
-        {table.selectionRows?.length > 0 &&
-          `${table.selectionRows?.length} selected`}
-      </span>
+
+      {table.selectionRows?.length <= 0 && (
+        <Typography sx={{ paddingLeft: '10px' }}>
+          {table.options.tableTitle}{' '}
+        </Typography>
+      )}
+
+      {table.selectionRows?.length > 0 && (
+        <Slide in unmountOnExit>
+          <Box
+            sx={{
+              width: '100%',
+              height: '100%',
+              pt: '5px',
+              pl: '10px',
+              m: 0,
+              backgroundColor:
+                table.options.selection.active &&
+                table.selectionRows?.length > 0 &&
+                table.options.selection.backgroundColor,
+            }}
+          >
+            <Typography>
+              <strong>{table.selectionRows?.length}</strong> item selected
+            </Typography>
+          </Box>
+        </Slide>
+      )}
+
       {table.options.search.active && <SearchBox />}
       <div className={css.paginationtableheader__selection}>
         {table.options.selection?.buttons?.length > 0 &&
