@@ -1,6 +1,6 @@
 {
   "name": "@czkoudy/pagination-table",
-  "version": "4.12.2",
+  "version": "0.0.0-development",
   "description": "Pagination for tables",
   "author": "czkoudy",
   "type": "module",
@@ -28,7 +28,7 @@
     "semantic-release": "semantic-release --branches main",
     "prepare": "pnpm run build",
     "commit": "git-cz",
-    "acp": "git add . && npm run commit && git push"
+    "acp": "git add . && pnpm run commit && git push"
   },
   "eslintConfig": {
     "extends": [
