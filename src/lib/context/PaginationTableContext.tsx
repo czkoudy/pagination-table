@@ -68,15 +68,6 @@ export const PaginationTableProvider: React.FC<PaginationTableInterface> = ({
             searchData,
             [
               (item) => {
-                // if (Array.isArray(order.column)) {
-                //   if (_.get(item, order.column[0])) {
-                //     return _.get(item, order.column)?.toLowerCase();
-                //   }
-                //   if (_.get(item, order.column[1])) {
-                //     return _.get(item, order.column)?.toLowerCase();
-                //   }
-                // }
-
                 if (typeof _.get(item, order.column) === 'string') {
                   return _.get(item, order.column)?.toLowerCase();
                 }
