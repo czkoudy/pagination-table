@@ -51,7 +51,11 @@
     "@babel/cli": "^7.23.4",
     "@babel/plugin-proposal-optional-chaining": "^7.21.0",
     "@babel/preset-react": "^7.23.3",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^11.1.0",
+    "@semantic-release/git": "^10.0.1",
     "@semantic-release/npm": "^11.0.2",
+    "@semantic-release/release-notes-generator": "^12.1.0",
     "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^14.1.2",
     "@types/lodash": "^4.14.202",
@@ -97,23 +101,13 @@
     "README.md"
   ],
   "dependencies": {
-    "@czkoudy/pagination-table": "^4.10.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
-    "@fortawesome/free-regular-svg-icons": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@mui/icons-material": "^5.14.19",
     "@mui/material": "^5.14.20",
-    "@semantic-release/changelog": "^6.0.3",
-    "@semantic-release/commit-analyzer": "^11.1.0",
-    "@semantic-release/git": "^10.0.1",
-    "@semantic-release/release-notes-generator": "^12.1.0",
-    "html2canvas": "^1.4.1",
-    "leaflet": "^1.9.4",
-    "lodash": "^4.17.21",
-    "react-leaflet": "^4.2.1"
+    "lodash": "^4.17.21"
   },
   "publishConfig": {
     "access": "public"
