@@ -18,6 +18,7 @@
           "docs/CHANGELOG.md"
         ]
       }
-    ]
+    ],
+    "@semantic-release/npm"
   ]
 }

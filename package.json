@@ -51,6 +51,7 @@
     "@babel/cli": "^7.23.4",
     "@babel/plugin-proposal-optional-chaining": "^7.21.0",
     "@babel/preset-react": "^7.23.3",
+    "@semantic-release/npm": "^11.0.2",
     "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^14.1.2",
     "@types/lodash": "^4.14.202",

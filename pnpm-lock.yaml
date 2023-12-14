@@ -76,6 +76,9 @@ devDependencies:
   '@babel/preset-react':
     specifier: ^7.23.3
     version: 7.23.3(@babel/core@7.23.6)
+  '@semantic-release/npm':
+    specifier: ^11.0.2
+    version: 11.0.2(semantic-release@22.0.12)
   '@testing-library/jest-dom':
     specifier: ^6.1.5
     version: 6.1.5(vitest@1.0.4)
