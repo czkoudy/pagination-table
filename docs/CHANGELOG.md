@@ -1,3 +1,10 @@
+## [4.12.10](https://github.com/czkoudy/pagination-table/compare/v4.12.9...v4.12.10) (2023-12-14)
+
+
+### Bug Fixes
+
+* moved some dependencies around ([b59b6ad](https://github.com/czkoudy/pagination-table/commit/b59b6ad10530c61b9e33d7b9ff24ceab6b7a49cc))
+
 ## [4.12.9](https://github.com/czkoudy/pagination-table/compare/v4.12.8...v4.12.9) (2023-12-14)
 
 
