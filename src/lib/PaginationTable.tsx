@@ -7,14 +7,13 @@ import {
 } from '@/lib/context/PaginationTableContext';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-import { far } from '@fortawesome/free-regular-svg-icons';
 import TableHeader from './components/TableHeader/TableHeader';
 import PaginationTableHeader from './components/PaginationTableHeader/PaginationTableHeader';
 import css from './paginationtable.module.css';
 import PaginationTableFooter from './components/PaginationTableFooter/PaginationTableFooter';
 import TableRow from './components/TableRow/TableRow';
 
-library.add(fas, far);
+library.add(fas);
 
 const defaultOptions = {
   perPage: 10,
