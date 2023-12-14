@@ -27,7 +27,7 @@
     "preview": "vite preview",
     "prepare": "pnpm run build",
     "commit": "git-cz",
-    "acp": "git add . && pnpm run commit && git push"
+    "acp": "git pull && git add . && pnpm run commit && git push"
   },
   "eslintConfig": {
     "extends": [
