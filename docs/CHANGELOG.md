@@ -1,3 +1,10 @@
+## [4.12.8](https://github.com/czkoudy/pagination-table/compare/v4.12.7...v4.12.8) (2023-12-14)
+
+
+### Bug Fixes
+
+* testing sem release ([94c5046](https://github.com/czkoudy/pagination-table/commit/94c504601377fa58fc846c6ec6e61bb947caa8c5))
+
 ## [4.12.7](https://github.com/czkoudy/pagination-table/compare/v4.12.6...v4.12.7) (2023-12-14)
 
 
