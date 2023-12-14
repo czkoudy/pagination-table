@@ -22,8 +22,6 @@ const defaultOptions = {
   tableTitle: '',
   info: {
     active: true,
-    startText: 'Showing',
-    endText: 'records',
   },
   sort: {
     active: false,
@@ -45,7 +43,7 @@ const defaultOptions = {
     active: false,
     className: '',
   },
-  lengthMenu: [1, 5, 10, 15, 20],
+  lengthMenu: [5, 10, 15, 20],
   selection: {
     active: false,
     backgroundColor: '#FFDAC1',
@@ -143,8 +141,6 @@ export const PaginationTable = forwardRef(
       result,
       ref,
     });
-
-    // const copyDefaultOptions = { ...defaultOptions };
 
     const mergedOptions = _.merge({}, defaultOptions, {
       ...options,

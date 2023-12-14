@@ -1,38 +1,42 @@
+/* eslint-disable no-case-declarations */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import css from './tablepagination.module.css';
+import { Box } from '@mui/material';
 
-const TablePagination = ({ count, page, onChange, options }) => {
+type TablePaginationProps = {
+  count: number;
+  page: number;
+  onChange: (number: number) => void;
+};
+
+const TablePagination = ({ count, page, onChange }: TablePaginationProps) => {
   const defaultProps = {
     siblings: 1,
     boundary: 1,
-    ...options,
   };
-  const range = (from, to, step = 1) => {
+  const range = (from: number, to: number, step = 1) => {
     let i = from;
-    const range = [];
+    const rangeArray = [];
 
     while (i <= to) {
-      range.push(i);
+      rangeArray.push(i);
       i += step;
     }
 
-    return range;
+    return rangeArray;
   };
 
-  const handleOnClick = (pageNumber) => {
+  const handleOnClick = (pageNumber: number) => {
     onChange(pageNumber);
   };
 
   const handleOnClickPrev = () => {
-    if (page - 1 <= 0) {
-    } else {
+    if (page - 1 > 0) {
       onChange(page - 1);
     }
   };
 
   const handleOnClickNext = () => {
-    if (page + 1 > count) {
-    } else {
+    if (page + 1 <= count) {
       onChange(page + 1);
     }
   };
@@ -72,38 +76,94 @@ const TablePagination = ({ count, page, onChange, options }) => {
   };
 
   return (
-    <div className={css.pagination}>
-      <div className={css.pagination__nav_left} onClick={handleOnClickPrev}>
+    <Box
+      sx={{
+        display: 'flex',
+        width: '400px',
+        // paddingLeft: '10px',
+      }}
+    >
+      <Box
+        sx={{
+          border: '1px solid lightgray',
+          borderRadius: '3px',
+          padding: '7px',
+          margin: '5px',
+          marginLeft: '0px',
+          cursor: 'pointer',
+          '&:hover': {
+            backgroundColor: 'whitesmoke',
+            cursor: 'pointer',
+          },
+        }}
+        onClick={handleOnClickPrev}
+      >
         <FontAwesomeIcon icon="fa-solid fa-angle-left" />
-        {/* <i className={`${css.arrow} ${css.left}`} /> */}
-      </div>
+      </Box>
 
       {getPageNumbers().map((item) => {
         if (item === 'LEFT' || item === 'RIGHT')
           return (
-            <div className={css.pagination__item_spill} key={item}>
+            <Box
+              sx={{
+                width: '35px',
+                border: '1px solid transparent',
+                padding: '6px',
+                margin: '5px',
+                height: '15px',
+                textAlign: 'center',
+              }}
+              key={item}
+            >
               ...
-            </div>
+            </Box>
           );
 
+        const isActive = item === page;
+
         return (
-          <div
+          <Box
             key={item}
-            className={
-              item === page ? css.pagination__item_active : css.pagination__item
-            }
+            sx={{
+              width: '35px',
+              border: '1px solid lightgray',
+              padding: '7px',
+              margin: '5px',
+              borderRadius: '3px',
+              textAlign: 'center',
+              backgroundColor: isActive ? 'rgb(251, 233, 188)' : '',
+              borderColor: isActive ? 'rgb(253, 204, 79)' : '',
+              fontWeight: 500,
+              cursor: isActive ? 'pointer' : '',
+              '&:hover': {
+                backgroundColor: !isActive ? 'whitesmoke' : '',
+                cursor: !isActive ? 'pointer' : '',
+              },
+            }}
             onClick={() => handleOnClick(item)}
           >
             {item}
-          </div>
+          </Box>
         );
       })}
 
-      <div className={css.pagination__nav_right} onClick={handleOnClickNext}>
-        {/* <i className={`${css.arrow} ${css.right}`} /> */}
+      <Box
+        sx={{
+          border: '1px solid lightgray',
+          borderRadius: '3px',
+          padding: '7px',
+          margin: '5px',
+          cursor: 'pointer',
+          '&:hover': {
+            backgroundColor: 'whitesmoke',
+            cursor: 'pointer',
+          },
+        }}
+        onClick={handleOnClickNext}
+      >
         <FontAwesomeIcon icon="fa-solid fa-angle-right" />
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

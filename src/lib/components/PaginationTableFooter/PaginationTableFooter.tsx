@@ -1,7 +1,8 @@
 import { useContext } from 'react';
-import TablePagination from '../TablePagination/TablePagination';
 import { PaginationTableContext } from '@/lib/context/PaginationTableContext';
-import css from './paginationtablefooter.module.css';
+import { Box, Typography } from '@mui/material';
+import TablePagination from '../TablePagination/TablePagination';
+import LengthChangeMenu from '../LengthChangeMenu';
 
 const PaginationTableFooter = () => {
   const table = useContext(PaginationTableContext);
@@ -11,26 +12,50 @@ const PaginationTableFooter = () => {
   };
 
   return (
-    <div className={css.paginationtablefooter}>
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '5px',
+        // backgroundColor: 'blue',
+      }}
+    >
       {table.data.length > table.perPage && table.options.showPagination ? (
-        <TablePagination
-          count={Math.ceil(table.data.length / table.perPage)}
-          page={table.currentPage}
-          onChange={handleChangePage}
-          // options={defaults.pagination}
-        />
+        <Box sx={{ display: 'flex' }}>
+          <TablePagination
+            count={Math.ceil(table.data.length / table.perPage)}
+            page={table.currentPage}
+            onChange={handleChangePage}
+          />
+        </Box>
       ) : (
         <div>&nbsp;</div>
       )}
-      <div>
-        {table.options.info.active &&
-          `${table.options.info.startText} ${table.firstIndex + 1} to ${
-            table.lastIndex > table.data.length
-              ? table.data.length
-              : table.lastIndex
-          } of ${table.data.length} ${table.options.info.endText}`}
-      </div>
-    </div>
+      {table.options.info.active && (
+        <Box
+          sx={{
+            display: 'flex',
+            height: '100%',
+            alignItems: 'center',
+            // backgroundColor: 'yellow',
+            color: 'gray',
+          }}
+        >
+          <Box>{table.options.lengthChange && <LengthChangeMenu />}</Box>
+
+          <Box sx={{ marginLeft: '25px', marginRight: '25px' }}>
+            <Typography sx={{ paddingRight: '10px', fontSize: '14px' }}>
+              {`${table.firstIndex + 1}-${
+                table.lastIndex > table.data.length
+                  ? table.data.length
+                  : table.lastIndex
+              } of ${table.data.length}`}
+            </Typography>
+          </Box>
+        </Box>
+      )}
+    </Box>
   );
 };
 

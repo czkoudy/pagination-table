@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 import _ from 'lodash';
 import { createContext, useState, useEffect } from 'react';
 import { searchFunction } from '../utilz';

@@ -1,9 +1,7 @@
 import { createElement, useContext } from 'react';
 import { PaginationTableContext } from '@/lib/context/PaginationTableContext';
-import { Box, Slide, Typography } from '@mui/material';
+import { Box, Fade, Typography } from '@mui/material';
 import SearchBox from '../SearchBox';
-import css from './paginationtableheader.module.css';
-import LengthChangeMenu from '../LengthChangeMenu';
 
 const PaginationTableHeader = () => {
   const table = useContext(PaginationTableContext);
@@ -12,8 +10,6 @@ const PaginationTableHeader = () => {
 
   return (
     <Box sx={{ height: '40px' }}>
-      {/* {table.options.lengthChange.active && <LengthChangeMenu />} */}
-
       {table.selectionRows?.length <= 0 && (
         <Box
           sx={{
@@ -31,12 +27,7 @@ const PaginationTableHeader = () => {
       )}
 
       {table.selectionRows?.length > 0 && (
-        <Slide
-          in
-          unmountOnExit
-          container={table?.ref?.current}
-          direction="right"
-        >
+        <Fade in unmountOnExit timeout={600}>
           <Box
             sx={{
               display: 'flex',
@@ -86,7 +77,7 @@ const PaginationTableHeader = () => {
                 })}
             </Box>
           </Box>
-        </Slide>
+        </Fade>
       )}
     </Box>
   );
