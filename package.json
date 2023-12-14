@@ -1,6 +1,6 @@
 {
   "name": "@czkoudy/pagination-table",
-  "version": "4.12.2",
+  "version": "0.0.0-development",
   "description": "Pagination for tables",
   "author": "czkoudy",
   "type": "module",
