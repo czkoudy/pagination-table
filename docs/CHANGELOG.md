@@ -1,3 +1,10 @@
+# [4.13.0](https://github.com/czkoudy/pagination-table/compare/v4.12.10...v4.13.0) (2024-09-02)
+
+
+### Features
+
+* 🎸 align of columns center as default ([6749a48](https://github.com/czkoudy/pagination-table/commit/6749a489f967e607f3b3729b785b01855daf5a12))
+
 ## [4.12.10](https://github.com/czkoudy/pagination-table/compare/v4.12.9...v4.12.10) (2023-12-14)
 
 ### Bug Fixes
