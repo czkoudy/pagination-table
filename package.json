@@ -32,6 +32,7 @@
     "test": "vitest",
     "build": "vite build",
     "preview": "vite preview",
+    "semantic-release": "semantic-release --branches main",
     "prepare": "pnpm run build",
     "commit": "git-cz",
     "acp": "git pull && git add . && pnpm run commit && git push"
