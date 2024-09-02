@@ -10,7 +10,7 @@ export type TableBodyProps = {
 export type TableOptionsProps = {
   className: string;
   currentPage: 1;
-  customFormatFunctions: {};
+  customFormatFunctions: () => void;
   emptyRows: boolean;
   headerSeparator: boolean;
   info: {
