@@ -35,7 +35,7 @@ export type TableOptionsProps = {
     className: string;
     columns: 'all';
     skipObjects: boolean;
-    style: {};
+    style: CSSStyleDeclaration;
   };
   selection: {
     active?: boolean;
