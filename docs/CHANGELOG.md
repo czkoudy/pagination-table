@@ -1,3 +1,10 @@
+## [4.13.2](https://github.com/czkoudy/pagination-table/compare/v4.13.1...v4.13.2) (2024-09-02)
+
+
+### Bug Fixes
+
+* 🐛 typo and fix semantic release ([f47aef4](https://github.com/czkoudy/pagination-table/commit/f47aef45030d9048ff94314b3c037f2a33a9200f))
+
 ## [4.13.1](https://github.com/czkoudy/pagination-table/compare/v4.13.0...v4.13.1) (2024-09-02)
 
 
