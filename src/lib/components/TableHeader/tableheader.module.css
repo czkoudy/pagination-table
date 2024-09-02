@@ -22,6 +22,10 @@
   overflow: hidden;
 }
 
+.column_align_left {
+  text-align: left;
+}
+
 .column_align_center {
   text-align: center;
 }

@@ -1,6 +1,6 @@
 import { createElement, useContext } from 'react';
-import { PaginationTableContext } from '@/lib/context/PaginationTableContext';
 import { Box, Fade, Typography } from '@mui/material';
+import { PaginationTableContext } from '@/lib/context/PaginationTableContext';
 import SearchBox from '../SearchBox';
 
 const PaginationTableHeader = () => {
@@ -13,9 +13,9 @@ const PaginationTableHeader = () => {
       {table.selectionRows?.length <= 0 && (
         <Box
           sx={{
-            height: '100%',
-            display: 'flex',
             alignItems: 'center',
+            display: 'flex',
+            height: '100%',
             justifyContent: 'space-between',
           }}
         >
@@ -30,18 +30,17 @@ const PaginationTableHeader = () => {
         <Fade in unmountOnExit timeout={600}>
           <Box
             sx={{
-              display: 'flex',
               alignItems: 'center',
-              justifyContent: 'space-between',
-              width: '100%',
-              height: '100%',
-              // pt: '5px',
-              pl: '10px',
-              m: 0,
               backgroundColor:
                 table.options.selection.active &&
                 table.selectionRows?.length > 0 &&
                 table.options.selection.backgroundColor,
+              display: 'flex',
+              height: '100%',
+              justifyContent: 'space-between',
+              m: 0,
+              pl: '10px',
+              width: '100%',
             }}
           >
             <Typography>

@@ -1,17 +1,10 @@
-import { PaginationTableContext } from '@/lib/context/PaginationTableContext';
 import { createElement, useContext, useState } from 'react';
 import { IconButton } from '@mui/material';
+import { PaginationTableContext } from '@/lib/context/PaginationTableContext';
 import _ from 'lodash';
+import { TableRowProps } from '@/lib/types';
 import TableCell from '../TableCell';
 import css from './tablerow.module.css';
-
-interface TableRowProps {
-  emptyRows: boolean;
-  index: number;
-  entry: object;
-  body: object;
-  header: object;
-}
 
 const TableRow = ({
   emptyRows = false,
@@ -140,6 +133,28 @@ const TableRow = ({
     return Rows;
   }
   if (!emptyRows) {
+    // return body.map((row, index) => {
+    //   if (row.rowSpan) {
+    //     return (
+    //       <>
+    //         <tr>
+    //           <TableCell
+    //             key={index}
+    //             defaults={table.options}
+    //             index={index}
+    //             field={row}
+    //             entry={entry}
+    //             columnSpan={1}
+    //             // rowSpan={row?.rowSpan ? field?.key?.length : 1}
+    //           />
+    //         </tr>
+    //         <tr>
+    //           <td>b</td>
+    //         </tr>
+    //       </>
+    //     );
+    //   }
+    // });
     return (
       <>
         <tr
@@ -174,7 +189,6 @@ const TableRow = ({
             >
               {table.options.selection.component ? (
                 createElement(table.options.selection.component, {
-                  key: entry[table.options.selection.key],
                   checked: table.selectionRows.includes(
                     entry[table.options.selection.key]
                   ),
@@ -185,6 +199,7 @@ const TableRow = ({
                     !table.selectionRows.includes(
                       entry[table.options.selection.key]
                     ),
+                  key: entry[table.options.selection.key],
                   onClick: (e) => onRowSelection(e, entry),
                 })
               ) : (
@@ -217,6 +232,7 @@ const TableRow = ({
                 field={field}
                 entry={entry}
                 columnSpan={1}
+                rowSpan={field?.rowSpan ? field?.key?.length : 1}
               />
             );
           })}

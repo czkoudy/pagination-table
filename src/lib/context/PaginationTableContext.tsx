@@ -1,43 +1,26 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-no-constructed-context-values */
-import _ from 'lodash';
 import { createContext, useState, useEffect } from 'react';
+import _ from 'lodash';
 import { searchFunction } from '../utilz';
+import { PaginationTableProps } from '../types';
 
-export type PaginationTableType = {
-  data: any[];
-  options: {
-    className: string;
-    data: any[];
-    lengthChange: {
-      active?: boolean;
-    };
-    tableTitle: string;
-    search: {
-      active?: boolean;
-    };
-    selection: {
-      buttons: any[];
-    };
-  };
-  result?: () => void;
-  selectionRows: any[];
-  setSelectionRows: ([]) => void;
-};
+export const PaginationTableContext =
+  createContext<PaginationTableProps | null>(null);
 
-export const PaginationTableContext = createContext<PaginationTableType | null>(
-  null
-);
-
-interface PaginationTableInterface {
+type PaginationTableInterface = {
   children?: React.ReactNode;
-}
+  value: PaginationTableProps & {
+    currentPage: number;
+  };
+};
 
 export const PaginationTableProvider: React.FC<PaginationTableInterface> = ({
   children,
-  value: { data: data2, body, header, options, result = () => {}, divRef },
+  value: { data: data2, body, header, options, result = () => {} },
 }) => {
   const [currentPage, setCurrentPage] = useState(options.currentPage);
-  const [perPage, setPerPage] = useState(options?.perPage);
+  const [perPage, setPerPage] = useState(options.perPage);
   const [data, setData] = useState(data2);
   const [selectionRows, setSelectionRows] = useState([]);
   const [selectedPerPage, setSelectedPerPage] = useState({});
@@ -58,8 +41,8 @@ export const PaginationTableProvider: React.FC<PaginationTableInterface> = ({
         const searchData = searchFunction({
           body,
           data: data2,
-          searchString,
           search: options.search,
+          searchString,
           setCurrentPage,
           stayOnPage: options.stayOnPage,
         });
@@ -68,7 +51,6 @@ export const PaginationTableProvider: React.FC<PaginationTableInterface> = ({
             searchData,
             [
               (item) => {
-                // comment 2
                 if (typeof _.get(item, order.column) === 'string') {
                   return _.get(item, order.column)?.toLowerCase();
                 }
@@ -126,10 +108,8 @@ export const PaginationTableProvider: React.FC<PaginationTableInterface> = ({
   return (
     <PaginationTableContext.Provider
       value={{
+        body,
         currentPage,
-        setCurrentPage,
-        perPage,
-        setPerPage,
         data: data.map((x) => {
           const keys = bodyKeysHasValueArrays.map((z) => z.key);
 
@@ -174,23 +154,24 @@ export const PaginationTableProvider: React.FC<PaginationTableInterface> = ({
 
           return x;
         }),
-        setData,
         firstIndex,
+        header,
         lastIndex,
         options,
-        header,
-        body,
         order,
-        setOrder,
-        searchString,
-        setSearchString,
-        selectionRows,
-        setSelectionRows,
-        selectedPerPage,
-        setSelectedPerPage,
-        // setOptions,
+        perPage,
         ref,
+        searchString,
+        selectedPerPage,
+        selectionRows,
+        setCurrentPage,
+        setData,
+        setOrder,
+        setPerPage,
         setRef,
+        setSearchString,
+        setSelectedPerPage,
+        setSelectionRows,
       }}
     >
       {children}

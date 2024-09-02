@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { Box } from '@mui/material';
 import { PaginationTableContext } from '@/lib/context/PaginationTableContext';
 import { handleOrderColumn, handleSelectAllOnPage } from '@/lib/utilz';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,6 +17,10 @@ const TableHeader = () => {
     setSelectedPerPage,
   } = table;
 
+  const { headerSeparator } = table?.options;
+
+  const filteredHeaders = table.header.filter((x) => x.hide !== true);
+
   return (
     <thead>
       <tr>
@@ -27,24 +32,24 @@ const TableHeader = () => {
               onChange={() =>
                 selectedPerPage[currentPage] === perPage
                   ? handleSelectAllOnPage({
+                      currentPage,
+                      data,
+                      maxCount: table?.options.selection.maxCount,
+                      perPage,
                       reverse: true,
                       selectionRows,
-                      data,
-                      currentPage,
-                      perPage,
-                      setSelectionRows,
                       setSelectedPerPage,
-                      maxCount: table?.options.selection.maxCount,
+                      setSelectionRows,
                     })
                   : handleSelectAllOnPage({
+                      currentPage,
+                      data,
+                      maxCount: table?.options.selection.maxCount,
+                      perPage,
                       reverse: false,
                       selectionRows,
-                      data,
-                      currentPage,
-                      perPage,
-                      setSelectionRows,
                       setSelectedPerPage,
-                      maxCount: table?.options.selection.maxCount,
+                      setSelectionRows,
                     })
               }
               checked={
@@ -62,66 +67,74 @@ const TableHeader = () => {
             />
           </th>
         )}
-        {table.header
-          .filter((x) => x.hide !== true)
-          .map((field, index) => {
-            const keyIsArray = Array.isArray(table.body[index].key);
+        {filteredHeaders.map((field, index) => {
+          const keyIsArray = Array.isArray(table.body[index].key);
 
-            return (
-              <th
-                key={index}
-                width={field.width}
-                onClick={(e) =>
-                  handleOrderColumn({
-                    context: table,
-                    index,
-                  })
-                }
-                style={{ cursor: 'pointer' }}
-                title={field.title || ''}
-                className={`${css.column} ${
-                  field.align === 'center'
-                    ? css.column_align_center
-                    : field.align === 'right'
-                      ? css.column_align_right
-                      : ''
-                }`}
-              >
-                {field.label}
-                {table.options.sort.active &&
-                  !table?.options.sort?.excludeColumns?.includes(index) &&
-                  table.order.direction === 'desc' && (
-                    <FontAwesomeIcon
-                      icon="fa-solid fa-arrow-down-wide-short"
-                      size="xs"
-                      style={{
-                        paddingLeft: '5px',
-                        color:
-                          table.body[index].key === table.order.column
-                            ? 'black'
-                            : 'lightgray',
-                      }}
-                    />
-                  )}
+          return (
+            <th
+              key={index}
+              width={field.width}
+              onClick={(e) =>
+                handleOrderColumn({
+                  context: table,
+                  index,
+                })
+              }
+              style={{ cursor: 'pointer' }}
+              title={field.title || ''}
+              className={`${css.column} ${
+                field.align === 'left'
+                  ? css.column_align_left
+                  : field.align === 'right'
+                    ? css.column_align_right
+                    : css.column_align_center
+              }`}
+            >
+              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                <Box sx={{ flexGrow: 1 }}>
+                  {field.label}
+                  {table.options.sort.active &&
+                    !table?.options.sort?.excludeColumns?.includes(index) &&
+                    table.order.direction === 'desc' && (
+                      <FontAwesomeIcon
+                        icon="fa-solid fa-arrow-down-wide-short"
+                        size="xs"
+                        style={{
+                          color:
+                            table.body[index].key === table.order.column
+                              ? 'black'
+                              : 'lightgray',
+                          paddingLeft: '5px',
+                        }}
+                      />
+                    )}
 
-                {table.options.sort.active &&
-                  table.order.direction === 'asc' &&
-                  !table?.options.sort?.excludeColumns?.includes(index) && (
-                    <FontAwesomeIcon
-                      icon="fa-solid fa-arrow-up-wide-short"
-                      style={{
-                        paddingLeft: '5px',
-                        color:
-                          table.body[index].key === table.order.column
-                            ? 'black'
-                            : 'lightgray',
-                      }}
-                      size="xs"
-                    />
-                  )}
-              </th>
-            );
-          })}
+                  {table.options.sort.active &&
+                    table.order.direction === 'asc' &&
+                    !table?.options.sort?.excludeColumns?.includes(index) && (
+                      <FontAwesomeIcon
+                        icon="fa-solid fa-arrow-up-wide-short"
+                        style={{
+                          color:
+                            table.body[index].key === table.order.column
+                              ? 'black'
+                              : 'lightgray',
+                          paddingLeft: '5px',
+                        }}
+                        size="xs"
+                      />
+                    )}
+                </Box>
+
+                <Box style={{ color: 'lightgray' }}>
+                  {headerSeparator &&
+                    index !== filteredHeaders?.length - 1 &&
+                    ' | '}
+                </Box>
+              </Box>
+            </th>
+          );
+        })}
       </tr>
     </thead>
   );

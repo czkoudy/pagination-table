@@ -12,25 +12,13 @@ export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
 
   return defineConfig({
-    plugins: [react(), dts(), cssInjectedByJsPlugin()],
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, './src'),
-      },
-    },
-    server: {
-      open: false,
-      port: 3099,
-      strictPort: true,
-      // https: true
-    },
     build: {
+      emptyOutDir: true,
       lib: {
         entry: path.resolve(__dirname, './src/lib/index.ts'),
-        name: 'PaginationTable',
         fileName: (format) => `index.${format}.js`,
+        name: 'PaginationTable',
       },
-      // outDir: 'build',
       rollupOptions: {
         external: ['react', 'react-dom'],
         output: {
@@ -41,15 +29,23 @@ export default ({ mode }) => {
         },
       },
       sourcemap: true,
-      emptyOutDir: true,
+    },
+    plugins: [react(), dts(), cssInjectedByJsPlugin()],
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, './src'),
+      },
+    },
+    server: {
+      open: false,
+      port: 3099,
+      strictPort: true,
     },
     test: {
-      globals: true,
-      environment: 'jsdom',
-      setupFiles: './src/setupTests.ts',
-      // you might want to disable it, if you don't have tests that rely on CSS
-      // since parsing CSS is slow
       css: true,
+      environment: 'jsdom',
+      globals: true,
+      setupFiles: './src/setupTests.ts',
     },
   });
 };

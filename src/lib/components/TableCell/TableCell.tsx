@@ -1,15 +1,15 @@
 /* eslint-disable react/no-unstable-nested-components */
+import { createElement } from 'react';
 import { format } from 'date-fns';
 import _ from 'lodash';
-import { createElement } from 'react';
 import css from './tablecell.module.css';
 
 type TableCellProps = {
-  index: number;
-  defaults: object;
-  field: object;
-  entry: object;
   columnSpan: number;
+  defaults: object;
+  entry: object;
+  field: object;
+  index: number;
   rowSpan: number;
 };
 
@@ -105,11 +105,11 @@ const TableCell = ({
           ? 'exclude-row-click'
           : ''
       } ${
-        field.align === 'center'
-          ? css.column_align_center
+        field.align === 'left'
+          ? css.column_align_left
           : field.align === 'right'
-          ? css.column_align_right
-          : ''
+            ? css.column_align_right
+            : css.column_align_center
       }`}
       colSpan={columnSpan}
     >
