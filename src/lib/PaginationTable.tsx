@@ -40,7 +40,7 @@ const defaultOptions = {
   },
 
   emptyRows: false,
-  headerSeparator: true,
+  headerSeparator: false,
   info: {
     active: true,
   },
