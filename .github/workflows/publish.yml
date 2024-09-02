@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: pnpm/action-setup@v2
         with:
-          version: 8.6.2
+          version: 9.9.0
       - uses: actions/checkout@v3
       - name: Set up Node.js 20.8.1
         uses: actions/setup-node@v3

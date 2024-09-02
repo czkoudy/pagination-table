@@ -1,3 +1,12 @@
+## [4.13.1](https://github.com/czkoudy/pagination-table/compare/v4.13.0...v4.13.1) (2024-09-02)
+
+
+### Bug Fixes
+
+* 🐛 missing semantic in package.json ([5a1c002](https://github.com/czkoudy/pagination-table/commit/5a1c002aec32c732efe533b6c550050312c09ef7))
+* 🐛 semantic release not working ([b65bb50](https://github.com/czkoudy/pagination-table/commit/b65bb5005d027cadc9f8e72fd7bdee60f9e699f4))
+* 🐛 typo ([baba246](https://github.com/czkoudy/pagination-table/commit/baba24675437883ca463d86447fa794c9bfc2092))
+
 # [4.13.0](https://github.com/czkoudy/pagination-table/compare/v4.12.10...v4.13.0) (2024-09-02)
 
 
