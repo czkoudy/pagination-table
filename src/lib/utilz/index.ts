@@ -67,13 +67,10 @@ export const handleOrderColumn = ({ context, index }) => {
     !context.options.sort.excludeColumns.includes(index)
   ) {
     context.setOrder((prevState) => ({
-      direction: prevState.direction === 'desc' ? 'asc' : 'desc',
       column: context.body[index].key,
+      direction: prevState.direction === 'desc' ? 'asc' : 'desc',
     }));
-    if (context.options.stayOnPage) {
-    } else {
-      context.setCurrentPage(1);
-    }
+    context.setCurrentPage(1);
   }
 };
 
