@@ -1,3 +1,10 @@
+## [4.14.2](https://github.com/czkoudy/pagination-table/compare/v4.14.1...v4.14.2) (2024-09-13)
+
+
+### Bug Fixes
+
+* 🐛 set currentPage to 1 after column sort change ([b052c91](https://github.com/czkoudy/pagination-table/commit/b052c913a58f2a318f375fd2640b36e09d1544f6))
+
 ## [4.14.1](https://github.com/czkoudy/pagination-table/compare/v4.14.0...v4.14.1) (2024-09-13)
 
 
