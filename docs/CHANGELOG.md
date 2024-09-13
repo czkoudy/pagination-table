@@ -1,3 +1,10 @@
+# [4.14.0](https://github.com/czkoudy/pagination-table/compare/v4.13.2...v4.14.0) (2024-09-13)
+
+
+### Features
+
+* 🎸 allow hide table title ([ae21f88](https://github.com/czkoudy/pagination-table/commit/ae21f88fc6b228c24c487282a1a267406faaa968))
+
 ## [4.13.2](https://github.com/czkoudy/pagination-table/compare/v4.13.1...v4.13.2) (2024-09-02)
 
 
