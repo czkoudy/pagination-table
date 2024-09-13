@@ -55,7 +55,7 @@ export type TableOptionsProps = {
     excludeColumns: number[];
   };
   stayOnPage: boolean;
-  tableTitle: string;
+  tableTitle: string | null;
 };
 
 export type PaginationTableProps = {

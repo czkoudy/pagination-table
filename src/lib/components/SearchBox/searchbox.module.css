@@ -1,3 +1,6 @@
 .searchbox {
   border-radius: 3px;
+  height: 25px;
+  margin-bottom: 10px;
+  border: 1px solid gray;
 }

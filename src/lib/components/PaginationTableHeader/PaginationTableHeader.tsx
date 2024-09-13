@@ -9,22 +9,32 @@ const PaginationTableHeader = () => {
   if (!table) return null;
 
   return (
-    <Box sx={{ height: '40px' }}>
-      {table.selectionRows?.length <= 0 && (
-        <Box
-          sx={{
-            alignItems: 'center',
-            display: 'flex',
-            height: '100%',
-            justifyContent: 'space-between',
-          }}
-        >
-          <Typography sx={{ paddingLeft: '10px' }}>
+    <Box
+      sx={{
+        display:
+          !table.options.tableTitle && !table.options.search.active
+            ? 'none'
+            : '',
+        height: '30px',
+      }}
+    >
+      <Box
+        sx={{
+          alignItems: 'center',
+          display: table.selectionRows?.length > 0 ? 'none' : 'flex',
+          height: '100%',
+          justifyContent: 'space-between',
+        }}
+      >
+        {table.selectionRows?.length <= 0 && table.options.tableTitle ? (
+          <Typography sx={{ paddingLeft: '5px' }}>
             {table.options.tableTitle}
           </Typography>
-          {table.options.search.active && <SearchBox />}
-        </Box>
-      )}
+        ) : (
+          <span>&nbsp;</span>
+        )}
+        {table.options.search.active && <SearchBox />}
+      </Box>
 
       {table.selectionRows?.length > 0 && (
         <Fade in unmountOnExit timeout={600}>

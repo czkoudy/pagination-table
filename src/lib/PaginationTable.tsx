@@ -82,7 +82,7 @@ const defaultOptions = {
     excludeColumns: [],
   },
   stayOnPage: true,
-  tableTitle: '',
+  tableTitle: null,
 };
 
 export const usePaginationTable = ({
