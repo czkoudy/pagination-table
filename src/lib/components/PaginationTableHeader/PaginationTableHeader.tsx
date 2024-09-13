@@ -12,7 +12,9 @@ const PaginationTableHeader = () => {
     <Box
       sx={{
         display:
-          !table.options.tableTitle && !table.options.search.active
+          !table.options.tableTitle &&
+          !table.options.search.active &&
+          table.selectionRows?.length <= 0
             ? 'none'
             : '',
         height: '30px',
