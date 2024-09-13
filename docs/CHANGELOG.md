@@ -1,3 +1,10 @@
+## [4.14.1](https://github.com/czkoudy/pagination-table/compare/v4.14.0...v4.14.1) (2024-09-13)
+
+
+### Bug Fixes
+
+* 🐛 header not shown properly ([971009c](https://github.com/czkoudy/pagination-table/commit/971009cdf6ca63b57029c500253907dbd677206e))
+
 # [4.14.0](https://github.com/czkoudy/pagination-table/compare/v4.13.2...v4.14.0) (2024-09-13)
 
 
