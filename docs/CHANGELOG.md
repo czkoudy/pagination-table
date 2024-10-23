@@ -1,3 +1,10 @@
+## [4.14.3](https://github.com/czkoudy/pagination-table/compare/v4.14.2...v4.14.3) (2024-10-23)
+
+
+### Bug Fixes
+
+* 🐛 bump react and react dom version ([313dbbd](https://github.com/czkoudy/pagination-table/commit/313dbbdcfd254464c58eb790637f7f5f17a7efb4))
+
 ## [4.14.2](https://github.com/czkoudy/pagination-table/compare/v4.14.1...v4.14.2) (2024-09-13)
 
 
